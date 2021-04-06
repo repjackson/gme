@@ -4,6 +4,7 @@
 @User_tags = new Meteor.Collection 'user_tags'
 @Level_results = new Meteor.Collection 'level_results'
 
+@results = new Meteor.Collection 'results'
 
 if Meteor.isClient
     # console.log $
