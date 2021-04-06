@@ -1,9 +1,14 @@
 template(name='chart')
     +ticker
 template(name='home')
+    // +small_ticker
+    // +mini_chart
+    +symbol_overview
     .ui.stackable.grid
         .sixteen.wide.column
-            .ui.header news
+            .ui.header 
+                i.blog.icon
+                |news
             each articles
                 .ui.segment
                     .ui.header #{title} #{when}
