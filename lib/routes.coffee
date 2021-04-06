@@ -75,3 +75,6 @@ Router.route '/forgot_password', -> @render 'forgot_password'
 Router.route '/reset_password/:token', (->
     @render 'reset_password'
     ), name:'reset_password'
+Router.route '/techanal/', (->
+    @render 'techanal'
+    ), name:'techanal'

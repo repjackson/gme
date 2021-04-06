@@ -10,15 +10,18 @@ template(name='nav')
             span.mobile.hidden GME
         // a.icon.item.set_member.mobile.hidden(href="/m/member" class="{{isActivePath '/m/member'}}" title='users')
         //     i.large.users.icon
-        a.item.mobile.hidden(href="/apes" class="{{isActivePath '/users'}}" title='events')
+        a.item.mobile.hidden(href="/apes" class="{{isActivePath '/apes'}}" title='retards')
             img(src="https://img.icons8.com/fluent/48/000000/gorilla.png")
             | apes
         a.item.mobile.hidden(href="/floor" class="{{isActivePath '/floor'}}" title='events')
             img(src="https://img.icons8.com/fluent/48/000000/rocket.png")
             | floor
-        a.item.mobile.hidden(href="/reddit" class="{{isActivePath '/reddit'}}" title='events')
-            img(src="https://img.icons8.com/fluent/48/000000/reddit.png")
-            | reddit
+        a.item.mobile.hidden(href="/techanal" class="{{isActivePath '/techanal'}}" title='tech analysis')
+            img(src="https://img.icons8.com/fluent/48/000000/wrench.png")
+            | tech analysis
+        // a.item.mobile.hidden(href="/reddit" class="{{isActivePath '/reddit'}}" title='events')
+        //     img(src="https://img.icons8.com/fluent/48/000000/reddit.png")
+        //     | reddit
         a.item.mobile.hidden(href="/dd" class="{{isActivePath '/dd'}}" title='dd')
             img(src="https://img.icons8.com/fluent/48/000000/reading.png")
             span.mobile.hidden dd
@@ -144,22 +147,28 @@ template(name='right_sidebar')
 
 
 template(name='left_sidebar')
-    .ui.left.sidebar.vertical.large.borderless.menu
+    .ui.left.sidebar.vertical.large.borderless.inverted.menu
         // a.item.toggle_sidebar(href="/" class="{{isActiveRoute '/'}}")
         //     img.ui.avatar.compact.image(src="{{c.url 'one_logo' height=200 width=200 gravity='face' crop='fill'}}")
         //     |One
-        a.item.toggle_sidebar(href="/apes" class="{{isActivePath '/users'}}" title='events')
+        a.item.toggle_sidebar(href="/apes" class="{{isActivePath '/users'}}" title='retards')
             img.ui.avatar.image(src="https://img.icons8.com/fluent/48/000000/gorilla.png")
             | apes
         a.item.toggle_sidebar(href="/floor" class="{{isActivePath '/floor'}}" title='events')
             img.ui.avatar.image(src="https://img.icons8.com/fluent/48/000000/rocket.png")
             | floor
-        a.item.toggle_sidebar(href="/reddit" class="{{isActivePath '/floor'}}" title='events')
+        a.disabled.item.toggle_sidebar(href="/reddit" class="{{isActivePath '/reddit'}}" title='reddit')
             img.ui.avatar.image(src="https://img.icons8.com/fluent/48/000000/reddit.png")
             | reddit
+        a.item.toggle_sidebar(href="/techanal" class="{{isActivePath '/techanal'}}" title='tech analysis')
+            img(src="https://img.icons8.com/fluent/48/000000/wrench.png")
+            | tech analysis
         a.item.toggle_sidebar(href="/dd" class="{{isActivePath '/floor'}}" title='events')
             img.ui.avatar.image(src="https://img.icons8.com/fluent/48/000000/reading.png")
             | dd
+        a.item.toggle_sidebar(href="/tools" class="{{isActivePath '/tools'}}" title='tools')
+            img.ui.avatar.image(src="https://img.icons8.com/fluent/48/000000/wrench--v1.png")
+            | tools
         // a.item.toggle_sidebar(href="/chat" class="{{isActivePath '/chat'}}" title='chat') 
         //     |chat
         //     i.large.chat.icon
