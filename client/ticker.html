@@ -1,0 +1,28 @@
+<template name="ticker">
+        <!-- TradingView Widget BEGIN -->
+    <div class="tradingview-widget-container">
+      <div id="tradingview_ff6ae"></div>
+      <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/symbols/NYSE-GME/" rel="noopener" target="_blank"><span class="blue-text">GME Chart</span></a> by TradingView</div>
+      <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+      <script type="text/javascript">
+      new TradingView.widget(
+      {
+      "autosize": true,
+      "symbol": "NYSE:GME",
+      "interval": "60",
+      "timezone": "Etc/UTC",
+      "theme": "dark",
+      "style": "1",
+      "locale": "en",
+      "toolbar_bg": "#f1f3f6",
+      "withdateranges": true,
+      "enable_publishing": false,
+      "allow_symbol_change": false,
+      "details": true,
+      "container_id": "tradingview_ff6ae"
+    }
+      );
+      </script>
+    </div>
+    <!-- TradingView Widget END -->
+</template>

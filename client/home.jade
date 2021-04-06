@@ -1,8 +1,6 @@
 template(name='home')
+    +ticker
     .ui.stackable.grid
-        .sixteen.wide.column
-            iframe(width='560' height='315' src="https://gmefloor.com/" frameborder='0' allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture' allowfullscreen='')
-        
         .sixteen.wide.column
             .ui.header news
             each articles
@@ -188,7 +186,10 @@ template(name='home')
     //                 //             each tags 
     //                 //                 .ui.tiny.basic.label #{this}
                     
-                    
+         
+         
+template(name='floor')                    
+    iframe(width='100%' height='100%' src="https://gmefloor.com/" frameborder='0' allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture' allowfullscreen='')
                     
 template(name='finance_bar')
     .sixteen.wide.column.toggle_finance_details
