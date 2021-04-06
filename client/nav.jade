@@ -22,6 +22,9 @@ template(name='nav')
         a.item.mobile.hidden(href="/fun" class="{{isActivePath '/fun'}}" title='fundamentals')
             img(src="https://img.icons8.com/fluent/48/000000/paid-search.png")
             | fundamentals
+        a.item.mobile.hidden(href="/profile" class="{{isActivePath '/profile'}}" title='gme profile')
+            img(src="https://img.icons8.com/fluent/48/000000/info.png")
+            | profile
         // a.item.mobile.hidden(href="/reddit" class="{{isActivePath '/reddit'}}" title='events')
         //     img(src="https://img.icons8.com/fluent/48/000000/reddit.png")
         //     | reddit
@@ -176,6 +179,10 @@ template(name='left_sidebar')
         a.item.toggle_sidebar(href="/tools" class="{{isActivePath '/tools'}}" title='tools')
             img.ui.avatar.image(src="https://img.icons8.com/fluent/48/000000/wrench--v1.png")
             | tools
+        a.item.toggle_sidebar(href="/profile" class="{{isActivePath '/profile'}}" title='gme profile')
+            img.ui.avatar.image(src="https://img.icons8.com/fluent/48/000000/info.png")
+            | profile
+            
         // a.item.toggle_sidebar(href="/chat" class="{{isActivePath '/chat'}}" title='chat') 
         //     |chat
         //     i.large.chat.icon

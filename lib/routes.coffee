@@ -78,3 +78,6 @@ Router.route '/reset_password/:token', (->
 Router.route '/techanal/', (->
     @render 'techanal'
     ), name:'techanal'
+Router.route '/profile/', (->
+    @render 'gme_profile'
+    ), name:'gme_profile'
