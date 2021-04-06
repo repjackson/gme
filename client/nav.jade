@@ -1,17 +1,27 @@
 template(name='nav')
     // .ui.fluid.fixed.menu.topnav(style="background-color:#{currentUser.theme_color};")
     .ui.fluid.borderless.attached.inverted.menu.topnav
-        // a.icon.item.toggle_sidebar
-        //     i.large.bars.icon
+        a.icon.item.toggle_sidebar.mobile.only
+            i.large.bars.icon
         a.item(href="/" class="{{isActivePath '/'}}")
             // img.ui.avatar.compact.image(src="{{c.url 'one_logo' height=200 width=200 gravity='face' crop='fill'}}")
-            i.diamond.icon
+            // i.diamond.icon
+            img(src="https://img.icons8.com/fluent/48/000000/diamond-care-1.png")
             span.mobile.hidden GME
         // a.icon.item.set_member.mobile.hidden(href="/m/member" class="{{isActivePath '/m/member'}}" title='users')
         //     i.large.users.icon
-        // a.icon.item.mobile.hidden(href="/events" class="{{isActivePath '/events'}}" title='events')
-        //     i.large.calendar.icon
-        //     // | events
+        a.item.mobile.hidden(href="/apes" class="{{isActivePath '/users'}}" title='events')
+            img(src="https://img.icons8.com/fluent/48/000000/gorilla.png")
+            | apes
+        a.item.mobile.hidden(href="/floor" class="{{isActivePath '/floor'}}" title='events')
+            img(src="https://img.icons8.com/fluent/48/000000/rocket.png")
+            | floor
+        a.item.mobile.hidden(href="/reddit" class="{{isActivePath '/floor'}}" title='events')
+            img(src="https://img.icons8.com/fluent/48/000000/reddit.png")
+            | reddit
+        a.item.mobile.hidden(href="/dd" class="{{isActivePath '/floor'}}" title='events')
+            img(src="https://img.icons8.com/fluent/48/000000/reading.png")
+            | dd
         // a.icon.item.mobile.hidden(href="/m/event" class="{{isActivePath 'events'}}" title='events')
         // a.icon.item.mobile.hidden.set_request(href="/m/request" class="{{isActivePath '/m/request'}}" title='requests')
         //     i.large.concierge.bell.icon
@@ -45,6 +55,8 @@ template(name='nav')
                     a.icon.item(href="/inbox" class="{{isActiveRoute 'inbox'}}")
                         i.large.outline.bell.icon
                 // a.icon.item(href="/chat" title='chat') 
+                a.icon.item.add_post(title="add post")
+                    i.plus.large.icon
                 // a.icon.item(href="/user/#{currentUser.username}/messages" class="{{isActivePath 'user_messages'}}" title="#{user.username} messages")
                 //     i.chat.large.icon
                 if is_dev 
@@ -155,37 +167,18 @@ template(name='left_sidebar')
         // a.item.toggle_sidebar(href="/" class="{{isActiveRoute '/'}}")
         //     img.ui.avatar.compact.image(src="{{c.url 'one_logo' height=200 width=200 gravity='face' crop='fill'}}")
         //     |One
-        a.item.set_member.toggle_sidebar(href="/m/member" class="{{isActivePath 'm/member'}}" title='players')
-            i.large.users.icon
-            | directory
-        a.item.toggle_sidebar(href="/events" class="{{isActivePath '/events'}}")
-            i.large.calendar.icon
-            |events
-        a.item.toggle_sidebar(href="/m/request" class="{{isActivePath '/m/request'}}")
-            i.large.concierge.bell.icon
-            |requests
-        a.item.toggle_sidebar(href="/m/offer" class="{{isActivePath '/m/offer'}}")
-            i.large.hand.holding.heart.icon
-            |offers
-        a.item.toggle_sidebar.set_post(href="/m/post" class="{{isActivePath '/m/post'}}")
-            i.large.newspaper.icon
-            |news
-        // a.item.toggle_sidebar(href="/m/collective" class="{{isActivePath 'requests'}}")
-        //     i.users.icon
-        //     |collectives
-        a.item.toggle_sidebar.set_bug(href="/m/bug" class="{{isActivePath '/m/bug'}}")
-            i.large.bug.icon
-            |bugs
-        a.icon.item.toggle_sidebar.set_photo(href="/m/photo" class="{{isActivePath '/m/photo'}}" title='photos')
-            i.large.large.picture.icon
-            |photos  
-        a.icon.item.toggle_sidebar.set_expense(href="/m/expense" class="{{isActivePath '/m/expense'}}" title='expenses')
-            i.large.dollar.icon
-            |expenses            
-        // a.item.toggle_sidebar.set_rental(href="/m/rental" class="{{isActivePath regex='rentals'}}")
-        //     i.clock.icon
-        //     |rentals
-        // if has_badge 'facilitator'
+        a.item.toggle_sidebar(href="/apes" class="{{isActivePath '/users'}}" title='events')
+            img(src="https://img.icons8.com/fluent/48/000000/gorilla.png")
+            | apes
+        a.item.toggle_sidebar(href="/floor" class="{{isActivePath '/floor'}}" title='events')
+            img(src="https://img.icons8.com/fluent/48/000000/rocket.png")
+            | floor
+        a.item.toggle_sidebar(href="/reddit" class="{{isActivePath '/floor'}}" title='events')
+            img(src="https://img.icons8.com/fluent/48/000000/reddit.png")
+            | reddit
+        a.item.toggle_sidebar(href="/dd" class="{{isActivePath '/floor'}}" title='events')
+            img(src="https://img.icons8.com/fluent/48/000000/reading.png")
+            | dd
         // a.item.toggle_sidebar(href="/chat" class="{{isActivePath '/chat'}}" title='chat') 
         //     |chat
         //     i.large.chat.icon
