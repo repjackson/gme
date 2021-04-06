@@ -81,3 +81,9 @@ Router.route '/techanal/', (->
 Router.route '/profile/', (->
     @render 'gme_profile'
     ), name:'gme_profile'
+Router.route '/dd/', (->
+    @render 'dd'
+    ), name:'dd'
+Router.route '/timeline/', (->
+    @render 'timeline'
+    ), name:'timeline'

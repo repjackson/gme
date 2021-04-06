@@ -22,6 +22,9 @@ template(name='nav')
         a.item.mobile.hidden(href="/fun" class="{{isActivePath '/fun'}}" title='fundamentals')
             img(src="https://img.icons8.com/fluent/48/000000/paid-search.png")
             | fundamentals
+        a.item.mobile.hidden(href="/timeline" class="{{isActivePath '/timeline'}}" title='fundamentals')
+            img(src="https://img.icons8.com/fluent/48/000000/clock.png")
+            | timeline
         a.item.mobile.hidden(href="/profile" class="{{isActivePath '/profile'}}" title='gme profile')
             img(src="https://img.icons8.com/fluent/48/000000/info.png")
             | profile
@@ -166,6 +169,9 @@ template(name='left_sidebar')
         a.disabled.item.toggle_sidebar(href="/reddit" class="{{isActivePath '/reddit'}}" title='reddit')
             img.ui.avatar.image(src="https://img.icons8.com/fluent/48/000000/reddit.png")
             | reddit
+        a.item.toggle_sidebar(href="/timeline" class="{{isActivePath '/timeline'}}" title='fundamentals')
+            img.ui.avatar.image(src="https://img.icons8.com/fluent/48/000000/clock.png")
+            | timeline
         a.item.toggle_sidebar(href="/techanal" class="{{isActivePath '/techanal'}}" title='tech analysis')
             img.ui.avatar.image(src="https://img.icons8.com/fluent/48/000000/wrench.png")
             | tech analysis

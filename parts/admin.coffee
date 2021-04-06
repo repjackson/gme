@@ -15,6 +15,10 @@ if Meteor.isClient
         @layout 'layout'
         @render 'fun'
         ), name:'fun'
+    Router.route '/timeline', (->
+        @layout 'layout'
+        @render 'timeline'
+        ), name:'timeline'
 
     Template.admin.onCreated ->
         # @autorun -> Meteor.subscribe 'user_model_docs', 'offer', Router.current().params.username
