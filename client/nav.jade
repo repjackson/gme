@@ -7,36 +7,36 @@ template(name='nav')
             // img.ui.avatar.compact.image(src="{{c.url 'one_logo' height=200 width=200 gravity='face' crop='fill'}}")
             // i.diamond.icon
             img(src="https://img.icons8.com/fluent/48/000000/diamond-care-1.png")
-            span.mobile.hidden GME
+            // span.mobile.hidden GME
         // a.icon.item.set_member.mobile.hidden(href="/m/member" class="{{isActivePath '/m/member'}}" title='users')
         //     i.large.users.icon
         a.item.mobile.hidden(href="/apes" class="{{isActivePath '/apes'}}" title='retards')
             img(src="https://img.icons8.com/fluent/48/000000/gorilla.png")
-            | apes
-        a.item.mobile.hidden(href="/floor" class="{{isActivePath '/floor'}}" title='events')
+            // | apes
+        a.item.mobile.hidden(href="/floor" class="{{isActivePath '/floor'}}" title='floor')
             img(src="https://img.icons8.com/fluent/48/000000/rocket.png")
-            | floor
-        a.item.mobile.hidden(href="/techanal" class="{{isActivePath '/techanal'}}" title='tech analysis')
-            img(src="https://img.icons8.com/fluent/48/000000/wrench.png")
-            | tech analysis
+            // | floor
+        a.item.mobile.hidden(href="/techanal" class="{{isActivePath '/techanal'}}" title='tech anal')
+            img(src="https://img.icons8.com/fluent/48/000000/speedometer.png")
+            // | tech analysis
         a.item.mobile.hidden(href="/fun" class="{{isActivePath '/fun'}}" title='fundamentals')
             img(src="https://img.icons8.com/fluent/48/000000/paid-search.png")
-            | fundamentals
-        a.item.mobile.hidden(href="/timeline" class="{{isActivePath '/timeline'}}" title='fundamentals')
+            // | fundamentals
+        a.item.mobile.hidden(href="/timeline" class="{{isActivePath '/timeline'}}" title='timeline')
             img(src="https://img.icons8.com/fluent/48/000000/clock.png")
-            | timeline
-        a.item.mobile.hidden(href="/profile" class="{{isActivePath '/profile'}}" title='gme profile')
+            // | timeline
+        a.item.mobile.hidden(href="/profile" class="{{isActivePath '/profile'}}" title='profile')
             img(src="https://img.icons8.com/fluent/48/000000/info.png")
-            | profile
+            // | profile
         // a.item.mobile.hidden(href="/reddit" class="{{isActivePath '/reddit'}}" title='events')
         //     img(src="https://img.icons8.com/fluent/48/000000/reddit.png")
         //     | reddit
         a.item.mobile.hidden(href="/dd" class="{{isActivePath '/dd'}}" title='dd')
             img(src="https://img.icons8.com/fluent/48/000000/reading.png")
-            span.mobile.hidden dd
+            // span.mobile.hidden dd
         a.item(href="/chart" class="{{isActivePath '/chart'}}" title='chart')
             img(src="https://img.icons8.com/fluent/48/000000/combo-chart.png")
-            span.mobile.hidden chart
+            // span.mobile.hidden chart
         .right.menu
             if currentUser
                 if unread_count
