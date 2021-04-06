@@ -21,17 +21,17 @@ force_loggedin =  ()->
     else
         @next()
 
-Router.onBeforeAction(force_loggedin, {
-    # only: ['admin']
-    except: [
-        'register'
-        'login'
-        'verify-email'
-        'forgot_password'
-        'event_view'
-        'delta'
-    ]
-    })
+# Router.onBeforeAction(force_loggedin, {
+#     # only: ['admin']
+#     except: [
+#         'register'
+#         'login'
+#         'verify-email'
+#         'forgot_password'
+#         'event_view'
+#         'delta'
+#     ]
+#     })
 
 
 Router.route('enroll', {
