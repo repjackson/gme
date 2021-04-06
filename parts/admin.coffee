@@ -11,6 +11,10 @@ if Meteor.isClient
         @layout 'layout'
         @render 'admin'
         ), name:'admin'
+    Router.route '/fun', (->
+        @layout 'layout'
+        @render 'fun'
+        ), name:'fun'
 
     Template.admin.onCreated ->
         # @autorun -> Meteor.subscribe 'user_model_docs', 'offer', Router.current().params.username

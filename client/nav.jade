@@ -19,6 +19,9 @@ template(name='nav')
         a.item.mobile.hidden(href="/techanal" class="{{isActivePath '/techanal'}}" title='tech analysis')
             img(src="https://img.icons8.com/fluent/48/000000/wrench.png")
             | tech analysis
+        a.item.mobile.hidden(href="/fun" class="{{isActivePath '/fun'}}" title='fundamentals')
+            img(src="https://img.icons8.com/fluent/48/000000/paid-search.png")
+            | fundamentals
         // a.item.mobile.hidden(href="/reddit" class="{{isActivePath '/reddit'}}" title='events')
         //     img(src="https://img.icons8.com/fluent/48/000000/reddit.png")
         //     | reddit
@@ -147,7 +150,7 @@ template(name='right_sidebar')
 
 
 template(name='left_sidebar')
-    .ui.left.sidebar.vertical.large.borderless.inverted.menu
+    .ui.left.sidebar.vertical.borderless.inverted.menu
         // a.item.toggle_sidebar(href="/" class="{{isActiveRoute '/'}}")
         //     img.ui.avatar.compact.image(src="{{c.url 'one_logo' height=200 width=200 gravity='face' crop='fill'}}")
         //     |One
@@ -161,8 +164,12 @@ template(name='left_sidebar')
             img.ui.avatar.image(src="https://img.icons8.com/fluent/48/000000/reddit.png")
             | reddit
         a.item.toggle_sidebar(href="/techanal" class="{{isActivePath '/techanal'}}" title='tech analysis')
-            img(src="https://img.icons8.com/fluent/48/000000/wrench.png")
+            img.ui.avatar.image(src="https://img.icons8.com/fluent/48/000000/wrench.png")
             | tech analysis
+        a.item.mobile.hidden(href="/fun" class="{{isActivePath '/fun'}}" title='fundamentals')
+            img.ui.avatar.image(src="https://img.icons8.com/fluent/48/000000/paid-search.png")
+            | fundamentals
+            
         a.item.toggle_sidebar(href="/dd" class="{{isActivePath '/floor'}}" title='events')
             img.ui.avatar.image(src="https://img.icons8.com/fluent/48/000000/reading.png")
             | dd
