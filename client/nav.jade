@@ -1,7 +1,7 @@
 template(name='nav')
     // .ui.fluid.fixed.menu.topnav(style="background-color:#{currentUser.theme_color};")
     .ui.fluid.borderless.attached.inverted.menu.topnav
-        a.icon.item.toggle_sidebar.mobile.only
+        a.icon.item.toggle_sidebar
             i.large.bars.icon
         a.item(href="/" class="{{isActivePath '/'}}")
             // img.ui.avatar.compact.image(src="{{c.url 'one_logo' height=200 width=200 gravity='face' crop='fill'}}")
@@ -16,34 +16,15 @@ template(name='nav')
         a.item.mobile.hidden(href="/floor" class="{{isActivePath '/floor'}}" title='events')
             img(src="https://img.icons8.com/fluent/48/000000/rocket.png")
             | floor
-        a.item.mobile.hidden(href="/reddit" class="{{isActivePath '/floor'}}" title='events')
+        a.item.mobile.hidden(href="/reddit" class="{{isActivePath '/reddit'}}" title='events')
             img(src="https://img.icons8.com/fluent/48/000000/reddit.png")
             | reddit
-        a.item.mobile.hidden(href="/dd" class="{{isActivePath '/floor'}}" title='events')
+        a.item.mobile.hidden(href="/dd" class="{{isActivePath '/dd'}}" title='dd')
             img(src="https://img.icons8.com/fluent/48/000000/reading.png")
-            | dd
-        // a.icon.item.mobile.hidden(href="/m/event" class="{{isActivePath 'events'}}" title='events')
-        // a.icon.item.mobile.hidden.set_request(href="/m/request" class="{{isActivePath '/m/request'}}" title='requests')
-        //     i.large.concierge.bell.icon
-        //     // em(data-emoji='bellhop')
-        //     // | requests
-        // a.icon.item.mobile.hidden.set_offer(href="/m/offer" class="{{isActivePath '/m/offer'}}" title='offers')
-        //     i.large.hand.holding.heart.icon
-        //     // em(data-emoji='bellhop')
-        //     // | offers
-        // a.icon.item.mobile.hidden.set_post(href="/m/post" class="{{isActivePath '/m/post'}}" title='feed')
-        //     i.large.newspaper.icon
-        //     // em(data-emoji='newspaper')
-        //     // | news
-        // a.icon.item.mobile.hidden.set_photo(href="/m/photo" class="{{isActivePath '/m/photo'}}" title='photos')
-        //     i.large.picture.icon
-        //     // em(data-emoji='newspaper')
-        //     // | news
-        // a.icon.item.mobile.hidden.set_expense(href="/m/expense" class="{{isActivePath '/m/expense'}}" title='expenses')
-        //     i.large.dollar.icon
-        // // if is_admin
-        // //     a.icon.item.mobile.hidden(href="/m/model" class="{{isActivePath regex='model'}}" title='admin')
-        // //         i.database.large.icon
+            span.mobile.hidden dd
+        a.item(href="/chart" class="{{isActivePath '/chart'}}" title='chart')
+            img(src="https://img.icons8.com/fluent/48/000000/combo-chart.png")
+            span.mobile.hidden chart
         .right.menu
             if currentUser
                 if unread_count
@@ -168,20 +149,24 @@ template(name='left_sidebar')
         //     img.ui.avatar.compact.image(src="{{c.url 'one_logo' height=200 width=200 gravity='face' crop='fill'}}")
         //     |One
         a.item.toggle_sidebar(href="/apes" class="{{isActivePath '/users'}}" title='events')
-            img(src="https://img.icons8.com/fluent/48/000000/gorilla.png")
+            img.ui.avatar.image(src="https://img.icons8.com/fluent/48/000000/gorilla.png")
             | apes
         a.item.toggle_sidebar(href="/floor" class="{{isActivePath '/floor'}}" title='events')
-            img(src="https://img.icons8.com/fluent/48/000000/rocket.png")
+            img.ui.avatar.image(src="https://img.icons8.com/fluent/48/000000/rocket.png")
             | floor
         a.item.toggle_sidebar(href="/reddit" class="{{isActivePath '/floor'}}" title='events')
-            img(src="https://img.icons8.com/fluent/48/000000/reddit.png")
+            img.ui.avatar.image(src="https://img.icons8.com/fluent/48/000000/reddit.png")
             | reddit
         a.item.toggle_sidebar(href="/dd" class="{{isActivePath '/floor'}}" title='events')
-            img(src="https://img.icons8.com/fluent/48/000000/reading.png")
+            img.ui.avatar.image(src="https://img.icons8.com/fluent/48/000000/reading.png")
             | dd
         // a.item.toggle_sidebar(href="/chat" class="{{isActivePath '/chat'}}" title='chat') 
         //     |chat
         //     i.large.chat.icon
+        a.item(href="/chart" class="{{isActivePath '/chart'}}" title='chart')
+            img.ui.avatar.image(src="https://img.icons8.com/fluent/48/000000/combo-chart.png")
+            | chart
+        
         if is_eric
             a.icon.item.toggle_dev.toggle_sidebar
                 |toggle dev

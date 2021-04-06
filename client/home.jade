@@ -1,5 +1,6 @@
-template(name='home')
+template(name='chart')
     +ticker
+template(name='home')
     .ui.stackable.grid
         .sixteen.wide.column
             .ui.header news
@@ -189,7 +190,7 @@ template(name='home')
          
          
 template(name='floor')                    
-    iframe(width='100%' height='100%' src="https://gmefloor.com/" frameborder='0' allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture' allowfullscreen='')
+    iframe(width='100%' height='800' src="https://gmefloor.com/" frameborder='0' allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture' allowfullscreen='')
                     
 template(name='finance_bar')
     .sixteen.wide.column.toggle_finance_details

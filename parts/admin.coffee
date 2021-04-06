@@ -1,13 +1,21 @@
 if Meteor.isClient
+    Router.route '/chart', (->
+        @layout 'layout'
+        @render 'chart'
+        ), name:'chart'
+    Router.route '/floor', (->
+        @layout 'layout'
+        @render 'floor'
+        ), name:'floor'
     Router.route '/admin', (->
         @layout 'layout'
         @render 'admin'
         ), name:'admin'
 
     Template.admin.onCreated ->
-        @autorun -> Meteor.subscribe 'user_model_docs', 'offer', Router.current().params.username
+        # @autorun -> Meteor.subscribe 'user_model_docs', 'offer', Router.current().params.username
         # @autorun => Meteor.subscribe 'admin', Router.current().params.username
-        @autorun => Meteor.subscribe 'model_docs', 'stat'
+        # @autorun => Meteor.subscribe 'model_docs', 'stat'
 
     Template.admin.events
         'keyup .new_offer': (e,t)->
