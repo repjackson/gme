@@ -4,8 +4,8 @@ template(name='login')
             .eight.wide.column
                 .ui.center.aligned.basic.segment
                     .ui.inline.header 
-                        img.ui.image(src="{{c.url 'one_logo' height=200 width=200 gravity='face' crop='fill'}}")
-                        |one
+                        i.big.diamond.icon
+                        |gme
                     .ui.inline.grey.header login
 
                 div
@@ -34,3 +34,7 @@ template(name='login')
                 //     a.ui.basic.button(href='/forgot_password')
                 //         i.refresh.icon
                 //         |forgot password
+                .ui.center.aligned.basic.segment    
+                    a.ui.basic.button(href='/register')
+                        i.plus.icon
+                        |register

@@ -16,16 +16,17 @@ if Meteor.isClient
         , 2000
     
     Template.home.onCreated ->
-        @autorun => Meteor.subscribe 'latest_debits'
-        @autorun => Meteor.subscribe 'model_docs', 'finance_stat'
-        @autorun => Meteor.subscribe 'model_docs', 'expense'
+        @autorun => Meteor.subscribe 'articles', ->
+        # @autorun => Meteor.subscribe 'latest_debits'
+        # @autorun => Meteor.subscribe 'model_docs', 'finance_stat'
+        # @autorun => Meteor.subscribe 'model_docs', 'expense'
 
-        # @autorun => Meteor.subscribe 'model_docs', 'transaction'
-        @autorun => Meteor.subscribe 'model_docs', 'request'
-        @autorun => Meteor.subscribe 'model_docs', 'offer'
-        # @autorun => Meteor.subscribe 'model_docs', 'comment'
-        @autorun => Meteor.subscribe 'future_events'
-        @autorun => Meteor.subscribe 'model_docs', 'post'
+        # # @autorun => Meteor.subscribe 'model_docs', 'transaction'
+        # @autorun => Meteor.subscribe 'model_docs', 'request'
+        # @autorun => Meteor.subscribe 'model_docs', 'offer'
+        # # @autorun => Meteor.subscribe 'model_docs', 'comment'
+        # @autorun => Meteor.subscribe 'future_events'
+        # @autorun => Meteor.subscribe 'model_docs', 'post'
         # @autorun => Meteor.subscribe 'model_docs', 'global_stats'
         # @autorun -> Meteor.subscribe('home_tag_results',
         #     selected_tags.array()
@@ -63,9 +64,12 @@ if Meteor.isClient
             ).count()
         
     Template.home.helpers
-        featured_products: ->
+        articles: ->
             Docs.find
-                model:'product'
+                model:'post'
+                group:'gme'
+                
+                
         home_doc: ->
             Docs.findOne 
                 model:'home_doc'
@@ -222,3 +226,12 @@ if Meteor.isServer
         Docs.find 
             model:'transaction'
             event_id:event._id
+            
+    Meteor.publish 'articles', (event)->
+        # console.log event
+        Docs.find {
+            model:'post'
+            group:'gme'
+        }, limit:10
+            
+            
