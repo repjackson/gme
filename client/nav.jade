@@ -1,8 +1,8 @@
 template(name='nav')
     // .ui.fluid.fixed.menu.topnav(style="background-color:#{currentUser.theme_color};")
     .ui.fluid.borderless.attached.inverted.menu.topnav
-        a.icon.item.toggle_sidebar
-            i.large.bars.icon
+        // a.icon.item.toggle_sidebar
+        //     i.large.bars.icon
         a.item(href="/" class="{{isActivePath '/'}}")
             // img.ui.avatar.compact.image(src="{{c.url 'one_logo' height=200 width=200 gravity='face' crop='fill'}}")
             i.diamond.icon
@@ -35,22 +35,22 @@ template(name='nav')
         // //     a.icon.item.mobile.hidden(href="/m/model" class="{{isActivePath regex='model'}}" title='admin')
         // //         i.database.large.icon
         .right.menu
-            if unread_count
-                a.item.alerts.select_term(href="#" class=alert_toggle_class)
-                    i.large.bell.icon
-                    if unread_count
-                        |#{unread_count}
-            else
-                a.icon.item(href="/inbox" class="{{isActiveRoute 'inbox'}}")
-                    i.large.outline.bell.icon
-            // a.icon.item(href="/chat" title='chat') 
-            // a.icon.item(href="/user/#{currentUser.username}/messages" class="{{isActivePath 'user_messages'}}" title="#{user.username} messages")
-            //     i.chat.large.icon
-            if is_dev 
-                .icon.item
-                    i.large.code.icon
             if currentUser
-                // a.large.item.toggle_rightbar(class="{{isActiveRoute 'user_dashboard'}}")
+                if unread_count
+                    a.item.alerts.select_term(href="#" class=alert_toggle_class)
+                        i.large.bell.icon
+                        if unread_count
+                            |#{unread_count}
+                else
+                    a.icon.item(href="/inbox" class="{{isActiveRoute 'inbox'}}")
+                        i.large.outline.bell.icon
+                // a.icon.item(href="/chat" title='chat') 
+                // a.icon.item(href="/user/#{currentUser.username}/messages" class="{{isActivePath 'user_messages'}}" title="#{user.username} messages")
+                //     i.chat.large.icon
+                if is_dev 
+                    .icon.item
+                        i.large.code.icon
+                    // a.large.item.toggle_rightbar(class="{{isActiveRoute 'user_dashboard'}}")
                 a.large.item(href="/user/#{currentUser.username}" class="{{isActiveRoute 'user_dashboard'}}")
                     //- i.large.user.large.icon
                     if currentUser.profile_image_id
@@ -74,8 +74,8 @@ template(name='nav')
                     |login
                     // +icon name='login-rounded-right'
                     i.large.chevron.right.icon
-    if session_is 'viewing_alerts'
-        +topbar
+    // if session_is 'viewing_alerts'
+    //     +topbar
 
 
 

@@ -26,7 +26,7 @@ template(name='user_dashboard')
                             |!{current_status}
                 if is_dev
                     .ui.small.inline.header #{_id}
-        .four.column.row
+        .three.column.row
             .column
                 a.ui.inline.header(href="/user/#{username}/credits")
                     i.chevron.down.large.icon
@@ -75,24 +75,6 @@ template(name='user_dashboard')
                                 |status: #{status}
                                 if complete 
                                     |completed by #{completer.name}
-            .column
-                a.ui.inline.spaced.header(href="/user/#{username}/events")
-                    i.calendar.icon
-                    |events
-                .medscroll
-                    each user_event_tickets
-                        .ui.card
-                            if ticket_event.image_id
-                                a(href="/event/#{event_id}/view")
-                                    img.ui.fluid.zoom.image(src="{{c.url ticket_event.image_id height=200 width=200 crop='fit'}}" class=currentUser.invert_class)
-                            .content.zoom.pointer
-                                a.header(href="/event/#{event_id}/view")
-                                    |#{ticket_event.title}
-                                |#{fac.shortname}
-                                |#{description}
-                                |{{med_date date}}
-                                |{{long_time time}}
-
 
 
 template(name='user_credit_segment')

@@ -1,11 +1,14 @@
 template(name='home')
-    .ui.header news
-    each articles
-        .ui.segment
-            .ui.header #{title} #{when}
-            |!{content}
-            each tags 
-                .ui.label #{this}
+    .ui.stackable.padded.grid
+        .sixteen.wide.column
+            .ui.header news
+            each articles
+                .ui.segment
+                    .ui.header #{title} #{when}
+                    .ui.basic.segment.smallscroll
+                        |!{content}
+                    each tags 
+                        .ui.label #{this}
     // .ui.center.aligned.basic.segment
     //     .ui.basic.big.compact.circular.button.debit
     //         i.gift.red.icon
