@@ -24,7 +24,19 @@ Docs.helpers
     _buyer: -> Meteor.users.findOne @buyer_id
     recipient: ->
         Meteor.users.findOne @recipient_id
-    
+    seven_tags: ->
+        if @tags
+            @tags[..7]
+    five_tags: ->
+        if @tags
+            @tags[..5]
+    ten_tags: ->
+        if @tags
+            @tags[..10]
+    three_tags: ->
+        if @tags
+            @tags[..3]
+
     when: -> moment(@_timestamp).fromNow()
     is_visible: -> @published in [0,1]
     is_published: -> @published is 1
@@ -248,3 +260,63 @@ Meteor.methods
                     anon_downvotes:1
             Meteor.users.update doc._author_id,
                 $inc:anon_points:-1
+
+
+    upvote_sentence: (doc_id, sentence)->
+        # console.log sentence
+        if sentence.weight
+            Docs.update(
+                { _id:doc_id, "tone.result.sentences_tone.sentence_id": sentence.sentence_id },
+                $inc: 
+                    "tone.result.sentences_tone.$.weight": 1
+                    points:1
+            )
+        else
+            Docs.update(
+                { _id:doc_id, "tone.result.sentences_tone.sentence_id": sentence.sentence_id },
+                {
+                    $set: 
+                        "tone.result.sentences_tone.$.weight": 1
+                    $inc:
+                        points:1
+                }
+            )
+    tag_sentence: (doc_id, sentence, tag)->
+        # console.log sentence
+        Docs.update(
+            { _id:doc_id, "tone.result.sentences_tone.sentence_id": sentence.sentence_id },
+            { $addToSet: 
+                "tone.result.sentences_tone.$.tags": tag
+                "tags": tag
+            }
+        )
+
+    reset_sentence: (doc_id, sentence)->
+        # console.log sentence
+        Docs.update(
+            { _id:doc_id, "tone.result.sentences_tone.sentence_id": sentence.sentence_id },
+            { 
+                $set: 
+                    "tone.result.sentences_tone.$.weight": -2
+            } 
+        )
+
+
+    downvote_sentence: (doc_id, sentence)->
+        # console.log sentence
+        Docs.update(
+            { _id:doc_id, "tone.result.sentences_tone.sentence_id": sentence.sentence_id },
+            { $inc: 
+                "tone.result.sentences_tone.$.weight": -1
+                points: -1
+            }
+        )
+    check_url: (str)->
+        # console.log 'testing', str
+        pattern = new RegExp('^(https?:\\/\\/)?'+ # protocol
+        '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ # domain name
+        '((\\d{1,3}\\.){3}\\d{1,3}))'+ # OR ip (v4) address
+        '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ # port and path
+        '(\\?[;&a-z\\d%_.~+=-]*)?'+ # query string
+        '(\\#[-a-z\\d_]*)?$','i') # fragment locator
+        return !!pattern.test(str)

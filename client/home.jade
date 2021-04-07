@@ -1,8 +1,8 @@
 template(name='chart')
     +ticker
 template(name='home')
-    // +small_ticker
-    // +mini_chart
+    +small_ticker
+    +mini_chart
     +symbol_overview
     .ui.stackable.padded.grid
         .four.wide.column
@@ -10,17 +10,6 @@ template(name='home')
                 |12.4 billion
                 +fluent name='peeled-banana'
                 | plucked
-        .sixteen.wide.column
-            .ui.header 
-                i.blog.icon
-                |news
-            each articles
-                .ui.segment
-                    .ui.header #{title} #{when}
-                    .ui.basic.segment.smallscroll
-                        |!{content}
-                    each tags 
-                        .ui.label #{this}
         .sixteen.wide.column
             .ui.inline.header #{counter}
             .ui.inline.header    
@@ -42,6 +31,46 @@ template(name='home')
                     +tag_selector
             // else
             //     i.big.grey.loading.yin.yang.icon
+        .twelve.wide.column
+            |sort by
+            if skve 'group_sort_key' 'points'
+                .ui.circular.black.icon.button.set_sort_points
+                    i.large.thumbs.up.icon
+            else
+                .ui.circular.basic.icon.button.set_sort_points
+                    i.large.thumbs.up.icon
+            if skve 'group_sort_key' '_timestamp'
+                .ui.circular.black.icon.button.set_sort_timestamp
+                    i.clock.large.icon
+            else
+                .ui.circular.basic.icon.button.set_sort_timestamp
+                    i.clock.large.icon
+            if skve 'group_sort_key' 'views'
+                .ui.circular.black.icon.button.set_sort_views
+                    i.eye.large.icon
+            else
+                .ui.circular.basic.icon.button.set_sort_views
+                    i.eye.large.icon
+            // .ui.inline.header
+            //     |view
+            // +view_mode key='video' icon='video'
+            // +view_mode key='image' icon='image'
+            // +view_mode key='content' icon='content'
+            if one_post
+                .ui.one.column.centered.padded.grid.scrolling
+                    each posts
+                        +post_card_med
+            else if two_posts
+                .ui.two.column.centered.padded.grid.scrolling
+                    each posts
+                        +post_card_med
+            else 
+                .ui.stackable.two.column.padded.grid.scrolling
+                    if posts.count
+                        each posts
+                            +post_card
+                    else
+                        i.massive.grey.loading.yin.yang.icon
         .four.wide.center.aligned.column.scrolling
             i.big.clock.grey.icon(title='when tags')
             if picked_time_tags
@@ -107,75 +136,35 @@ template(name='home')
                         |&nbsp;
                     div.rounded.invert(style="height:5px;width:{{abs_percent doc_sentiment_score}}%;background-color:red" title="{{abs_percent doc_sentiment_score}}% #{doc_sentiment_label}")
                     
-                .ui.invert.inverted.header(class="{{calculated_size avg_sent_score}}") {{ to_percent avg_sent_score }}% sentiment
+                .uied.header(class="{{calculated_size avg_sent_score}}") {{ to_percent avg_sent_score }}% sentiment
                     |&nbsp;
-                // div.rounded.invert(style="height:5px;width:{{to_percent avg_sent_score}}%;background-color:green" title="{{to_percent avg_sent_score}}% joy")
+                // div.rounded(style="height:5px;width:{{to_percent avg_sent_score}}%;background-color:green" title="{{to_percent avg_sent_score}}% joy")
       
-                span.say.ui.green.text.invert(class="{{calculated_size avg_joy_score}}") {{ to_percent avg_joy_score }}% joy 
+                span.say.ui.green.text(class="{{calculated_size avg_joy_score}}") {{ to_percent avg_joy_score }}% joy 
                     |&nbsp;
-                div.rounded.invert(style="height:5px;width:{{to_percent avg_joy_score}}%;background-color:green" title="{{to_percent avg_joy_score}}% joy")
+                div.rounded(style="height:5px;width:{{to_percent avg_joy_score}}%;background-color:green" title="{{to_percent avg_joy_score}}% joy")
                 //- if above_50 'avg_sadness_score'
                     //- .spacer
-                span.say.ui.blue.text.invert(class="{{calculated_size avg_sadness_score}}") {{ to_percent avg_sadness_score}}% sad 
+                span.say.ui.blue.text(class="{{calculated_size avg_sadness_score}}") {{ to_percent avg_sadness_score}}% sad 
                     |&nbsp;
-                div.rounded.invert(style="height:5px;width:{{to_percent avg_sadness_score}}%;background-color:blue" title="{{to_percent avg_sadness_score}}% sad")
+                div.rounded(style="height:5px;width:{{to_percent avg_sadness_score}}%;background-color:blue" title="{{to_percent avg_sadness_score}}% sad")
                 //- if above_50 'avg_fear_score'
                     //- .spacer
-                span.say.ui.grey.text.invert(class="{{calculated_size avg_fear_score}}") {{ to_percent avg_fear_score }}% fear 
+                span.say.ui.grey.text(class="{{calculated_size avg_fear_score}}") {{ to_percent avg_fear_score }}% fear 
                     |&nbsp;
-                div.rounded.invert(style="height:5px;width:{{to_percent avg_fear_score}}%;background-color:grey" title="{{to_percent avg_fear_score}}% fear")
+                div.rounded(style="height:5px;width:{{to_percent avg_fear_score}}%;background-color:grey" title="{{to_percent avg_fear_score}}% fear")
                 //- if above_50 'avg_disgust_score'
                     //- .spacer
-                span.say.ui.orange.text.invert(class="{{calculated_size avg_disgust_score}}") {{ to_percent avg_disgust_score }}% disgust 
+                span.say.ui.orange.text(class="{{calculated_size avg_disgust_score}}") {{ to_percent avg_disgust_score }}% disgust 
                     |&nbsp;
-                div.rounded.invert(style="height:5px;width:{{to_percent avg_disgust_score}}%;background-color:orange" title="{{to_percent avg_disgust_score}}% disgust")
+                div.rounded(style="height:5px;width:{{to_percent avg_disgust_score}}%;background-color:orange" title="{{to_percent avg_disgust_score}}% disgust")
                 //- if above_50 'avg_anger_score'
                     //- .spacer
-                span.say.ui.red.text.invert(class="{{calculated_size avg_anger_score}}") {{ to_percent avg_anger_score }}% anger 
+                span.say.ui.red.text(class="{{calculated_size avg_anger_score}}") {{ to_percent avg_anger_score }}% anger 
                     |&nbsp;
-                div.rounded.invert(style="height:5px;width:{{to_percent avg_anger_score}}%;background-color:red" title="{{to_percent avg_anger_score}}% anger")
+                div.rounded(style="height:5px;width:{{to_percent avg_anger_score}}%;background-color:red" title="{{to_percent avg_anger_score}}% anger")
 
             
-        .twelve.wide.column
-            |sort by
-            if skve 'group_sort_key' 'points'
-                .ui.circular.black.icon.button.set_sort_points
-                    i.large.thumbs.up.icon
-            else
-                .ui.circular.basic.icon.button.set_sort_points
-                    i.large.thumbs.up.icon
-            if skve 'group_sort_key' '_timestamp'
-                .ui.circular.black.icon.button.set_sort_timestamp
-                    i.clock.large.icon
-            else
-                .ui.circular.basic.icon.button.set_sort_timestamp
-                    i.clock.large.icon
-            if skve 'group_sort_key' 'views'
-                .ui.circular.black.icon.button.set_sort_views
-                    i.eye.large.icon
-            else
-                .ui.circular.basic.icon.button.set_sort_views
-                    i.eye.large.icon
-            // .ui.inline.header
-            //     |view
-            // +group_view_mode key='video' icon='video'
-            // +group_view_mode key='image' icon='image'
-            // +group_view_mode key='content' icon='content'
-            if one_post
-                .ui.one.column.centered.padded.grid.scrolling
-                    each posts
-                        +post_card_med
-            else if two_posts
-                .ui.two.column.centered.padded.grid.scrolling
-                    each posts
-                        +post_card_med
-            else 
-                .ui.stackable.two.column.padded.grid.scrolling
-                    if posts.count
-                        each posts
-                            +post_card
-                    else
-                        i.massive.grey.loading.yin.yang.icon
 
          
 template(name='floor')                    
@@ -199,57 +188,6 @@ template(name='finance_bar')
                         // .ui.header most generative member
                             
                                     
-template(name='home_request_card')
-    .ui.segment.view_request.pointer
-        .content
-            if youtube_id
-                +youtube_view key='youtube_id' direct=true
-            else if image_id
-                img.ui.raw.image(src="{{c.url image_id width=400 height=300 crop='fill'}}")    
-
-            .header
-                .ui.inline.header #{point_bounty}p: #{title}
-                if _author.profile_image_id
-                    with _author
-                        img.ui.avatar.image(src="{{c.url profile_image_id height=500 width=500 gravity='face' crop='fill'}}" class=user_class title=shortname)
-                | #{_author.name}
-            |!{description}
-            .meta #{when}
-            // each tags 
-            //     .ui.tiny.basic.label #{this}
-            if doc_comments.count
-                .meta
-                    each doc_comments 
-                        i.grey.chat.outline.icon
-                        img.ui.avatar.image(src="{{c.url _author.profile_image_id height=200 width=200 gravity='face' crop='fill'}}" class=user_class)
-                        |#{body}
-                        div
-
-
-                                    
-template(name='home_offer_card')
-    .ui.segment.view_offer.pointer
-        .content
-            if youtube_id
-                +youtube_view key='youtube_id' direct=true
-            else if image_id
-                img.ui.raw.image(src="{{c.url image_id width=400 height=300 crop='fill'}}")    
-            .header
-                .ui.inline.header #{title}
-                if _author.profile_image_id
-                    with _author
-                        img.ui.avatar.image(src="{{c.url profile_image_id height=500 width=500 gravity='face' crop='fill'}}" class=user_class title=shortname)
-                | #{_author.name}
-            // |!{description}
-            .meta #{when}
-            if point_price
-                |#{point_price}p
-            if dollar_price
-                |$#{dollar_price}
-            // each tags 
-            //     .ui.tiny.basic.label #{this}
-            +comments_view_small
-            
             
 template(name='comments_view_small')            
     if doc_comments.count
@@ -263,99 +201,130 @@ template(name='comments_view_small')
 
                                     
                                     
-template(name='home_event_card')
-    a.ui.fluid.card(href="/event/#{_id}/view")
-        img.ui.image(src="{{c.url image_id height=200 width=500 crop='fill'}}")
-        .content
-            .header
-                | #{title} 
-            .meta    
-                |{{medium_date date}}
-                |#{time}
-                // |{{home_long_date start_datetime}}
-                // .ui.small.grey.inline.header {{from_now start_datetime}}
-            .meta    
-                .ui.inline.small.header $#{usd_price} / #{point_price}p
-            .meta
-                if fac
-                    |led by
-                    if fac.profile_image_id
-                        with fac
-                            img.ui.avatar.spaced.image(src="{{c.url profile_image_id height=500 width=500 gravity='face' crop='fill'}}" class=user_class title=shortname)
-                    | #{fac.name}
-            // .meta #{when}
-            .description 
-            if location
-                i.marker.icon 
-                |#{location}
-            div 
-        .content
-            |#{going.count}
-            i.checkmark.green.large.icon
-            each going
-                img.ui.avatar.image(src="{{c.url profile_image_id height=200 width=200 gravity='face' crop='fill'}}" class=user_class title=shortname)
-            // i.question.orange.large.icon
-            // | #{maybe_user_ids.length}
-            // each maybe_going
-            //     img.ui.avatar.image(src="{{c.url profile_image_id height=200 width=200 gravity='face' crop='fill'}}" class=user_class title=shortname)
-            // | #{not_user_ids.length}
-            // i.remove.red.large.icon
-            // each not_going
-            //     img.ui.avatar.image(src="{{c.url profile_image_id height=200 width=200 gravity='face' crop='fill'}}" class=user_class title=shortname)
-            +comments_view_small
-                               
-                               
-                               
-                                    
-template(name='debit_card')
-    .ui.card.pointer.view_debit
-        if image_id
-            img.ui.image(src="{{c.url image_id height=200 width=500 crop='fill'}}")
-        .content
-            .description 
-                if _author.profile_image_id
-                    with _author
-                        img.ui.avatar.image(src="{{c.url profile_image_id height=500 width=500 gravity='face' crop='fill'}}" class=user_class)
-                | #{_author.shortname}
-                a.ui.inline.header(href="/debit/#{_id}/view") #{amount}p
-                .ui.inline.header >
-                if recipient.profile_image_id
-                    with recipient
-                        img.ui.avatar.image(src="{{c.url profile_image_id height=500 width=500 gravity='face' crop='fill'}}" class=user_class)
-                |#{recipient.shortname}
-            .meta #{when}
-            .description.f11
-                |#{description}
-            .spacer
-            each tags 
-                .ui.small.basic.label #{this}
-            if upvoter_ids
-                +voting_tiny
-            +comments_view_small
                                     
 template(name='join_button')
     .ui.fluid.green.button.join
         i.checkmark.icon
         |join
 
+template(name='tag_selector')
+    // a.ui.big.image.rounded.label.zoomer.pointer.select_tag.select_term(href='#' title="#{count} results" class="#{selector_class} #{thinking_class}")
+    a.ui.basic.image.large.label.zoomer.select_tag(title="#{count} results" class="#{selector_class} #{thinking_class}")
+        if term
+            if term.metadata.image
+                img.ui.avatar.image.superzoom(src=term.metadata.image )    
+        strong #{name}
+        // if in_dev
+        //     small #{count}
+        
+template(name='unselect_tag')
+    a.unselect_tag.ui.big.black.image.label(href='#')
+        if term
+            if term.metadata.image
+                img.ui.avatar.compact.image.superzoom(src=term.metadata.image)    
+        strong #{this}
+
+        
+        
+template(name='flat_tag_selector')
+    // a.ui.big.image.rounded.label.zoomer.pointer.select_tag.select_term(href='#' title="#{count} results" class="#{selector_class} #{thinking_class}")
+    a.ui.compact.tiny.basic.image.label.zoomer.select_flat_tag(title="#{count} results" class="#{selector_class} #{thinking_class}")
+        if term
+            if term.metadata.image
+                img.ui.mini.rounded.inline.image.superzoom(src=term.metadata.image )    
+        | #{this}
+        // if in_dev
+        //     small #{count}
 
 
 
-template(name='home_shift_card')
-    a.ui.card(href="/shift/#{_id}/view")
+
+template(name='emotion_edit')
+    // div
+    .ui.small.inline.header #{key}
+    .ui.circular.icon.button.up_emotion
+        i.chevron.up.icon
+    .ui.circular.icon.button.down_emotion
+        i.chevron.down.icon
+    if kve key 'joy'
+        i.smile.icon
+
+template(name='post_edit')
+    with current_doc
+        .ui.stackable.padded.grid
+            .row
+                .four.wide.column
+                    a.ui.icon.green.big.button(href="/#{group}/p/#{_id}" title='save')
+                        i.checkmark.big.icon
+                    .ui.inline.header 
+                        i.pencil.icon
+                        |edit group post
+                    i.large.link.red.remove.icon.delete_group_post
+                    +image_edit key='image_id' label='image' direct=true
+                    div 
+                    +array_edit key='tags' label='tags' direct=true
+                    +link_edit key='link' label='link' direct=true
+                    +array_edit key='time_tags' label='time tags' icon='clock' direct=true
+                    +array_edit key='location_tags' label='location tags' icon='marker' direct=true
+                    +array_edit key='people_tags' label='people tags' icon='user' direct=true
+                    +datetime_edit key='publish_datetime' label='publish date/time' icon='clock' direct=true
+
+                    // +raw_edit key='raw' label='raw' direct=true
+                .twelve.wide.column
+                    +text_edit key='title' label='title' direct=true
+                    +image_link_edit key='image_link' direct=true
+                    +youtube_edit key='youtube_id' label='youtube id' direct=true
+                    +html_edit key='content' label='content' direct=true
+
+
+template(name='view_mode')
+    .ui.circular.icon.button
+        i.icon(class=icon)
+
+     
+template(name='post_card')     
+    .column.medscroll
         .content
-            .header
-                .ui.inline.header
-                // if _author.profile_image_id
-                //     img.ui.avatar.image(src="{{c.url _author.profile_image_id height=500 width=500 gravity='face' crop='fill'}}" class=user_class)
-                // | #{_author_username}
-                .item from {{from_now start_datetime}} > {{from_now end_datetime}}
-                if shift_contributors 
-                    each shift_contributors
-                        img.ui.avatar.image(src="{{c.url profile_image_id height=500 width=500 gravity='face' crop='fill'}}" class=user_class)
-                        |#{username}
-            .meta #{when}
-            .description 
-                |#{description}
-            each tags 
-                .ui.tiny.basic.label #{this}
+            a.ui.header.zoomer(href="/#{group}/p/#{_id}" class=post_header_class) #{title}
+            if image_id
+                a(href="/#{group}/p/#{_id}")
+                    img.ui.fluid.rounded.zoomer.image(src="{{c.url image_id }}" class=currentUser.invert_class)
+            if image_link
+                a(href="/#{group}/p/#{_id}")
+                    +image_link_view key='image_link' direct=true
+            if youtube_id
+                +youtube_view key='youtube_id' label='youtube id' direct=true
+            // if is_admin
+            //     +text_edit key='group' label='slug' direct=true
+            // +datetime_view key='publish_datetime' label='publish date/time' icon='clock' direct=true
+            if tone 
+                +tone
+            else 
+                a.pointer.black_text.zoomer(href="/#{group}/p/#{_id}")
+                    |!{content}
+                // if raw
+                //     |!{raw}
+            a.ui.inline.grey.header(href="/#{group}/p/#{_id}") #{when}
+            each tags
+                +flat_tag_selector
+            if is_admin 
+                +remove_button
+            +doc_emotion_small    
+            span(title='views')
+                i.grey.eye.icon
+                |#{views}
+            +voting
+            +array_view key='people_tags' icon='user outline' direct=true
+            +array_view key='time_tags' icon='clock' direct=true
+            +array_view key='location_tags' icon='marker' direct=true
+
+
+template(name='flat_tag_picker')
+    // a.ui.big.image.rounded.label.zoomer.pointer.select_tag.select_term(href='#' title="#{count} results" class="#{selector_class} #{thinking_class}")
+    a.ui.compact.tiny.basic.image.label.zoomer.select_flat_tag(title="#{count} results" class="#{selector_class} #{thinking_class}")
+        if term
+            if term.metadata.image
+                img.ui.mini.rounded.inline.image.superzoom(src=term.metadata.image )    
+        | #{this}
+        // if in_dev
+        //     small #{count}

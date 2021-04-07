@@ -187,15 +187,15 @@ template(name='entities')
                 if emotion
                     with emotion
                         span {{ to_percent sadness }}% sad
-                            .rounded.invert(style="height:5px;width:{{to_percent sadness}}%;background-color:blue" title="{{to_percent sadness}}% sad" )
+                            .rounded(style="height:5px;width:{{to_percent sadness}}%;background-color:blue" title="{{to_percent sadness}}% sad" )
                         span {{ to_percent joy }}% joy
-                            .rounded.invert(style="height:5px;width:{{to_percent joy}}%;background-color:green" title="{{to_percent joy}}% sadness" )
+                            .rounded(style="height:5px;width:{{to_percent joy}}%;background-color:green" title="{{to_percent joy}}% sadness" )
                         span {{ to_percent disgust }}% disgust
-                            .rounded.invert(style="height:5px;width:{{to_percent disgust}}%;background-color:orange" title="{{to_percent disgust}}% disgust" )
+                            .rounded(style="height:5px;width:{{to_percent disgust}}%;background-color:orange" title="{{to_percent disgust}}% disgust" )
                         span {{ to_percent fear }}% fear
-                            .rounded.invert(style="height:5px;width:{{to_percent fear}}%;background-color:black" title="{{to_percent fear}}% fear" )
+                            .rounded(style="height:5px;width:{{to_percent fear}}%;background-color:black" title="{{to_percent fear}}% fear" )
                         span {{ to_percent anger }}% anger
-                            .rounded.invert(style="height:5px;width:{{to_percent anger}}%;background-color:red" title="{{to_percent anger}}% anger" )
+                            .rounded(style="height:5px;width:{{to_percent anger}}%;background-color:red" title="{{to_percent anger}}% anger" )
 
 
 
@@ -403,7 +403,7 @@ template(name='tone')
                     i.chevron.up.link.grey.icon.upvote_sentence
                     i.chevron.down.link.grey.icon.downvote_sentence
                     each tones
-                        // .ui.basic.inverted.small.compact.circular.label(class="{{calculated_size 'score'}} #{tone_label_class}") 
+                        // .ui.basiced.small.compact.circular.label(class="{{calculated_size 'score'}} #{tone_label_class}") 
                         if kve 'tone_id' 'joy'
                             +emoji name='joy'
                         else if kve 'tone_id' 'analytical'
@@ -415,7 +415,7 @@ template(name='tone')
                         else if kve 'tone_id' 'tentative'
                             +emoji name='fearful'
                         else
-                            .ui.basic.inverted.small.compact.circular.label(class="#{tone_label_class}") 
+                            .ui.basiced.small.compact.circular.label(class="#{tone_label_class}") 
                                 span.ui.text
                                     |#{tone_id} &nbsp;
                                 | {{ to_percent score }}% 
