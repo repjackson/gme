@@ -68,7 +68,16 @@ if Meteor.isClient
                 }
             Meteor.call 'create_user', options, (err,res)=>
                 if err
-                    alert err
+                    # alert err
+                    console.log err
+                    $('body').toast(
+                        position: 'bottom center',
+                        showIcon: 'remove'
+                        message: err.reason
+                        displayTime: 'auto',
+                        class: 'error'
+                    )
+                    
                 else
                     console.log res
                     unless username

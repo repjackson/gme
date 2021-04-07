@@ -6,8 +6,8 @@ template(name='register')
                 .ui.center.aligned.basic.segment
                     //- a.ui.icon.button(href="/")
                     //-     i.large.home.icon
-                    i.diamond.big.icon
-                    +color name='diamond'
+                    i.diamond.big.blue.icon
+                    // +color name='diamond'
                     div
                     // +icon name='circled' cl='ui inline image'
                     .ui.big.inline.header registration
@@ -61,18 +61,20 @@ template(name='register')
                 //-     input.password2(type='password')
                 if can_register
                     //- if registering
-                    .ui.fluid.big.button.register(class=enter_class)
-                        i.user.plus.icon
+                    .ui.fluid.big.basic.button.register(class=enter_class)
+                        i.user.plus.large.icon
                         |register
                 else
-                    .ui.fluid.big.disabled.button(class=enter_class)
+                    .ui.fluid.big.disabled.basic.button(class=enter_class)
                         i.user.plus.icon
                         |register
                     // // .ui.small.header username "#{username}" found
-                    // a.ui.basic.fluid.button(href='/login') 
-                    //     // i.right.chevron.icon
-                    //     +icon name='internal' cl='ui inline image'
-                    //     |login
+                .ui.horizontal.divider or
+                a.ui.basic.fluid.button(href='/login') 
+                    // i.right.chevron.icon
+                    +color name='internal' classes='ui inline image'
+                    // small or 
+                    strong login
                 // .ui.center.aligned.basic.segment    
                     // .ui.small.header by registering you agree to our 
                     //     a(href='/p/privacy' target="_window") privacy policy
