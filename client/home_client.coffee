@@ -18,6 +18,7 @@ Router.route '/g/:group', (->
     
 
 Template.home.onCreated ->
+    Session.setDefault('ticker_view', 'small')
     Session.setDefault('sort_key', '_timestamp')
     @autorun => Meteor.subscribe 'agg_sentiment_group',
         # Router.current().params.group
@@ -137,6 +138,14 @@ Template.emotion_edit.events
                 "#{@key}_percent":updated_percent-.01
         
 Template.home.events
+    'click .ticker': ->
+        if Session.equals('ticker_view','small')
+            Session.set('ticker_view', 'med')
+        else if Session.equals('ticker_view','med')
+            Session.set('ticker_view', 'large')
+        else if Session.equals('ticker_view','large')
+            Session.set('ticker_view', 'small')
+            
     'click .set_sort_points': -> Session.set('sort_key', 'points')
     'click .set_sort_timestamp': -> Session.set('sort_key', '_timestamp')
     'click .set_sort_views': -> Session.set('sort_key', 'views')

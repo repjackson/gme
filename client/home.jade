@@ -1,9 +1,13 @@
 template(name='chart')
     +ticker
 template(name='home')
-    +small_ticker
-    +mini_chart
-    +symbol_overview
+    .ticker.zoomer.pointer
+        if skve 'ticker_view' 'small'
+            +small_ticker
+        if skve 'ticker_view' 'med'
+            +mini_chart
+        if skve 'ticker_view' 'large'
+            +symbol_overview
     .ui.stackable.padded.grid
         .four.wide.column
             .ui.header
@@ -70,8 +74,8 @@ template(name='home')
                         each posts
                             +post_card
                     else
-                        i.massive.grey.loading.yin.yang.icon
-        .four.wide.center.aligned.column.scrolling
+                        i.massive.grey.loading.diamond.icon
+        .four.wide.column.scrolling
             i.big.clock.grey.icon(title='when tags')
             if picked_time_tags
                 each picked_time_tags
