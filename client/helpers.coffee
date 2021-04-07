@@ -8,6 +8,30 @@ Template.registerHelper 'in_role', (role)->
     else
         false
 
+
+# Template.skve.helpers
+#     calculated_class: ->
+#         if Session.equals(@k,@v) then 'black' else 'basic'
+# Template.skve.events
+#     'click .set_session_v': ->
+#         Session.set(@k, @v)
+
+    
+
+Template.registerHelper 'has_thumbnail', ()->
+    # console.log @data.thumbnail
+    @thumbnail.length > 0
+
+Template.registerHelper 'is_youtube', ()->
+    @domain in ['youtube.com','youtu.be','m.youtube.com','vimeo.com']
+    
+    
+Template.registerHelper 'ufrom', (input)-> moment.unix(input).fromNow()
+
+
+
+
+Template.registerHelper 'skv_is', (key,value) -> Session.equals(key,value)
 Template.registerHelper 'current_tribe', () ->
     if Meteor.user()
         Docs.findOne 

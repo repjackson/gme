@@ -1,7 +1,8 @@
 Meteor.publish 'subreddit_by_param', (subreddit)->
     Docs.find
         model:'subreddit'
-        "data.display_name":subreddit
+        # "data.display_name":subreddit
+        "name":subreddit
 
 Meteor.publish 'sub_docs', (
     subreddit
@@ -192,6 +193,7 @@ Meteor.methods
                     name:subreddit
                     # "data.display_name":subreddit
                 if existing
+                    console.log 'existing', existing
                     # if Meteor.isDevelopment
                     # if typeof(existing.tags) is 'string'
                     #     Doc.update
@@ -203,6 +205,7 @@ Meteor.methods
                     sub.model = 'subreddit'
                     sub.name = subreddit
                     sub.data = res.data.data
+                    console.log 'new', subreddit
                     new_reddit_post_id = Docs.insert sub
     
     get_sub_latest: (subreddit)->

@@ -141,8 +141,8 @@ Template.subreddit.helpers
     subreddit_doc: ->
         Docs.findOne
             model:'subreddit'
-            "data.display_name":Router.current().params.subreddit
-            # name:Router.current().params.subreddit
+            # "data.display_name":Router.current().params.subreddit
+            name:Router.current().params.subreddit
     sub_docs: ->
         Docs.find({
             model:'rpost'
