@@ -14,9 +14,9 @@ template(name='nav')
         a.item.mobile.hidden(href="/r/Superstonk" class="{{isActivePath '/r/Superstonk'}}" title='superstonk')
             img(src="https://styles.redditmedia.com/t5_43zwn1/styles/communityIcon_buyz18nw5an61.jpg?width=256&format=pjpg&s=428194a22860c38a11b3a9ed5cc3f7fb0ff122b9")
         a.item.mobile.hidden(href="/r/GME" class="{{isActivePath '/r/GME'}}" title='GME subreddit')
-            img(src="https://img.icons8.com/fluent/48/000000/reddit.png")
-            // | fundamentals
-            // | fundamentals
+            img(src="https://styles.redditmedia.com/t5_2u6vg/styles/communityIcon_d56uwvvfalo61.jpg?width=256&format=pjpg&s=11e958067c7844c85a1ab0d436ba515d2fb27264")
+        a.item.mobile.hidden(href="/r/wallstreetbets" class="{{isActivePath '/r/wallstreetbets'}}" title='wallstreetbets subreddit')
+            img(src="https://styles.redditmedia.com/t5_2th52/styles/communityIcon_b37n2zfs8k861.png?width=256&s=a9cb63319055ded916e5b12ff03f1e8c63ae6911")
         a.item.mobile.hidden(href="/apes" class="{{isActivePath '/apes'}}" title='apes')
             img(src="https://img.icons8.com/fluent/48/000000/gorilla.png")
             // | apes
@@ -172,7 +172,13 @@ template(name='left_sidebar')
             | floor
         a.item.toggle_sidebar(href="/r/GME" class="{{isActivePath '/r/GME'}}" title='GME subreddit')
             img.ui.avatar.image(src="https://img.icons8.com/fluent/48/000000/reddit.png")
-            | /r/GME
+            | GME
+        a.item.toggle_sidebar(href="/r/wallstreetbets" class="{{isActivePath '/r/wallstreetbets'}}" title='wsb subreddit')
+            img.ui.avatar.image(src="https://styles.redditmedia.com/t5_2th52/styles/communityIcon_b37n2zfs8k861.png?width=256&s=a9cb63319055ded916e5b12ff03f1e8c63ae6911")
+            | wallstreetbets
+        a.item.toggle_sidebar(href="/r/Superstonk" class="{{isActivePath '/r/Superstonk'}}" title='wsb subreddit')
+            img.ui.avatar.image(src="https://styles.redditmedia.com/t5_43zwn1/styles/communityIcon_buyz18nw5an61.jpg?width=256&format=pjpg&s=428194a22860c38a11b3a9ed5cc3f7fb0ff122b9")
+            | Superstonk
         a.item.toggle_sidebar(href="/timeline" class="{{isActivePath '/timeline'}}" title='timeline')
             img.ui.avatar.image(src="https://img.icons8.com/fluent/48/000000/clock.png")
             | timeline
