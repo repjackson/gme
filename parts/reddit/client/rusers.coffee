@@ -2,7 +2,7 @@
 # @selected_user_roles = new ReactiveArray []
 
 
-Router.route '/rusers', (->
+Router.route '/apes', (->
     @render 'rusers'
     ), name:'rusers'
 
@@ -115,9 +115,9 @@ Template.rusers.helpers
 
 
         
-Template.user_small.events
-    'click .add_tag': -> 
-        picked_user_tags.push @valueOf()
+# Template.user_small.events
+#     'click .add_tag': -> 
+#         picked_user_tags.push @valueOf()
 Template.rusers.events
     'click .pick_user_tag': -> 
         # window.speechSynthesis.speak new SpeechSynthesisUtterance @name

@@ -11,7 +11,7 @@ template(name='nav')
             // span.mobile.hidden GME
         // a.icon.item.set_member.mobile.hidden(href="/m/member" class="{{isActivePath '/m/member'}}" title='users')
         //     i.large.users.icon
-        a.item.mobile.disabled.hidden(href="/apes" class="{{isActivePath '/apes'}}" title='apes')
+        a.item.mobile.hidden(href="/apes" class="{{isActivePath '/apes'}}" title='apes')
             img(src="https://img.icons8.com/fluent/48/000000/gorilla.png")
             // | apes
         a.item.mobile.hidden(href="/floor" class="{{isActivePath '/floor'}}" title='floor')
@@ -23,7 +23,10 @@ template(name='nav')
         a.item.mobile.hidden(href="/fun" class="{{isActivePath '/fun'}}" title='fundamentals')
             img(src="https://img.icons8.com/fluent/48/000000/paid-search.png")
             // | fundamentals
-        a.item.mobile.hidden(href="/r/GME" class="{{isActivePath '/r/GME'}}" title='/r/GME subreddit')
+        a.item.mobile.hidden(href="/r/GME" class="{{isActivePath '/r/GME'}}" title='GME subreddit')
+            img(src="https://img.icons8.com/fluent/48/000000/reddit.png")
+            // | fundamentals
+        a.item.mobile.hidden(href="/s/finance" class="{{isActivePath '/s/finance'}}" title='finance stack site')
             img(src="https://img.icons8.com/fluent/48/000000/reddit.png")
             // | fundamentals
         a.item.mobile.hidden(href="/timeline" class="{{isActivePath '/timeline'}}" title='timeline')
@@ -161,16 +164,16 @@ template(name='left_sidebar')
         // a.item.toggle_sidebar(href="/" class="{{isActiveRoute '/'}}")
         //     img.ui.avatar.compact.image(src="{{c.url 'one_logo' height=200 width=200 gravity='face' crop='fill'}}")
         //     |One
-        a.item.toggle_sidebar(href="/apes" class="{{isActivePath '/users'}}" title='retards')
+        a.item.toggle_sidebar(href="/apes" class="{{isActivePath '/users'}}" title='apes')
             img.ui.avatar.image(src="https://img.icons8.com/fluent/48/000000/gorilla.png")
             | apes
-        a.item.toggle_sidebar(href="/floor" class="{{isActivePath '/floor'}}" title='events')
+        a.item.toggle_sidebar(href="/floor" class="{{isActivePath '/floor'}}" title='floor')
             img.ui.avatar.image(src="https://img.icons8.com/fluent/48/000000/rocket.png")
             | floor
-        a.item.toggle_sidebar(href="/r/GME" class="{{isActivePath '/r/GME'}}" title='reddit')
+        a.item.toggle_sidebar(href="/r/GME" class="{{isActivePath '/r/GME'}}" title='GME subreddit')
             img.ui.avatar.image(src="https://img.icons8.com/fluent/48/000000/reddit.png")
             | /r/GME
-        a.item.toggle_sidebar(href="/timeline" class="{{isActivePath '/timeline'}}" title='fundamentals')
+        a.item.toggle_sidebar(href="/timeline" class="{{isActivePath '/timeline'}}" title='timeline')
             img.ui.avatar.image(src="https://img.icons8.com/fluent/48/000000/clock.png")
             | timeline
         a.item.toggle_sidebar(href="/techanal" class="{{isActivePath '/techanal'}}" title='tech analysis')
@@ -180,7 +183,7 @@ template(name='left_sidebar')
             img.ui.avatar.image(src="https://img.icons8.com/fluent/48/000000/paid-search.png")
             | fundamentals
             
-        a.item.toggle_sidebar(href="/dd" class="{{isActivePath '/floor'}}" title='events')
+        a.item.toggle_sidebar(href="/dd" class="{{isActivePath '/dd'}}" title='dd')
             img.ui.avatar.image(src="https://img.icons8.com/fluent/48/000000/reading.png")
             | dd
         a.item.toggle_sidebar(href="/tools" class="{{isActivePath '/tools'}}" title='tools')
