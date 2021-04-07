@@ -13,12 +13,12 @@ Meteor.publish 'sub_docs', (
     sort_key='data.created'
     sort_direction
     )->
-    @unblock()
+    # @unblock()
 
     self = @
     match = {
         model:'rpost'
-        subreddit:subreddit
+        # subreddit:'gme'
     }
     # if view_bounties
     #     match.bounty = true
@@ -28,6 +28,8 @@ Meteor.publish 'sub_docs', (
     if picked_sub_tags.length > 0 then match.tags = $all:picked_sub_tags
     # if picked_time_tags.length > 0 then match.time_tags = $all:picked_time_tags
     # if picked_authors.length > 0 then match.authors = $all:picked_authors
+    console.log 'match', match
+    console.log 'match', Docs.find(match).count()
     Docs.find match,
         limit:20
         sort: "#{sort_key}":parseInt(sort_direction)
@@ -56,6 +58,7 @@ Meteor.publish 'sub_docs', (
             permalink:1
             "data.media":1
             doc_sentiment_score:1
+            subreddit:1
             doc_sentiment_label:1
             joy_percent:1
             sadness_percent:1
@@ -266,9 +269,10 @@ Meteor.methods
               
     search_subreddit: (subreddit,search)->
         @unblock()
+        console.log 'searching', subreddit, search
         HTTP.get "http://reddit.com/r/#{subreddit}/search.json?q=#{search}&limit=10&restrict_sr=1&raw_json=1&include_over_18=off&nsfw=0", (err,res)->
             if res.data.data.dist > 1
-                _.each(res.data.data.children[0..100], (item)=>
+                _.each(res.data.data.children[0..10], (item)=>
                     # for item in res.data.data.children[0..3]
                     id = item.data.id
                     # Docs.insert d
@@ -276,7 +280,8 @@ Meteor.methods
                     added_tags = [search]
                     found = Docs.findOne({
                         model:'rpost',
-                        "data.subreddit":item.data.subreddit
+                        # "data.subreddit":item.data.subreddit
+                        subreddit:item.data.subreddit
                         reddit_id:id
                     })
                     #     # continue
