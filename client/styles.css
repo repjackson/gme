@@ -1,6 +1,6 @@
 body {
     /* font-family: 'Raleway', sans-serif !important; */
-    font-family: 'Ubuntu', sans-serif !important;
+    /*font-family: 'Ubuntu', sans-serif !important;*/
     /* font-family: 'Lato+Mono', sans-serif !important; */
     /* font-family: 'Lato', sans-serif !important; */
     /* font-size: 110% !important; */
@@ -433,7 +433,7 @@ a.title, #title {
 }
 .label:not(.circular) {
     margin: 2px !important;
-    border-radius: 10px !important; 
+    /*border-radius: 10px !important; */
 }
 
 input {

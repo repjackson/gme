@@ -1,6 +1,9 @@
 @selected_tags = new ReactiveArray []
 @selected_authors = new ReactiveArray []
 @selected_location_tags = new ReactiveArray []
+@picked_sub_tags = new ReactiveArray []
+@picked_domains = new ReactiveArray []
+@picked_authors = new ReactiveArray []
 
 
 # Router.configure

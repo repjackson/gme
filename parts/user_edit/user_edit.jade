@@ -14,30 +14,27 @@ template(name='user_edit_layout')
                             .ui.small.inline.header @#{current_user.username}
                             img.ui.centered.medium.rounded.image(src="{{c.url profile_image_id height=400 width=400 gravity='face' crop='fill'}}")
                                 
-                            a.ui.big.green.circular.icon.button(href="/user/#{current_user.username}/") 
+                            a.ui.big.green.circular.button(href="/user/#{current_user.username}/") 
                                 i.checkmark.big.icon
-                                // strong save
-                            a.ui.large.basic.icon.circular.button(href="/user/#{current_user.username}/edit/account" class="{{isActiveRoute 'user_edit_account'}}" title='account') 
+                                strong save
+                            a.ui.large.basic.circular.button(href="/user/#{current_user.username}/edit/account" class="{{isActiveRoute 'user_edit_account'}}" title='account') 
                                 i.cog.large.icon 
-                                // |account
-                            a.ui.large.basic.icon.circular.button(href="/user/#{current_user.username}/edit/info" class="{{isActiveRoute 'user_edit_info'}}" title='info') 
+                                |account
+                            a.ui.large.basic.circular.button(href="/user/#{current_user.username}/edit/info" class="{{isActiveRoute 'user_edit_info'}}" title='info') 
                                 i.info.large.icon 
-                                // |info
-                            a.ui.large.basic.icon.circular.button(href="/user/#{current_user.username}/edit/alerts" class="{{isActiveRoute 'user_edit_alerts'}}") 
+                                |info
+                            a.ui.large.basic.circular.button(href="/user/#{current_user.username}/edit/alerts" class="{{isActiveRoute 'user_edit_alerts'}}") 
                                 i.bell.large.icon 
-                                // |alerts
-                            a.ui.large.basic.icon.circular.button(href="/user/#{current_user.username}/edit/genekeys" class="{{isActiveRoute 'user_edit_genekeys'}}") 
-                                i.dna.large.icon 
-                                // |genekeys
-                            a.ui.large.basic.icon.circular.button(href="/user/#{current_user.username}/edit/privacy" class="{{isActiveRoute 'user_edit_privacy'}}") 
+                                |alerts
+                            a.ui.large.basic.circular.button(href="/user/#{current_user.username}/edit/privacy" class="{{isActiveRoute 'user_edit_privacy'}}") 
                                 i.lock.privacy.large.icon 
-                                // | privacy
-                            // a.ui.large.basic.icon.circular.button(href="/user/#{current_user.username}/edit/badges" class="{{isActiveRoute 'user_edit_badges'}}" title='badges') 
-                            //     i.certificate.large.icon
-                            //     // |badges
-                            a.ui.large.basic.icon.circular.button(href="/user/#{current_user.username}/edit/membership" class="{{isActiveRoute 'user_edit_membership'}}" title='membership') 
+                                | privacy
+                            a.ui.large.basic.circular.button(href="/user/#{current_user.username}/edit/badges" class="{{isActiveRoute 'user_edit_badges'}}" title='badges') 
+                                i.certificate.large.icon
+                                |badges
+                            a.ui.large.basic.circular.button(href="/user/#{current_user.username}/edit/membership" class="{{isActiveRoute 'user_edit_membership'}}" title='membership') 
                                 i.shield.large.icon
-                                // | membership
+                                | membership
                         .twelve.wide.column
                             +yield
 
@@ -57,7 +54,7 @@ template(name='phone_editor')
     //-             .ui.label not verified
     //-             a.resend_verification(href='#')
     //-                 |resend code
-    //-             .ui.small.icon.button.remove_phone(title='remove phone')
+    //-             .ui.small.button.remove_phone(title='remove phone')
     //-                 i.remove.icon
     //- else
     //-     .ui.fluid.button.update_phone add phone
