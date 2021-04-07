@@ -23,7 +23,7 @@ template(name='nav')
         a.item.mobile.hidden(href="/fun" class="{{isActivePath '/fun'}}" title='fundamentals')
             img(src="https://img.icons8.com/fluent/48/000000/paid-search.png")
             // | fundamentals
-        a.item.mobile.hidden(href="/r/gme" class="{{isActivePath '/r/gme'}}" title='/r/gme subreddit')
+        a.item.mobile.hidden(href="/r/GME" class="{{isActivePath '/r/GME'}}" title='/r/GME subreddit')
             img(src="https://img.icons8.com/fluent/48/000000/reddit.png")
             // | fundamentals
         a.item.mobile.hidden(href="/timeline" class="{{isActivePath '/timeline'}}" title='timeline')
@@ -167,16 +167,16 @@ template(name='left_sidebar')
         a.item.toggle_sidebar(href="/floor" class="{{isActivePath '/floor'}}" title='events')
             img.ui.avatar.image(src="https://img.icons8.com/fluent/48/000000/rocket.png")
             | floor
-        a.disabled.item.toggle_sidebar(href="/reddit" class="{{isActivePath '/reddit'}}" title='reddit')
+        a.item.toggle_sidebar(href="/r/GME" class="{{isActivePath '/r/GME'}}" title='reddit')
             img.ui.avatar.image(src="https://img.icons8.com/fluent/48/000000/reddit.png")
-            | reddit
+            | /r/GME
         a.item.toggle_sidebar(href="/timeline" class="{{isActivePath '/timeline'}}" title='fundamentals')
             img.ui.avatar.image(src="https://img.icons8.com/fluent/48/000000/clock.png")
             | timeline
         a.item.toggle_sidebar(href="/techanal" class="{{isActivePath '/techanal'}}" title='tech analysis')
             img.ui.avatar.image(src="https://img.icons8.com/fluent/48/000000/wrench.png")
             | tech analysis
-        a.item.mobile.hidden(href="/fun" class="{{isActivePath '/fun'}}" title='fundamentals')
+        a.item.toggle_sidebar(href="/fun" class="{{isActivePath '/fun'}}" title='fundamentals')
             img.ui.avatar.image(src="https://img.icons8.com/fluent/48/000000/paid-search.png")
             | fundamentals
             
@@ -226,7 +226,7 @@ template(name='left_sidebar')
             // a.item.toggle_sidebar(href="/m/room" class="{{isActiveRoute 'requests'}}")
             //     i.building.blue.icon
             //     |rooms
-            a.blue.item.set_model.toggle_sidebar(href="/m/model" class="{{isActivePath '/m/model'}}")
+            a.blue.item.set_model.toggle_sidebar(href="/admin" class="{{isActivePath '/admin'}}")
                 |admin
                 i.database.blue.icon
             a.item.set_user.toggle_sidebar(href="/m/user" class="{{isActiveRoute '/m/user'}}")

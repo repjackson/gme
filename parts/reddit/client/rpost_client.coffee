@@ -3,12 +3,12 @@ Router.route '/rpost/:doc_id', (->
     @render 'rpost'
     ), name:'rpost'
 
-Template.rpost.onCreated ->
+Template.rpage.onCreated ->
     @autorun -> Meteor.subscribe('doc', Router.current().params.doc_id)
     # @autorun -> Meteor.subscribe('rpost_comments', Router.current().params.group, Router.current().params.doc_id)
     Session.set('view_section','comments')
     
-Template.rpost.events ->
+Template.rpage.events ->
     'click .get_post': ->
         Meteor.call 'get_reddit_post', Router.current().params.doc_id, ->
     # Meteor.call 'call_watson',Router.current().params.doc_id,'url','url',=>
@@ -16,7 +16,7 @@ Template.rpost.events ->
     # if doc
     #     Meteor.call 'get_user_info', doc.data.author, ->
 
-Template.rpost.events
+Template.rpage.events
     'click .get_comments': ->
         $('body').toast(
             position: 'bottom center',
@@ -95,7 +95,7 @@ Template.rpost.events
         # window.speechSynthesis.speak new SpeechSynthesisUtterance 'ouch'
 
 
-Template.rpost.events
+Template.rpage.events
     'click .goto_sub': -> 
         Meteor.call 'get_sub_info', Router.current().params.subreddit, ->
             Meteor.call 'get_sub_latest', Router.current().params.subreddit, ->
