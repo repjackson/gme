@@ -1,7 +1,7 @@
 template(name='nav')
     // .ui.fluid.fixed.menu.topnav(style="background-color:#{currentUser.theme_color};")
     .ui.fluid.borderless.attached.inverted.small.menu.topnav
-        a.icon.item.toggle_sidebar
+        a.icon.item.toggle_sidebar.mobile.only
             // i.large.bars.icon
             img.zoomer(src="https://img.icons8.com/color/48/000000/menu--v3.png")            
         a.item(href="/" class="{{isActivePath '/'}}")

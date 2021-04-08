@@ -490,7 +490,7 @@ input {
 }
 .scrolling{
     max-height: 85vh !important;
-    /*min-height: 50vh !important;*/
+    min-height: 50vh !important;
     /* padding: 5px !important;
     border-radius: 10px !important;
     border-width: 1px !important;

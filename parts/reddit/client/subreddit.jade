@@ -55,32 +55,7 @@ template(name='subreddit')
                     else
                         .ui.basic.center.aligned.segment
                             i.big.loading.yin.yang.icon
-            .four.wide.column.scrolling.seg
-                img.ui.inline.image(src=data.header_img)
-                .ui.inline.header.pull_latest #{data.title}
-                // +alpha
-                div
-                .ui.inline.small.header
-                    i.globe.icon
-                    |domains
-                each subreddit_domain_tags
-                    .ui.basic.label.select_domain(class=domain_selector_class)
-                        |#{name} 
-                        small #{count}
-                div
-                .ui.inline.header
-                    i.clock.icon    
-                    |time tags
-                each subreddit_time_tags
-                    .ui.basic.label.select_time_tag(class=domain_selector_class)
-                        |#{name} 
-                        small #{count}
-                // .ui.inline.header.pull_latest #{display_name}
-                if in_dev
-                    +print_this
-                    // div
-                +subreddit_best
-                +subreddit_newest
+            .four.wide.column.scrlling.seg
                 with emotion_avg
                     if is_positive
                         span.say.ui.green.text(class="{{calculated_size doc_sentiment_score}}") {{ to_percent doc_sentiment_score }}% positive
@@ -116,6 +91,32 @@ template(name='subreddit')
                     span.say.ui.red.text(class="{{calculated_size avg_anger_score}}") {{ to_percent avg_anger_score }}% anger 
                         |&nbsp;
                     div.rounded(style="height:5px;width:{{to_percent avg_anger_score}}%;background-color:red" title="{{to_percent avg_anger_score}}% anger")
+            
+                img.ui.inline.image(src=data.header_img)
+                .ui.inline.header.pull_latest #{data.title}
+                // +alpha
+                div
+                .ui.inline.small.header
+                    i.globe.icon
+                    |domains
+                each subreddit_domain_tags
+                    .ui.basic.label.select_domain(class=domain_selector_class)
+                        |#{name} 
+                        small #{count}
+                div
+                .ui.inline.header
+                    i.clock.icon    
+                    |time tags
+                each subreddit_time_tags
+                    .ui.basic.label.select_time_tag(class=domain_selector_class)
+                        |#{name} 
+                        small #{count}
+                // .ui.inline.header.pull_latest #{display_name}
+                if in_dev
+                    +print_this
+                    // div
+                +subreddit_best
+                +subreddit_newest
                 .smallscroll
                     .ui.list.mobile.hidden
                         .item.seg.say !{data.public_description}
