@@ -380,10 +380,6 @@ Template.registerHelper 'nl2br', (text)->
     new Spacebars.SafeString(nl2br)
 
 
-Template.registerHelper 'author', ->
-    Meteor.users.findOne(@_author_id)
-
-
 Template.registerHelper 'dev', -> Meteor.isDevelopment
 Template.registerHelper 'fixed', (number)->
     # console.log number
@@ -393,14 +389,6 @@ Template.registerHelper 'to_percent', (number)->
     # console.log number
     (number*100).toFixed()
 
-Template.registerHelper 'upvote_class', () ->
-    if Meteor.userId()
-        if @upvoter_ids and Meteor.userId() in @upvoter_ids then '' else 'outline'
-    else ''
-Template.registerHelper 'downvote_class', () ->
-    if Meteor.userId()
-        if @downvoter_ids and Meteor.userId() in @downvoter_ids then '' else 'outline'
-    else ''
 
 Template.registerHelper 'current_month', () -> moment(Date.now()).format("MMMM")
 Template.registerHelper 'current_day', () -> moment(Date.now()).format("DD")
@@ -453,10 +441,6 @@ Template.registerHelper 'loading_class', ()->
 Template.registerHelper 'in_dev', ()-> Meteor.isDevelopment
 
 Template.registerHelper 'publish_when', ()-> moment(@publish_date).fromNow()
-
-
-Template.registerHelper 'is_one', ()-> 
-    if Meteor.userId() and Meteor.userId() in ['YFPxjXCgjhMYEPADS'] then true else false
 
 
 

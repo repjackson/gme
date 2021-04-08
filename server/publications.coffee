@@ -33,11 +33,6 @@ Meteor.publish 'latest_debits', ()->
         limit:25
 
 
-Meteor.publish 'all_users', ()->
-    Meteor.users.find()
-
-
-
 Meteor.publish 'doc', (doc_id)->
     found_doc = Docs.findOne doc_id
     if found_doc

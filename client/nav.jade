@@ -3,46 +3,46 @@ template(name='nav')
     .ui.fluid.borderless.attached.inverted.small.menu.topnav
         a.icon.item.toggle_sidebar
             // i.large.bars.icon
-            img(src="https://img.icons8.com/color/48/000000/menu--v3.png")            
+            img.zoomer(src="https://img.icons8.com/color/48/000000/menu--v3.png")            
         a.item(href="/" class="{{isActivePath '/'}}")
             // img.ui.avatar.compact.image(src="{{c.url 'one_logo' height=200 width=200 gravity='face' crop='fill'}}")
             // i.diamond.icon
-            img(src="https://img.icons8.com/fluent/48/000000/diamond-care-1.png")
+            img.zoomer(src="https://img.icons8.com/color/48/000000/diamond.png")
             // span.mobile.hidden GME
         // a.icon.item.set_member.mobile.hidden(href="/m/member" class="{{isActivePath '/m/member'}}" title='users')
         //     i.large.users.icon
         a.item.mobile.hidden(href="/r/Superstonk" class="{{isActivePath '/r/Superstonk'}}" title='superstonk')
-            img(src="https://styles.redditmedia.com/t5_43zwn1/styles/communityIcon_buyz18nw5an61.jpg?width=256&format=pjpg&s=428194a22860c38a11b3a9ed5cc3f7fb0ff122b9")
+            img.zoomer(src="https://styles.redditmedia.com/t5_43zwn1/styles/communityIcon_buyz18nw5an61.jpg?width=256&format=pjpg&s=428194a22860c38a11b3a9ed5cc3f7fb0ff122b9")
         a.item.mobile.hidden(href="/r/GME" class="{{isActivePath '/r/GME'}}" title='GME subreddit')
-            img(src="https://styles.redditmedia.com/t5_2u6vg/styles/communityIcon_d56uwvvfalo61.jpg?width=256&format=pjpg&s=11e958067c7844c85a1ab0d436ba515d2fb27264")
+            img.zoomer(src="https://styles.redditmedia.com/t5_2u6vg/styles/communityIcon_d56uwvvfalo61.jpg?width=256&format=pjpg&s=11e958067c7844c85a1ab0d436ba515d2fb27264")
         a.item.mobile.hidden(href="/r/wallstreetbets" class="{{isActivePath '/r/wallstreetbets'}}" title='wallstreetbets subreddit')
-            img(src="https://styles.redditmedia.com/t5_2th52/styles/communityIcon_b37n2zfs8k861.png?width=256&s=a9cb63319055ded916e5b12ff03f1e8c63ae6911")
+            img.zoomer(src="https://styles.redditmedia.com/t5_2th52/styles/communityIcon_b37n2zfs8k861.png?width=256&s=a9cb63319055ded916e5b12ff03f1e8c63ae6911")
         a.item.mobile.hidden(href="/apes" class="{{isActivePath '/apes'}}" title='apes')
-            img(src="https://img.icons8.com/fluent/48/000000/gorilla.png")
+            img.zoomer(src="https://img.icons8.com/color/48/000000/gorilla.png")
             // | apes
         a.item.mobile.hidden(href="/floor" class="{{isActivePath '/floor'}}" title='floor')
-            img(src="https://img.icons8.com/fluent/48/000000/rocket.png")
+            img.zoomer(src="https://img.icons8.com/color/48/000000/rocket.png")
             // | floor
         a.item.mobile.hidden(href="/techanal" class="{{isActivePath '/techanal'}}" title='technical analysis')
-            img(src="https://img.icons8.com/fluent/48/000000/speedometer.png")
+            img.zoomer(src="https://img.icons8.com/color/48/000000/speedometer.png")
             // | tech analysis
         a.item.mobile.hidden(href="/fun" class="{{isActivePath '/fun'}}" title='fundamentals')
-            img(src="https://img.icons8.com/fluent/48/000000/paid-search.png")
+            img.zoomer(src="https://img.icons8.com/color/48/000000/paid-search.png")
             // | fundamentals
         a.item.mobile.hidden(href="/timeline" class="{{isActivePath '/timeline'}}" title='timeline')
-            img(src="https://img.icons8.com/fluent/48/000000/clock.png")
+            img.zoomer(src="https://img.icons8.com/color/48/000000/clock.png")
             // | timeline
         a.item.mobile.hidden(href="/profile" class="{{isActivePath '/profile'}}" title='profile')
-            img(src="https://img.icons8.com/fluent/48/000000/info.png")
+            img.zoomer(src="https://img.icons8.com/color/48/000000/info.png")
             // | profile
         // a.item.mobile.hidden(href="/reddit" class="{{isActivePath '/reddit'}}" title='events')
-        //     img(src="https://img.icons8.com/fluent/48/000000/reddit.png")
+        //     img(src="https://img.icons8.com/color/48/000000/reddit.png")
         //     | reddit
-        a.item.mobile.hidden(href="/dd" class="{{isActivePath '/dd'}}" title='dd')
-            img(src="https://img.icons8.com/fluent/48/000000/reading.png")
-            // span.mobile.hidden dd
+        // a.item.mobile.hidden(href="/dd" class="{{isActivePath '/dd'}}" title='dd')
+        //     img(src="https://img.icons8.com/color/48/000000/reading.png")
+        //     // span.mobile.hidden dd
         a.item(href="/chart" class="{{isActivePath '/chart'}}" title='chart')
-            img(src="https://img.icons8.com/fluent/48/000000/combo-chart.png")
+            img.zoomer(src="https://img.icons8.com/color/48/000000/combo-chart.png")
             // span.mobile.hidden chart
 
 
@@ -75,13 +75,13 @@ template(name='left_sidebar')
         //     img.ui.avatar.compact.image(src="{{c.url 'one_logo' height=200 width=200 gravity='face' crop='fill'}}")
         //     |One
         a.item.toggle_sidebar(href="/apes" class="{{isActivePath '/users'}}" title='apes')
-            img.ui.avatar.image(src="https://img.icons8.com/fluent/48/000000/gorilla.png")
+            img.ui.avatar.image(src="https://img.icons8.com/color/48/000000/gorilla.png")
             | apes
         a.item.toggle_sidebar(href="/floor" class="{{isActivePath '/floor'}}" title='floor')
-            img.ui.avatar.image(src="https://img.icons8.com/fluent/48/000000/rocket.png")
+            img.ui.avatar.image(src="https://img.icons8.com/color/48/000000/rocket.png")
             | floor
         a.item.toggle_sidebar(href="/r/GME" class="{{isActivePath '/r/GME'}}" title='GME subreddit')
-            img.ui.avatar.image(src="https://img.icons8.com/fluent/48/000000/reddit.png")
+            img.ui.avatar.image(src="https://img.icons8.com/color/48/000000/reddit.png")
             | GME
         a.item.toggle_sidebar(href="/r/wallstreetbets" class="{{isActivePath '/r/wallstreetbets'}}" title='wsb subreddit')
             img.ui.avatar.image(src="https://styles.redditmedia.com/t5_2th52/styles/communityIcon_b37n2zfs8k861.png?width=256&s=a9cb63319055ded916e5b12ff03f1e8c63ae6911")
@@ -90,30 +90,30 @@ template(name='left_sidebar')
             img.ui.avatar.image(src="https://styles.redditmedia.com/t5_43zwn1/styles/communityIcon_buyz18nw5an61.jpg?width=256&format=pjpg&s=428194a22860c38a11b3a9ed5cc3f7fb0ff122b9")
             | Superstonk
         a.item.toggle_sidebar(href="/timeline" class="{{isActivePath '/timeline'}}" title='timeline')
-            img.ui.avatar.image(src="https://img.icons8.com/fluent/48/000000/clock.png")
+            img.ui.avatar.image(src="https://img.icons8.com/color/48/000000/clock.png")
             | timeline
         a.item.toggle_sidebar(href="/techanal" class="{{isActivePath '/techanal'}}" title='tech analysis')
-            img.ui.avatar.image(src="https://img.icons8.com/fluent/48/000000/wrench.png")
+            img.ui.avatar.image(src="https://img.icons8.com/color/48/000000/wrench.png")
             | tech analysis
         a.item.toggle_sidebar(href="/fun" class="{{isActivePath '/fun'}}" title='fundamentals')
-            img.ui.avatar.image(src="https://img.icons8.com/fluent/48/000000/paid-search.png")
+            img.ui.avatar.image(src="https://img.icons8.com/color/48/000000/paid-search.png")
             | fundamentals
             
-        a.item.toggle_sidebar(href="/dd" class="{{isActivePath '/dd'}}" title='dd')
-            img.ui.avatar.image(src="https://img.icons8.com/fluent/48/000000/reading.png")
-            | dd
+        // a.item.toggle_sidebar(href="/dd" class="{{isActivePath '/dd'}}" title='dd')
+        //     img.ui.avatar.image(src="https://img.icons8.com/color/48/000000/reading.png")
+        //     | dd
         a.item.toggle_sidebar(href="/tools" class="{{isActivePath '/tools'}}" title='tools')
-            img.ui.avatar.image(src="https://img.icons8.com/fluent/48/000000/wrench--v1.png")
+            img.ui.avatar.image(src="https://img.icons8.com/color/48/000000/wrench--v1.png")
             | tools
         a.item.toggle_sidebar(href="/profile" class="{{isActivePath '/profile'}}" title='gme profile')
-            img.ui.avatar.image(src="https://img.icons8.com/fluent/48/000000/info.png")
+            img.ui.avatar.image(src="https://img.icons8.com/color/48/000000/info.png")
             | profile
             
         // a.item.toggle_sidebar(href="/chat" class="{{isActivePath '/chat'}}" title='chat') 
         //     |chat
         //     i.large.chat.icon
         a.item(href="/chart" class="{{isActivePath '/chart'}}" title='chart')
-            img.ui.avatar.image(src="https://img.icons8.com/fluent/48/000000/combo-chart.png")
+            img.ui.avatar.image(src="https://img.icons8.com/color/48/000000/combo-chart.png")
             | chart
         
         if is_eric
