@@ -76,7 +76,7 @@ template(name='home')
                     else
                         .ui.basic.center.aligned.segment
                             i.big.blue.loading.diamond.icon
-        .four.wide.column.scrolling
+        .four.wide.column.scrollin
             with emotion_avg
                 // .ui.list
                 //     .item {{ to_percent avg_sent_score}}% sentiment
@@ -319,7 +319,6 @@ template(name='post_card')
             span(title='views')
                 i.grey.eye.icon
                 |#{views}
-            +voting
             +array_view key='people_tags' icon='user outline' direct=true
             +array_view key='time_tags' icon='clock' direct=true
             +array_view key='location_tags' icon='marker' direct=true

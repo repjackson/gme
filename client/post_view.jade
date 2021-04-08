@@ -8,10 +8,6 @@ template(name='post_view')
                     .ui.basic.segment
                         // div
                         .ui.grey.header {{when}}
-                        +voting
-                        if can_edit
-                            a.edit_group_post(href="/p/#{_id}/edit" title='edit')
-                                i.large.link.pencil.icon
                         | #{views} views
                         +array_edit key='tags' label='tags' icon='tag' direct=true
                         // +voting_full

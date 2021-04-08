@@ -19,63 +19,6 @@ if Meteor.isClient
 #         Meteor.setTimeout ->
 #             $('.accordion').accordion()
 #         , 1000
-    Template.comments.onCreated ->
-        # if Router.current().params.doc_id
-        #     parent = Docs.findOne Router.current().params.doc_id
-        # else
-        #     parent = Docs.findOne Template.parentData()._id
-        # if parent
-        @autorun => Meteor.subscribe 'children', 'comment', Router.current().params.doc_id
-    Template.comments.helpers
-        doc_comments: ->
-            if Router.current().params.doc_id
-                parent = Docs.findOne Router.current().params.doc_id
-            else
-                parent = Docs.findOne Template.parentData()._id
-            if Meteor.user()
-                Docs.find
-                    parent_id:parent._id
-                    model:'comment'
-            else
-                Docs.find
-                    model:'comment'
-                    parent_id:parent._id
-                    _author_id:$exists:false
-                    
-    Template.comments.events
-        'keyup .add_comment': (e,t)->
-            if e.which is 13
-                if Router.current().params.doc_id
-                    parent = Docs.findOne Router.current().params.doc_id
-                else
-                    parent = Docs.findOne Template.parentData()._id
-                # parent = Docs.findOne Router.current().params.doc_id
-                comment = t.$('.add_comment').val()
-                Docs.insert
-                    parent_id: parent._id
-                    model:'comment'
-                    parent_model:parent.model
-                    body:comment
-                t.$('.add_comment').val('')
-
-        'click .remove_comment': ->
-            if confirm 'Confirm remove comment'
-                Docs.remove @_id
-
-    Template.follow.helpers
-        followers: ->
-            Meteor.users.find
-                _id: $in: @follower_ids
-        following: -> @follower_ids and Meteor.userId() in @follower_ids
-    Template.follow.events
-        'click .follow': ->
-            Docs.update @_id,
-                $addToSet:follower_ids:Meteor.userId()
-        'click .unfollow': ->
-            Docs.update @_id,
-                $pull:follower_ids:Meteor.userId()
-#
-#
 #
 #     Template.session_key_value.events
 #         'click .set_session_value': ->
@@ -94,20 +37,6 @@ if Meteor.isClient
 #
 #
 #
-    Template.voting.events
-        'click .upvote': (e,t)->
-            # $(e.currentTarget).closest('.button').transition('pulse',200)
-            Meteor.call 'upvote', @, ->
-        'click .downvote': (e,t)->
-            # $(e.currentTarget).closest('.button').transition('pulse',200)
-            Meteor.call 'downvote', @, ->
-    Template.voting_small.events
-        'click .upvote': (e,t)->
-            # $(e.currentTarget).closest('.button').transition('pulse',200)
-            Meteor.call 'upvote', @, ->
-        'click .downvote': (e,t)->
-            # $(e.currentTarget).closest('.button').transition('pulse',200)
-            Meteor.call 'downvote', @, ->
 #
 #
 #
@@ -130,14 +59,6 @@ if Meteor.isClient
 #     #
 #     #         Meteor.call 'call_watson', doc._id, @key, @mode
 #
-    Template.voting_full.events
-        'click .upvote': (e,t)->
-            # $(e.currentTarget).closest('.button').transition('pulse',200)
-            Meteor.call 'upvote', @, ->
-        'click .downvote': (e,t)->
-            # $(e.currentTarget).closest('.button').transition('pulse',200)
-            Meteor.call 'downvote', @, ->
-
 
 #
 #
@@ -174,27 +95,6 @@ if Meteor.isClient
 #
 #
 
-    Template.user_info.onCreated ->
-        @autorun => Meteor.subscribe 'user_from_id', @data
-    Template.user_info.helpers
-        user: -> Meteor.users.findOne @valueOf()
-    
-    Template.user_info_small.onCreated ->
-        @autorun => Meteor.subscribe 'user_from_id', @data
-    Template.user_info_small.helpers
-        user: -> Meteor.users.findOne @valueOf()
-    
-    Template.user_info_tiny.onCreated ->
-        @autorun => Meteor.subscribe 'user_from_id', @data
-    Template.user_info_tiny.helpers
-        user: -> Meteor.users.findOne @valueOf()
-
-#
-    Template.user_avatar.onCreated ->
-        @autorun => Meteor.subscribe 'user_from_id', @data
-    Template.user_avatar.helpers
-        user: -> Meteor.users.findOne @valueOf()
-
 #
 #     Template.toggle_edit.events
 #         'click .toggle_edit': ->
@@ -219,99 +119,6 @@ if Meteor.isClient
 #             Meteor.users.findOne @valueOf()
 #
 #
-#
-    Template.bookmark_button.events
-        'click .toggle': (e,t)->
-            console.log @
-            # $(e.currentTarget).closest('.button').transition('pulse',200)
-            if Meteor.user().bookmark_ids and @_id in Meteor.user().bookmark_ids
-                Meteor.users.update Meteor.userId(),
-                    $pull:"bookmark_ids": @_id
-            else
-                Meteor.users.update Meteor.userId(),
-                    $addToSet:"bookmark_ids": @_id
-
-    Template.bookmark_button.helpers
-        bookmark_button_class: ->
-            if Meteor.user()
-                if Meteor.user().bookmark_ids and @_id in Meteor.user().bookmark_ids then 'active' else 'basic'
-            else
-                'disabled'
-
-        bookmarked: ->
-            if Meteor.user().bookmark_ids and @_id in Meteor.user().bookmark_ids then true else false
-#
-#
-#
-#
-    Template.user_list_toggle.onCreated ->
-        @autorun => Meteor.subscribe 'user_list', Template.parentData(),@key
-    Template.user_list_toggle.events
-        'click .toggle': (e,t)->
-            parent = Template.parentData()
-            # $(e.currentTarget).closest('.button').transition('pulse',200)
-            if parent["#{@key}"] and Meteor.userId() in parent["#{@key}"]
-                Docs.update parent._id,
-                    $pull:"#{@key}":Meteor.userId()
-            else
-                Docs.update parent._id,
-                    $addToSet:"#{@key}":Meteor.userId()
-    Template.user_list_toggle.helpers
-        user_list_toggle_class: ->
-            if Meteor.user()
-                parent = Template.parentData()
-                if parent["#{@key}"] and Meteor.userId() in parent["#{@key}"] then 'blue' else 'basic'
-            else
-                'disabled'
-        in_list: ->
-            parent = Template.parentData()
-            if parent["#{@key}"] and Meteor.userId() in parent["#{@key}"] then true else false
-        list_users: ->
-            parent = Template.parentData()
-            Meteor.users.find _id:$in:parent["#{@key}"]
-
-#
-#
-#
-    Template.viewing.events
-        'click .mark_read': (e,t)->
-            Docs.update @_id,
-                $inc:views:1
-            unless @read_ids and Meteor.userId() in @read_ids
-                Meteor.call 'mark_read', @_id, ->
-                    # $(e.currentTarget).closest('.comment').transition('pulse')
-                    $('.unread_icon').transition('pulse')
-        'click .mark_unread': (e,t)->
-            Docs.update @_id,
-                $inc:views:-1
-            Meteor.call 'mark_unread', @_id, ->
-                # $(e.currentTarget).closest('.comment').transition('pulse')
-                $('.unread_icon').transition('pulse')
-    Template.viewing.helpers
-        viewed_by: -> Meteor.userId() in @read_ids
-        readers: ->
-            readers = []
-            if @read_ids
-                for reader_id in @read_ids
-                    unless reader_id is @_author_id
-                        readers.push Meteor.users.findOne reader_id
-            readers
-#
-#
-#
-#
-if Meteor.isClient
-    Template.email_validation_check.events
-        'click .send_verification': ->
-            console.log @
-            if confirm 'send verification email?'
-                Meteor.call 'verify_email', @_id, ->
-                    alert 'verification email sent'
-        'click .toggle_email_verified': ->
-            console.log @emails[0].verified
-            if @emails[0]
-                Meteor.users.update @_id,
-                    $set:"emails.0.verified":true
 #
 #
 #     Template.add_button.onCreated ->
