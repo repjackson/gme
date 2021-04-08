@@ -195,24 +195,6 @@ template(name='finance_bar')
                             
                                     
             
-template(name='comments_view_small')            
-    if doc_comments.count
-        .meta
-            each doc_comments 
-                i.grey.chat.outline.icon
-                img.ui.avatar.image(src="{{c.url _author.profile_image_id height=200 width=200 gravity='face' crop='fill'}}" class=user_class)
-                |#{body}
-                div
-
-
-                                    
-                                    
-                                    
-template(name='join_button')
-    .ui.fluid.green.button.join
-        i.checkmark.icon
-        |join
-
 template(name='tag_selector')
     // a.ui.big.image.rounded.label.zoomer.pointer.select_tag.select_term(href='#' title="#{count} results" class="#{selector_class} #{thinking_class}")
     a.ui.basic.image.large.label.zoomer.select_tag(title="#{count} results" class="#{selector_class} #{thinking_class}")

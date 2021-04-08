@@ -99,16 +99,20 @@ if Meteor.isServer
         related_cur
         
                 
-    Meteor.publish 'rpost_comments', (subreddit, doc_id)->
+    Meteor.publish 'rpost_comments', (doc_id)->
+        console.log 'comments', doc_id
         post = Docs.findOne doc_id
-        Docs.find
-            model:'rcomment'
-            parent_id:"t3_#{post.reddit_id}"
-            
+        # console.log 'post', post
+        if post
+            Docs.find
+                model:'rcomment'
+                parent_id:"t3_#{post.reddit_id}"
+        else 
+            []
             
         
-        
-    
+if Meteor.isServer
+    Meteor.methods
         tagify_time_rpost: (doc_id)->
             doc = Docs.findOne doc_id
             # moment.unix(doc.data.created).fromNow()

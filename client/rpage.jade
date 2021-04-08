@@ -20,7 +20,7 @@ template(name='rpage')
                 // +skve k='view_section' v='related' l='related' i='fork'
                 // +skve k='view_section' v='preview' l='preview' i='content'
                 // if skv_is 'view_section' 'main'
-                .scrolling
+                .scrollin
                     // if skv_is 'view_section' 'main'
                     if data.is_reddit_media_domain
                         img.ui.centered.rounded.image.pointer.call_visual(src=data.url)
@@ -124,7 +124,7 @@ template(name='rpage')
                 
                 
 template(name='rcomments_tab')                
-    .ui.horizontal.divider.get_post_comments
+    a.ui.horizontal.divider.get_post_comments.get_comments
         i.grey.comment.outline.icon
         |#{rcomments.count} comments
     // .ui.items

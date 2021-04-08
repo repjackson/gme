@@ -294,10 +294,6 @@ Template.registerHelper 'tone_size', () ->
   
     
 
-Template.registerHelper 'is_dao', () -> @username is 'dao'
-
-
-
 Template.registerHelper 'current_month', () -> moment(Date.now()).format("MMMM")
 Template.registerHelper 'current_day', () -> moment(Date.now()).format("DD")
 
@@ -309,14 +305,6 @@ Template.registerHelper 'current_day', () -> moment(Date.now()).format("DD")
 #     # console.log 'parent', parent
 #     if parent
 #         parent["#{@key}"]
-
-Template.registerHelper 'doc_comments', () ->
-    Docs.find
-        model:'comment'
-        parent_id:@_id
-
-Template.registerHelper 'is_logging_out', () -> Session.get('logging_out')
-
 
 
 Template.registerHelper 'current_doc', () ->
@@ -392,9 +380,6 @@ Template.registerHelper 'to_percent', (number)->
 
 Template.registerHelper 'current_month', () -> moment(Date.now()).format("MMMM")
 Template.registerHelper 'current_day', () -> moment(Date.now()).format("DD")
-
-Template.registerHelper 'can_buy', ()->
-    Meteor.userId() isnt @_author_id
 
 
 Template.registerHelper 'is_image', ()->

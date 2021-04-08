@@ -5,8 +5,16 @@ Router.route '/rpost/:doc_id', (->
 
 Template.rpage.onCreated ->
     @autorun -> Meteor.subscribe('doc', Router.current().params.doc_id)
-    # @autorun -> Meteor.subscribe('rpost_comments', Router.current().params.group, Router.current().params.doc_id)
+    @autorun -> Meteor.subscribe('rpost_comments', Router.current().params.doc_id)
     Session.set('view_section','comments')
+
+Template.rcomments_tab.helpers
+    rcomments: ->
+        post = Docs.findOne Router.current().params.doc_id
+        Docs.find
+            model:'rcomment'
+            parent_id:"t3_#{post.reddit_id}"
+
     
 Template.rpage.events ->
     'click .get_post': ->
