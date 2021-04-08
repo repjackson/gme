@@ -38,11 +38,11 @@ Template.rusers.events
 
 
 Template.sort_button.events
-    'click .sort': ->
+    'click .set_sort': ->
         Session.set('sort_key', @key)
 Template.sort_button.helpers
     button_class: ->
-        if Session.equals('sort_key', @key) then 'active' else 'basic'
+        if Session.equals('sort_key', @key) then '' else 'outline'
     
 
 # Template.member_card.helpers

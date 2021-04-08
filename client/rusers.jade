@@ -111,10 +111,10 @@ template(name='ruser_karma_sort_button')
         |#{l} karma
             
 template(name='sort_button')     
-    .ui.compact.button.sort(class="#{c} #{button_class}")
-        if i 
-            i.icon(class=i)
-        |#{l}
+    i.large.link.icon.set_sort(class="#{c} #{button_class} #{i}")
+        // if i 
+        //     i.icon(class=i)
+        // // |#{l}
             
             
 template(name='ruser_top_emotion_small')
