@@ -20,17 +20,6 @@ Meteor.publish 'model_docs', (model)->
         # match.app = 'stand'
     Docs.find match
 
-Meteor.publish 'latest_debits', ()->
-    # console.log 'pulling doc'
-    match = {model:'debit'}
-    # if Meteor.user()
-    #     unless Meteor.user().roles and 'admin' in Meteor.user().roles
-    #         match.app = 'stand'
-    # else
-        # match.app = 'stand'
-    Docs.find match,
-        sort:_timestamp:-1
-        limit:25
 
 
 Meteor.publish 'doc', (doc_id)->

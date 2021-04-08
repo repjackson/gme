@@ -18,7 +18,7 @@ Meteor.publish 'sub_docs', (
     self = @
     match = {
         model:'rpost'
-        # subreddit:'gme'
+        subreddit:subreddit
     }
     # if view_bounties
     #     match.bounty = true
