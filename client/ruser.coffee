@@ -65,6 +65,10 @@ Template.ruser_doc_item.onRendered ->
     # unless @data.watson
     #     Meteor.call 'call_watson',@data._id,'data.url','url',@data.data.url,=>
 
+Template.rcomment.events
+    'click .call_watson_comment': ->
+        console.log 'call', @_id
+        Meteor.call 'call_watson', @_id,'data.body','comment',->
 Template.ruser_comment.events
     'click .call_watson_comment': ->
         # console.log 'call', 

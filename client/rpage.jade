@@ -120,7 +120,7 @@ template(name='rpage')
                 |#{tags.length}
                 each tags
                     .ui.label #{this}
-                    // +flat_sub_tag_selector
+                    // +flat_tag_picker
                 
                 
 template(name='rcomments_tab')                
@@ -148,7 +148,7 @@ template(name='rcomment')
                 |{{#markdown}} {{data.body}} {{/markdown}}
             .actions
                 each tags 
-                    +flat_sub_tag_selector
+                    +flat_tag_picker
                     // .ui.tiny.basic.label #/{this}
         if data.replies.data.children
             .ui.grid

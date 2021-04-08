@@ -140,7 +140,7 @@ Meteor.methods
                     params.returnAnalyzedText = true
                     params.clean = true
                 when 'comment'
-                    params.text = doc.body
+                    params.text = doc.data.body
                     params.returnAnalyzedText = true
                     params.clean = true
                     # params.features.metadata = {}
