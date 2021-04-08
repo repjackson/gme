@@ -67,61 +67,6 @@ Meteor.methods
             )
         # else return
 
-    get_emotion: (doc_id, mode) ->
-        self = @
-        doc = Docs.findOne doc_id
-        # if doc.skip_watson is false
-        # else
-        # unless doc.watson
-        params =
-            features:
-                emotion:{}
-            # url:doc.url
-        if mode is 'url'
-            params.url = doc.url
-        else if mode is 'comment'
-            params.text = doc.body
-        natural_language_understanding.analyze params, Meteor.bindEnvironment((err, response)=>
-            if err
-                # if err.code is 400
-                # unless err.code is 403
-                #     Docs.update doc_id,
-                #         $set:skip_watson:false
-                throw new Meteor.Error(err)
-                return err;
-            else
-                response = response.result
-                # if Meteor.isDevelopment
-                emotions = response.emotion.document.emotion
-
-                emotion_list = ['joy', 'sadness', 'fear', 'disgust', 'anger']
-                # main_emotions = []
-                max_emotion_percent = 0
-                max_emotion_name = ''
-
-                for emotion in emotion_list
-                    if emotions["#{emotion}"] > max_emotion_percent
-                        if emotions["#{emotion}"] > .5
-                            max_emotion_percent = emotions["#{emotion}"]
-                            max_emotion_name = emotion
-                            # main_emotions.push emotion
-                sadness_percent = emotions.sadness
-                joy_percent = emotions.joy
-                fear_percent = emotions.fear
-                anger_percent = emotions.anger
-                disgust_percent = emotions.disgust
-                            
-                Docs.update { _id: doc_id },
-                    $set:
-                        max_emotion_name:max_emotion_name
-                        max_emotion_percent:max_emotion_percent
-                        sadness_percent: sadness_percent
-                        joy_percent: joy_percent
-                        fear_percent: fear_percent
-                        anger_percent: anger_percent
-                        disgust_percent: disgust_percent
-        )
-
 
     import_url: (url)->
         # console.log 'importing', url
@@ -163,6 +108,7 @@ Meteor.methods
                     sentiment: false
                     limit: 20
                 concepts: {}
+                emotion: {}
                 # categories:
                 #     explanation:false
                 # metadata: {}
@@ -253,6 +199,35 @@ Meteor.methods
                 # Docs.update { _id: doc_id },
                 #     $addToSet:
                 #         tags:$each:adding_tags
+                emotions = response.emotion.document.emotion
+
+                emotion_list = ['joy', 'sadness', 'fear', 'disgust', 'anger']
+                # main_emotions = []
+                max_emotion_percent = 0
+                max_emotion_name = ''
+
+                for emotion in emotion_list
+                    if emotions["#{emotion}"] > max_emotion_percent
+                        if emotions["#{emotion}"] > .5
+                            max_emotion_percent = emotions["#{emotion}"]
+                            max_emotion_name = emotion
+                            # main_emotions.push emotion
+                sadness_percent = emotions.sadness
+                joy_percent = emotions.joy
+                fear_percent = emotions.fear
+                anger_percent = emotions.anger
+                disgust_percent = emotions.disgust
+                            
+                Docs.update { _id: doc_id },
+                    $set:
+                        max_emotion_name:max_emotion_name
+                        max_emotion_percent:max_emotion_percent
+                        sadness_percent: sadness_percent
+                        joy_percent: joy_percent
+                        fear_percent: fear_percent
+                        anger_percent: anger_percent
+                        disgust_percent: disgust_percent
+                
                 if response.entities and response.entities.length > 0
                     for entity in response.entities
                         unless entity.type is 'Quantity'
@@ -291,7 +266,6 @@ Meteor.methods
                 # if mode is 'url'
                 #     Meteor.call 'call_tone', doc_id, 'body', 'text', ->
 
-                # Meteor.call 'log_doc_terms', doc_id, ->
                 Meteor.call 'clear_blocklist_doc', doc_id, ->
                 # if Meteor.isDevelopment
         )
