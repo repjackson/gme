@@ -103,17 +103,17 @@ Template.home.helpers
         
 Template.emotion_edit.events
     'click .up_emotion': ->
-        console.log Template.parentData()
+        # console.log Template.parentData()
         parent = Template.parentData()
         current = parent["#{@key}_percent"]
         # console.log parent
         # console.log current
-        console.log typeof(current)
+        # console.log typeof(current)
         # console.log "#{@key}_percent"
         unless current is NaN
             # updated_percent = parseFloat(parent["#{@key}_percent"],2)
             updated_percent = parent["#{@key}_percent"]
-            console.log updated_percent+.1
+            # console.log updated_percent+.1
             if updated_percent > 1
                 Docs.update Template.parentData()._id,
                     $set:
@@ -127,12 +127,12 @@ Template.emotion_edit.events
                 $set:
                     "#{@key}_percent":0
     'click .down_emotion': ->
-        console.log @key
+        # console.log @key
         parent = Template.parentData()
-        console.log parent
+        # console.log parent
         # updated_percent = parseInt(parent["#{@key}_percent"])
         updated_percent = parent["#{@key}_percent"]
-        console.log updated_percent
+        # console.log updated_percent
         Docs.update Template.parentData()._id,
             $set:
                 "#{@key}_percent":updated_percent-.01
