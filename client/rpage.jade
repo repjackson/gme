@@ -81,6 +81,7 @@ template(name='rpage')
                     // if skv_is 'view_section' 'comments'
                     +rcomments_tab
             .four.wide.column
+                .ui.header {{ufrom data.created}}
                 a.ui.basic.fluid.button(href=data.url target="_window" title=data.url) 
                     i.external.icon
                     |url
@@ -107,8 +108,6 @@ template(name='rpage')
                         +call_tone    
                 // a.ui.large.basic.label(href=data.url target='_window')
                 //     | #{data.url}
-                if in_dev
-                    .ui.small.header reddit_id #{data.reddit_id}
                 .ui.basic.label
                     i.comment.outline.icon
                     |#{data.comment_count}

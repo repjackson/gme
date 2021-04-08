@@ -16,6 +16,15 @@ Template.rcomments_tab.helpers
             parent_id:"t3_#{post.reddit_id}"
 
     
+Template.rcomment.events
+    'click .call_watson_comment': ->
+        console.log 'call parent', @_id
+        
+        Meteor.call 'set_parent_doc_id', @_id, Router.current().params.doc_id,->
+        Meteor.call 'call_watson', @_id,'data.body','comment',->
+    
+    
+    
 Template.rpage.events ->
     'click .get_post': ->
         Meteor.call 'get_reddit_post', Router.current().params.doc_id, ->

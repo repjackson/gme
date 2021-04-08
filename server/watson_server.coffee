@@ -87,9 +87,9 @@ Meteor.methods
 
     call_watson: (doc_id, key, mode) ->
         self = @
-        console.log 'doc_id', doc_id
-        console.log 'key', key
-        console.log 'mode', mode
+        # console.log 'doc_id', doc_id
+        # console.log 'key', key
+        # console.log 'mode', mode
         doc = Docs.findOne doc_id
         # if doc.skip_watson is false
         # else
@@ -152,7 +152,7 @@ Meteor.methods
                     params.returnAnalyzedText = true
                     params.clean = true
                 when 'url'
-                    console.log 'params url'
+                    # console.log 'params url'
                     # params.url = doc["#{key}"]
                     # params.url = durl
                     params.url = doc.data.url
@@ -262,7 +262,14 @@ Meteor.methods
 
                         
                 final_doc = Docs.findOne doc_id
-
+                if mode is 'comment'
+                    # console.log 'comment call'
+                    # console.log final_doc
+                    if final_doc.parent_doc_id
+                        # console.log 'has parent doc id', final_doc.parent_doc_id
+                        Docs.update final_doc.parent_doc_id,
+                            $addToSet:
+                                tags:$each:final_doc.tags
                 # if mode is 'url'
                 #     Meteor.call 'call_tone', doc_id, 'body', 'text', ->
 

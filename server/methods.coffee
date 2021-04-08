@@ -328,3 +328,12 @@ Meteor.methods
             # console.log 'found term', term
             # Meteor.call 'call_wiki', @term_title, =>
             #     Meteor.call 'calc_term', @term_title, ->
+
+
+
+    set_parent_doc_id: (child_id,parent_id)->
+        console.log "CHILD",child_id
+        console.log parent_id
+        Docs.update child_id, 
+            $set:
+                parent_doc_id:parent_id
