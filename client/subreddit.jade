@@ -194,13 +194,13 @@ template(name='sub_post_card')
             div
         else if is_image
             // a.view_post(href="/r/#{subreddit}/post/#{_id}" class=post_header_class)
-            img.ui.image.toggle_view.view_post.zoomer.pointer(src=data.url)
+            img.ui.fluid.image.toggle_view.view_post.zoomer.pointer(src=data.url)
         else if watson.metadata.image.length
             // a.view_post.zoomer.pointer(href="/r/#{subreddit}/post/#{_id}" class=post_header_class)
-            img.ui.image.toggle_view(src=watson.metadata.image)
+            img.ui.fluid.image.toggle_view(src=watson.metadata.image)
         else if data.thumbnail.length
             // a.view_post.zoomer.pointer(href="/r/#{subreddit}/post/#{_id}" class=post_header_class)
-            img.ui.image.view_post.zoomer.pointer(src=data.thumbnail)    
+            img.ui.fluid.image.view_post.zoomer.pointer(src=data.thumbnail)    
         // else if data.thumbnail.length
         //     .column
         //         a.view_post(href="/r/#{subreddit}/post/#{_id}" class=post_header_class)

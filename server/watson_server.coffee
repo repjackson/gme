@@ -142,6 +142,9 @@ Meteor.methods
 
     call_watson: (doc_id, key, mode) ->
         self = @
+        console.log 'doc_id', doc_id
+        console.log 'key', key
+        console.log 'mode', mode
         doc = Docs.findOne doc_id
         # if doc.skip_watson is false
         # else
@@ -203,9 +206,10 @@ Meteor.methods
                     params.returnAnalyzedText = true
                     params.clean = true
                 when 'url'
+                    console.log 'params url'
                     # params.url = doc["#{key}"]
                     # params.url = durl
-                    params.url = doc.url
+                    params.url = doc.data.url
                     params.features.metadata = {}
                     params.returnAnalyzedText = true
                     params.clean = true

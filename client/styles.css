@@ -534,6 +534,9 @@ body {
     /* animation: fadeout .25s; */
 }
 
+img {
+  border-radius:5px !important;
+}
 
 
 @keyframes fadeout {
