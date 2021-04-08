@@ -4,6 +4,8 @@ template(name='subreddit')
             i.massive.fire.link.grey.icon.get_info.shadowed2
             .ui.big.grey.header #{current_sub}
     with subreddit_doc
+        +small_ticker
+    
         .ui.stackable.grid(style="background-image:url(#{data.banner_img}); margin-top:0px;, background-size:cover;, background-repeat: no-repeat; min-width: 100%; ")
             .twelve.wide.column.seg
                 // img(src=data.banner_img)
@@ -185,7 +187,7 @@ template(name='subreddit_newest')
        
    
 template(name='sub_post_card')
-    .ui.column.smallscroll
+    .ui.column.smallscrol
         // .ui.stackable.equal.width.compact.grid
         //     .row
         if embed

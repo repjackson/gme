@@ -1,6 +1,6 @@
 template(name='rpage')
     with current_doc
-        .ui.stackable.grid
+        .ui.stackable.padded.grid
             .twelve.wide.column
                 a.ui.basic.button.goto_sub(href="/r/#{data.subreddit}")
                     i.chevron.left.icon
@@ -20,7 +20,7 @@ template(name='rpage')
                 // +skve k='view_section' v='related' l='related' i='fork'
                 // +skve k='view_section' v='preview' l='preview' i='content'
                 // if skv_is 'view_section' 'main'
-                .scrollin
+                .scrolling
                     // if skv_is 'view_section' 'main'
                     if data.is_reddit_media_domain
                         img.ui.centered.rounded.image.pointer.call_visual(src=data.url)
