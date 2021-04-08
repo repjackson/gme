@@ -102,9 +102,9 @@ template(name='left_sidebar')
         // a.item.toggle_sidebar(href="/dd" class="{{isActivePath '/dd'}}" title='dd')
         //     img.ui.avatar.image(src="https://img.icons8.com/color/48/000000/reading.png")
         //     | dd
-        a.item.toggle_sidebar(href="/tools" class="{{isActivePath '/tools'}}" title='tools')
-            img.ui.avatar.image(src="https://img.icons8.com/color/48/000000/wrench--v1.png")
-            | tools
+        // a.item.toggle_sidebar(href="/tools" class="{{isActivePath '/tools'}}" title='tools')
+        //     img.ui.avatar.image(src="https://img.icons8.com/color/48/000000/wrench--v1.png")
+        //     | tools
         a.item.toggle_sidebar(href="/profile" class="{{isActivePath '/profile'}}" title='gme profile')
             img.ui.avatar.image(src="https://img.icons8.com/color/48/000000/info.png")
             | profile
@@ -115,40 +115,3 @@ template(name='left_sidebar')
         a.item(href="/chart" class="{{isActivePath '/chart'}}" title='chart')
             img.ui.avatar.image(src="https://img.icons8.com/color/48/000000/combo-chart.png")
             | chart
-        
-        if is_eric
-            a.icon.item.toggle_dev.toggle_sidebar
-                |toggle dev
-                if is_dev
-                    i.code.blue.large.icon
-                else
-                    i.code.large.icon
-        if is_in_admin
-            a.icon.item.toggle_admin.toggle_sidebar
-                |toggle admin
-                if is_admin
-                    i.shield.blue.large.icon
-                else
-                    i.shield.large.icon
-            
-        if is_admin
-            // a.item.toggle_sidebar.set_badge(href="/m/badge" class="{{isActivePath 'badges'}}")
-            //     i.certificate.blue.icon
-            //     | badges
-            // a.item.toggle_sidebar.set_debit(href="/m/debit" class="{{isActivePath regex='rentals'}}")
-            //     i.gift.blue.icon
-            //     |gifts
-            .divider
-            // a.item.toggle_sidebar.set_project(href="/m/project" class="{{isActivePath regex='projects'}}")
-            //     i.tasks.blue.icon
-            //     | projects
-            // a.item.toggle_sidebar(href="/m/room" class="{{isActiveRoute 'requests'}}")
-            //     i.building.blue.icon
-            //     |rooms
-            a.blue.item.set_model.toggle_sidebar(href="/admin" class="{{isActivePath '/admin'}}")
-                |admin
-                i.database.blue.icon
-            a.item.set_user.toggle_sidebar(href="/m/user" class="{{isActiveRoute '/m/user'}}")
-                i.blue.users.icon
-                | all users
-

@@ -143,7 +143,7 @@ Meteor.methods
         console.log 'searching', subreddit, search
         HTTP.get "http://reddit.com/r/#{subreddit}/search.json?q=#{search}&limit=100&restrict_sr=1&raw_json=1&include_over_18=off&nsfw=0", (err,res)->
             if res.data.data.dist > 1
-                _.each(res.data.data.children[0..10], (item)=>
+                _.each(res.data.data.children[0..100], (item)=>
                     # for item in res.data.data.children[0..3]
                     id = item.data.id
                     # Docs.insert d
