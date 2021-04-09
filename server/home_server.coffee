@@ -70,7 +70,7 @@ Meteor.publish 'group_posts', (
             # location_tags:1
             # people_tags:1
             views:1
-            # watsosn:1
+            # watson:1
             points:1
             max_emotion_name:1
             doc_sentiment_label:1

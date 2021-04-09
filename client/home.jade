@@ -1,317 +1,320 @@
-template(name='chart')
-    +ticker
-template(name='home')
-    .ticker.pointer
-        if skve 'ticker_view' 'small'
-            +small_ticker
-        if skve 'ticker_view' 'med'
-            +mini_chart
-        if skve 'ticker_view' 'large'
-            +symbol_overview
-    .ui.stackable.padded.grid
-        // .four.wide.column
-        //     .ui.header
-        //         |12.4 billion
-        //         +fluent name='peeled-banana'
-        //         | plucked
-        .sixteen.wide.column
-            .ui.inline.header #{counter}
-            .ui.inline.header    
-                |#{current_group}
-            // .ui.icon.circular.basic.button.add_post
-            //     i.plus.icon
-            if picked_tags
-                // if many_tags
-                //     a#clear_tags.ui.black.invert.icon.compact.button.select_term
-                //         i.remove.icon
-                each picked_tags
-                    +unselect_tag
-            // .ui.icon.small.input
-            //     i.search.icon
-            //     input.search_group_tag(type='text' value=group_query placeholder="#{counter} results")
-            //     // .ui.label #{this}
-            if result_tags.count
-                each result_tags
-                    +tag_selector
-            // else
-            //     i.big.grey.loading.yin.yang.icon
-        .twelve.wide.column
-            |sort by
-            if skve 'group_sort_key' 'points'
-                .ui.circular.black.icon.button.set_sort_points
-                    i.large.thumbs.up.icon
-            else
-                .ui.circular.basic.icon.button.set_sort_points
-                    i.large.thumbs.up.icon
-            if skve 'group_sort_key' '_timestamp'
-                .ui.circular.black.icon.button.set_sort_timestamp
-                    i.clock.large.icon
-            else
-                .ui.circular.basic.icon.button.set_sort_timestamp
-                    i.clock.large.icon
-            if skve 'group_sort_key' 'views'
-                .ui.circular.black.icon.button.set_sort_views
-                    i.eye.large.icon
-            else
-                .ui.circular.basic.icon.button.set_sort_views
-                    i.eye.large.icon
-            // .ui.inline.header
-            //     |view
-            // +view_mode key='video' icon='video'
-            // +view_mode key='image' icon='image'
-            // +view_mode key='content' icon='content'
-            if one_post
-                .ui.one.column.centered.padded.grid.scrolling
-                    each posts
-                        +post_card_med
-            else if two_posts
-                .ui.two.column.centered.padded.grid.scrolling
-                    each posts
-                        +post_card_med
-            else 
-                .ui.stackable.two.column.padded.grid.scrolling
-                    if posts.count
-                        each posts
-                            +post_card
-                    else
-                        .ui.basic.center.aligned.segment
-                            i.big.blue.loading.diamond.icon
-        .four.wide.column.scrollin
-            with emotion_avg
-                // .ui.list
-                //     .item {{ to_percent avg_sent_score}}% sentiment
-                //     .item {{ to_percent avg_joy_score}}% joy
-                //     .item {{ to_percent avg_anger_score}}% anger
-                //     .item {{ to_percent avg_sadness_score}}% sad
-                //     .item {{ to_percent avg_disgust_score}}% disgust
-                //     .item {{ to_percent avg_fear_score}}% fear
-                if kve 'doc_sentiment_label' 'positive'
-                    span.say.ui.green.text.invert(class="{{calculated_size doc_sentiment_score}}") {{ to_percent doc_sentiment_score }}% #{doc_sentiment_label}
-                        |&nbsp;
-                    div.rounded.invert(style="height:5px;width:{{to_percent doc_sentiment_score}}%;background-color:green" title="{{to_percent doc_sentiment_score}}% #{doc_sentiment_label}")
-                else if kve 'doc_sentiment_label' 'negative'
-                    span.say.ui.red.text.invert(class="{{calculated_size doc_sentiment_score}}") {{ to_percent doc_sentiment_score }}%  #{doc_sentiment_label} 
-                        |&nbsp;
-                    div.rounded.invert(style="height:5px;width:{{abs_percent doc_sentiment_score}}%;background-color:red" title="{{abs_percent doc_sentiment_score}}% #{doc_sentiment_label}")
+// template(name='chart')
+//     +ticker
+// template(name='home')
+//     .ticker.pointer
+//         if skve 'ticker_view' 'small'
+//             +small_ticker
+//         if skve 'ticker_view' 'med'
+//             +mini_chart
+//         if skve 'ticker_view' 'large'
+//             +symbol_overview
+//     .ui.stackable.padded.grid
+//         // .four.wide.column
+//         //     .ui.header
+//         //         |12.4 billion
+//         //         +fluent name='peeled-banana'
+//         //         | plucked
+//         .sixteen.wide.column
+//             .ui.inline.header #{counter}
+//             .ui.inline.header    
+//                 |#{current_group}
+//             // .ui.icon.circular.basic.button.add_post
+//             //     i.plus.icon
+//             if picked_tags
+//                 // if many_tags
+//                 //     a#clear_tags.ui.black.invert.icon.compact.button.select_term
+//                 //         i.remove.icon
+//                 each picked_tags
+//                     +unselect_tag
+//             // .ui.icon.small.input
+//             //     i.search.icon
+//             //     input.search_group_tag(type='text' value=group_query placeholder="#{counter} results")
+//             //     // .ui.label #{this}
+//             if result_tags.count
+//                 each result_tags
+//                     +tag_selector
+//             // else
+//             //     i.big.grey.loading.yin.yang.icon
+//         .twelve.wide.column
+//             |sort by
+//             if skve 'group_sort_key' 'points'
+//                 .ui.circular.black.icon.button.set_sort_points
+//                     i.large.thumbs.up.icon
+//             else
+//                 .ui.circular.basic.icon.button.set_sort_points
+//                     i.large.thumbs.up.icon
+//             if skve 'group_sort_key' '_timestamp'
+//                 .ui.circular.black.icon.button.set_sort_timestamp
+//                     i.clock.large.icon
+//             else
+//                 .ui.circular.basic.icon.button.set_sort_timestamp
+//                     i.clock.large.icon
+//             if skve 'group_sort_key' 'views'
+//                 .ui.circular.black.icon.button.set_sort_views
+//                     i.eye.large.icon
+//             else
+//                 .ui.circular.basic.icon.button.set_sort_views
+//                     i.eye.large.icon
+//             // .ui.inline.header
+//             //     |view
+//             // +view_mode key='video' icon='video'
+//             // +view_mode key='image' icon='image'
+//             // +view_mode key='content' icon='content'
+//             if one_post
+//                 .ui.one.column.centered.padded.grid.scrolling
+//                     each posts
+//                         +post_card_med
+//             else if two_posts
+//                 .ui.two.column.centered.padded.grid.scrolling
+//                     each posts
+//                         +post_card_med
+//             else 
+//                 .ui.stackable.two.column.padded.grid.scrolling
+//                     if posts.count
+//                         each posts
+//                             +post_card
+//                     else
+//                         .ui.basic.center.aligned.segment
+//                             i.big.blue.loading.diamond.icon
+//         .four.wide.column.scrollin
+//             with emotion_avg
+//                 // .ui.list
+//                 //     .item {{ to_percent avg_sent_score}}% sentiment
+//                 //     .item {{ to_percent avg_joy_score}}% joy
+//                 //     .item {{ to_percent avg_anger_score}}% anger
+//                 //     .item {{ to_percent avg_sadness_score}}% sad
+//                 //     .item {{ to_percent avg_disgust_score}}% disgust
+//                 //     .item {{ to_percent avg_fear_score}}% fear
+//                 if kve 'doc_sentiment_label' 'positive'
+//                     span.say.ui.green.text.invert(class="{{calculated_size doc_sentiment_score}}") {{ to_percent doc_sentiment_score }}% #{doc_sentiment_label}
+//                         |&nbsp;
+//                     div.rounded.invert(style="height:5px;width:{{to_percent doc_sentiment_score}}%;background-color:green" title="{{to_percent doc_sentiment_score}}% #{doc_sentiment_label}")
+//                 else if kve 'doc_sentiment_label' 'negative'
+//                     span.say.ui.red.text.invert(class="{{calculated_size doc_sentiment_score}}") {{ to_percent doc_sentiment_score }}%  #{doc_sentiment_label} 
+//                         |&nbsp;
+//                     div.rounded.invert(style="height:5px;width:{{abs_percent doc_sentiment_score}}%;background-color:red" title="{{abs_percent doc_sentiment_score}}% #{doc_sentiment_label}")
                     
-                .uied.header(class="{{calculated_size avg_sent_score}}") {{ to_percent avg_sent_score }}% sentiment
-                    |&nbsp;
-                // div.rounded(style="height:5px;width:{{to_percent avg_sent_score}}%;background-color:green" title="{{to_percent avg_sent_score}}% joy")
+//                 .uied.header(class="{{calculated_size avg_sent_score}}") {{ to_percent avg_sent_score }}% sentiment
+//                     |&nbsp;
+//                 // div.rounded(style="height:5px;width:{{to_percent avg_sent_score}}%;background-color:green" title="{{to_percent avg_sent_score}}% joy")
       
-                span.say.ui.green.text(class="{{calculated_size avg_joy_score}}") {{ to_percent avg_joy_score }}% joy 
-                    |&nbsp;
-                div.rounded(style="height:5px;width:{{to_percent avg_joy_score}}%;background-color:green" title="{{to_percent avg_joy_score}}% joy")
-                //- if above_50 'avg_sadness_score'
-                    //- .spacer
-                span.say.ui.blue.text(class="{{calculated_size avg_sadness_score}}") {{ to_percent avg_sadness_score}}% sad 
-                    |&nbsp;
-                div.rounded(style="height:5px;width:{{to_percent avg_sadness_score}}%;background-color:blue" title="{{to_percent avg_sadness_score}}% sad")
-                //- if above_50 'avg_fear_score'
-                    //- .spacer
-                span.say.ui.grey.text(class="{{calculated_size avg_fear_score}}") {{ to_percent avg_fear_score }}% fear 
-                    |&nbsp;
-                div.rounded(style="height:5px;width:{{to_percent avg_fear_score}}%;background-color:grey" title="{{to_percent avg_fear_score}}% fear")
-                //- if above_50 'avg_disgust_score'
-                    //- .spacer
-                span.say.ui.orange.text(class="{{calculated_size avg_disgust_score}}") {{ to_percent avg_disgust_score }}% disgust 
-                    |&nbsp;
-                div.rounded(style="height:5px;width:{{to_percent avg_disgust_score}}%;background-color:orange" title="{{to_percent avg_disgust_score}}% disgust")
-                //- if above_50 'avg_anger_score'
-                    //- .spacer
-                span.say.ui.red.text(class="{{calculated_size avg_anger_score}}") {{ to_percent avg_anger_score }}% anger 
-                    |&nbsp;
-                div.rounded(style="height:5px;width:{{to_percent avg_anger_score}}%;background-color:red" title="{{to_percent avg_anger_score}}% anger")
+//                 span.say.ui.green.text(class="{{calculated_size avg_joy_score}}") {{ to_percent avg_joy_score }}% joy 
+//                     |&nbsp;
+//                 div.rounded(style="height:5px;width:{{to_percent avg_joy_score}}%;background-color:green" title="{{to_percent avg_joy_score}}% joy")
+//                 //- if above_50 'avg_sadness_score'
+//                     //- .spacer
+//                 span.say.ui.blue.text(class="{{calculated_size avg_sadness_score}}") {{ to_percent avg_sadness_score}}% sad 
+//                     |&nbsp;
+//                 div.rounded(style="height:5px;width:{{to_percent avg_sadness_score}}%;background-color:blue" title="{{to_percent avg_sadness_score}}% sad")
+//                 //- if above_50 'avg_fear_score'
+//                     //- .spacer
+//                 span.say.ui.grey.text(class="{{calculated_size avg_fear_score}}") {{ to_percent avg_fear_score }}% fear 
+//                     |&nbsp;
+//                 div.rounded(style="height:5px;width:{{to_percent avg_fear_score}}%;background-color:grey" title="{{to_percent avg_fear_score}}% fear")
+//                 //- if above_50 'avg_disgust_score'
+//                     //- .spacer
+//                 span.say.ui.orange.text(class="{{calculated_size avg_disgust_score}}") {{ to_percent avg_disgust_score }}% disgust 
+//                     |&nbsp;
+//                 div.rounded(style="height:5px;width:{{to_percent avg_disgust_score}}%;background-color:orange" title="{{to_percent avg_disgust_score}}% disgust")
+//                 //- if above_50 'avg_anger_score'
+//                     //- .spacer
+//                 span.say.ui.red.text(class="{{calculated_size avg_anger_score}}") {{ to_percent avg_anger_score }}% anger 
+//                     |&nbsp;
+//                 div.rounded(style="height:5px;width:{{to_percent avg_anger_score}}%;background-color:red" title="{{to_percent avg_anger_score}}% anger")
         
-            i.big.clock.grey.icon(title='when tags')
-            if picked_time_tags
-                each picked_time_tags
-                    a.unselect_time_tag.ui.active.large.compact.button(href='#')
-                        strong #{this}
-            each time_tags
-                a.ui.basic.large.label.zoomer.select_time_tag(title="#{count} results" class="#{selector_class} #{thinking_class}")
-                    strong #{name}
-            div
-            i.big.smile.grey.icon(title='where tags')
-            if picked_emotion
-                each picked_emotion
-                    a.unpick_emotion.ui.active.large.compact.button(href='#')
-                        strong #{this}
-            each emotion_results
-                if name
-                    a.ui.basic.large.label.zoomer.pick_emotion(title="#{count} results" class="#{selector_class} #{thinking_class}")
-                        strong #{name}
-            div
-            div
-            i.big.marker.grey.icon(title='where tags')
-            if picked_location_tags
-                each picked_location_tags
-                    a.unselect_location_tag.ui.active.large.compact.button(href='#')
-                        strong #{this}
-            each location_tags
-                a.ui.basic.large.label.zoomer.select_location_tag(title="#{count} results" class="#{selector_class} #{thinking_class}")
-                    strong #{name}
-            div
-            i.big.users.grey.icon(title='where tags')
-            if picked_people_tags
-                each picked_people_tags
-                    a.unselect_people_tag.ui.active.large.compact.button(href='#')
-                        strong #{this}
-            each people_tags
-                a.ui.basic.large.label.zoomer.pick_people_tag(title="#{count} results" class="#{selector_class} #{thinking_class}")
-                    strong #{name}
-            div
-            i.big.plus.grey.icon(title='where tags')
-            if picked_timestamp_tags
-                each picked_timestamp_tags
-                    a.unpick_timestamp_tag.ui.active.large.compact.button(href='#')
-                        strong #{this}
-            each timestamp_tag_results
-                a.ui.basic.large.label.zoomer.pick_timestamp_tag(title="#{count} results" class="#{selector_class} #{thinking_class}")
-                    strong #{name}
-            .ui.hidden.divider
+//             i.big.clock.grey.icon(title='when tags')
+//             if picked_time_tags
+//                 each picked_time_tags
+//                     a.unselect_time_tag.ui.active.large.compact.button(href='#')
+//                         strong #{this}
+//             each time_tag_results
+//                 a.ui.basic.large.label.zoomer.select_time_tag(title="#{count} results" class="#{selector_class} #{thinking_class}")
+//                     strong #{name}
+//             div
+//             i.big.smile.grey.icon(title='where tags')
+//             if picked_emotion
+//                 each picked_emotion
+//                     a.unpick_emotion.ui.active.large.compact.button(href='#')
+//                         strong #{this}
+//             each emotion_results
+//                 if name
+//                     a.ui.basic.large.label.zoomer.pick_emotion(title="#{count} results" class="#{selector_class} #{thinking_class}")
+//                         strong #{name}
+//             div
+//             div
+//             i.big.marker.grey.icon(title='where tags')
+//             if picked_location_tags
+//                 each picked_location_tags
+//                     a.unselect_location_tag.ui.active.large.compact.button(href='#')
+//                         strong #{this}
+//             each location_tags
+//                 a.ui.basic.large.label.zoomer.select_location_tag(title="#{count} results" class="#{selector_class} #{thinking_class}")
+//                     strong #{name}
+//             div
+//             i.big.users.grey.icon(title='where tags')
+//             if picked_people_tags
+//                 each picked_people_tags
+//                     a.unselect_people_tag.ui.active.large.compact.button(href='#')
+//                         strong #{this}
+//             each people_tags
+//                 a.ui.basic.large.label.zoomer.pick_people_tag(title="#{count} results" class="#{selector_class} #{thinking_class}")
+//                     strong #{name}
+//             div
+//             i.big.plus.grey.icon(title='where tags')
+//             if picked_timestamp_tags
+//                 each picked_timestamp_tags
+//                     a.unpick_timestamp_tag.ui.active.large.compact.button(href='#')
+//                         strong #{this}
+//             each timestamp_tag_results
+//                 a.ui.basic.large.label.zoomer.pick_timestamp_tag(title="#{count} results" class="#{selector_class} #{thinking_class}")
+//                     strong #{name}
+//             .ui.hidden.divider
 
             
 
          
-template(name='floor')                    
-    iframe(width='100%' height='800' src="https://gmefloor.com/" frameborder='0' allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture' allowfullscreen='')
+// template(name='floor')                    
+//     iframe(width='100%' height='800' src="https://gmefloor.com/" frameborder='0' allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture' allowfullscreen='')
                     
-template(name='finance_bar')
-    .sixteen.wide.column.toggle_finance_details
-        .ui.green.small.progress.bar.pointer
-            .bar
-                .progress
-            .label
-                |monthly budget progress / 20k
-        if viewing_finance_details
-            .ui.stackable.grid
-                .two.column.row
-                    .column
-                        .ui.header #{finance_stat.membership_count} memberships totaling $#{finance_stat.total_membership_sum}
-                        // .ui.header income from events
-                    .column
-                        // .ui.header most generative event
-                        // .ui.header most generative member
+// template(name='finance_bar')
+//     .sixteen.wide.column.toggle_finance_details
+//         .ui.green.small.progress.bar.pointer
+//             .bar
+//                 .progress
+//             .label
+//                 |monthly budget progress / 20k
+//         if viewing_finance_details
+//             .ui.stackable.grid
+//                 .two.column.row
+//                     .column
+//                         .ui.header #{finance_stat.membership_count} memberships totaling $#{finance_stat.total_membership_sum}
+//                         // .ui.header income from events
+//                     .column
+//                         // .ui.header most generative event
+//                         // .ui.header most generative member
                             
                                     
             
-template(name='tag_selector')
-    // a.ui.big.image.rounded.label.zoomer.pointer.select_tag.select_term(href='#' title="#{count} results" class="#{selector_class} #{thinking_class}")
-    a.ui.basic.image.large.label.zoomer.select_tag(title="#{count} results" class="#{selector_class} #{thinking_class}")
-        if term
-            if term.metadata.image
-                img.ui.avatar.image.superzoom(src=term.metadata.image )    
-        strong #{name}
-        // if in_dev
-        //     small #{count}
+// template(name='tag_selector')
+//     // a.ui.big.image.rounded.label.zoomer.pointer.select_tag.select_term(href='#' title="#{count} results" class="#{selector_class} #{thinking_class}")
+//     a.ui.basic.image.large.label.zoomer.select_tag(title="#{count} results" class="#{selector_class} #{thinking_class}")
+//         if term
+//             if term.metadata.image
+//                 img.ui.avatar.image.superzoom(src=term.metadata.image )    
+//         strong #{name}
+//         // if in_dev
+//         //     small #{count}
         
-template(name='unselect_tag')
-    a.unselect_tag.ui.big.black.image.label(href='#')
-        if term
-            if term.metadata.image
-                img.ui.avatar.compact.image.superzoom(src=term.metadata.image)    
-        strong #{this}
+// template(name='unselect_tag')
+//     a.unselect_tag.ui.big.black.image.label(href='#')
+//         if term
+//             if term.metadata.image
+//                 img.ui.avatar.compact.image.superzoom(src=term.metadata.image)    
+//         strong #{this}
 
         
         
-template(name='flat_tag_selector')
-    // a.ui.big.image.rounded.label.zoomer.pointer.select_tag.select_term(href='#' title="#{count} results" class="#{selector_class} #{thinking_class}")
-    a.ui.compact.tiny.basic.image.label.zoomer.select_flat_tag(title="#{count} results" class="#{selector_class} #{thinking_class}")
-        if term
-            if term.metadata.image
-                img.ui.mini.rounded.inline.image.superzoom(src=term.metadata.image )    
-        | #{this}
-        // if in_dev
-        //     small #{count}
+// template(name='flat_tag_selector')
+//     // a.ui.big.image.rounded.label.zoomer.pointer.select_tag.select_term(href='#' title="#{count} results" class="#{selector_class} #{thinking_class}")
+//     a.ui.compact.tiny.basic.image.label.zoomer.select_flat_tag(title="#{count} results" class="#{selector_class} #{thinking_class}")
+//         if term
+//             if term.metadata.image
+//                 img.ui.mini.rounded.inline.image.superzoom(src=term.metadata.image )    
+//         | #{this}
+//         // if in_dev
+//         //     small #{count}
 
 
 
 
-template(name='emotion_edit')
-    // div
-    // .ui.small.inline.header #{key}
-    .ui.circular.icon.small.basic.compact.button.up_emotion
-        i.chevron.up.icon
-    .ui.circular.icon.small.basic.compact.button.down_emotion
-        i.chevron.down.icon
-    if kve key 'joy'
-        i.smile.icon
+// template(name='emotion_edit')
+//     // div
+//     // .ui.small.inline.header #{key}
+//     .ui.circular.icon.small.basic.compact.button.up_emotion
+//         i.chevron.up.icon
+//     .ui.circular.icon.small.basic.compact.button.down_emotion
+//         i.chevron.down.icon
+//     if kve key 'joy'
+//         i.smile.icon
 
-template(name='post_edit')
-    with current_doc
-        .ui.stackable.padded.grid
-            .row
-                .four.wide.column
-                    a.ui.icon.green.big.button(href="/#{group}/p/#{_id}" title='save')
-                        i.checkmark.big.icon
-                    .ui.inline.header 
-                        i.pencil.icon
-                        |edit group post
-                    i.large.link.red.remove.icon.delete_group_post
-                    +image_edit key='image_id' label='image' direct=true
-                    div 
-                    +array_edit key='tags' label='tags' direct=true
-                    +link_edit key='link' label='link' direct=true
-                    +array_edit key='time_tags' label='time tags' icon='clock' direct=true
-                    +array_edit key='location_tags' label='location tags' icon='marker' direct=true
-                    +array_edit key='people_tags' label='people tags' icon='user' direct=true
-                    +datetime_edit key='publish_datetime' label='publish date/time' icon='clock' direct=true
+// template(name='post_edit')
+//     with current_doc
+//         .ui.stackable.padded.grid
+//             .row
+//                 .four.wide.column
+//                     a.ui.icon.green.big.button(href="/#{group}/p/#{_id}" title='save')
+//                         i.checkmark.big.icon
+//                     .ui.inline.header 
+//                         i.pencil.icon
+//                         |edit group post
+//                     i.large.link.red.remove.icon.delete_group_post
+//                     +image_edit key='image_id' label='image' direct=true
+//                     div 
+//                     +array_edit key='tags' label='tags' direct=true
+//                     +link_edit key='link' label='link' direct=true
+//                     +array_edit key='time_tags' label='time tags' icon='clock' direct=true
+//                     +array_edit key='location_tags' label='location tags' icon='marker' direct=true
+//                     +array_edit key='people_tags' label='people tags' icon='user' direct=true
+//                     +datetime_edit key='publish_datetime' label='publish date/time' icon='clock' direct=true
 
-                    // +raw_edit key='raw' label='raw' direct=true
-                .twelve.wide.column
-                    +text_edit key='title' label='title' direct=true
-                    +image_link_edit key='image_link' direct=true
-                    +youtube_edit key='youtube_id' label='youtube id' direct=true
-                    +html_edit key='content' label='content' direct=true
+//                     // +raw_edit key='raw' label='raw' direct=true
+//                 .twelve.wide.column
+//                     +text_edit key='title' label='title' direct=true
+//                     +image_link_edit key='image_link' direct=true
+//                     +youtube_edit key='youtube_id' label='youtube id' direct=true
+//                     +html_edit key='content' label='content' direct=true
 
 
-template(name='view_mode')
-    .ui.circular.icon.button
-        i.icon(class=icon)
+// template(name='view_mode')
+//     .ui.circular.icon.button
+//         i.icon(class=icon)
 
      
-template(name='post_card')     
-    .column.medscroll
-        .content
-            a.ui.header.zoomer(href="/#{group}/p/#{_id}" class=post_header_class) #{title}
-            if image_id
-                a(href="/#{group}/p/#{_id}")
-                    img.ui.fluid.rounded.zoomer.image(src="{{c.url image_id }}" class=currentUser.invert_class)
-            if image_link
-                a(href="/#{group}/p/#{_id}")
-                    +image_link_view key='image_link' direct=true
-            if youtube_id
-                +youtube_view key='youtube_id' label='youtube id' direct=true
-            // if is_admin
-            //     +text_edit key='group' label='slug' direct=true
-            // +datetime_view key='publish_datetime' label='publish date/time' icon='clock' direct=true
-            if tone 
-                +tone
-            else 
-                a.pointer.black_text.zoomer(href="/#{group}/p/#{_id}")
-                    |!{content}
-                // if raw
-                //     |!{raw}
-            a.ui.inline.grey.header(href="/#{group}/p/#{_id}") #{when}
-            each tags
-                +flat_tag_selector
-            if is_admin 
-                +remove_button
-            +doc_emotion_small    
-            span(title='views')
-                i.grey.eye.icon
-                |#{views}
-            +array_view key='people_tags' icon='user outline' direct=true
-            +array_view key='time_tags' icon='clock' direct=true
-            +array_view key='location_tags' icon='marker' direct=true
+// template(name='post_card')     
+//     .column.medscrol
+//         .content
+//             a.ui.header.zoomer(href="/#{group}/p/#{_id}" class=post_header_class) #{title}
+//             if data.is_reddit_media_domain
+//                 img.ui.centered.rounded.image.pointer.call_visual(src=data.url)
+            
+//             if image_id
+//                 a(href="/#{group}/p/#{_id}")
+//                     img.ui.fluid.rounded.zoomer.image(src="{{c.url image_id }}" class=currentUser.invert_class)
+//             if image_link
+//                 a(href="/#{group}/p/#{_id}")
+//                     +image_link_view key='image_link' direct=true
+//             if youtube_id
+//                 +youtube_view key='youtube_id' label='youtube id' direct=true
+//             // if is_admin
+//             //     +text_edit key='group' label='slug' direct=true
+//             // +datetime_view key='publish_datetime' label='publish date/time' icon='clock' direct=true
+//             if tone 
+//                 +tone
+//             else 
+//                 a.pointer.black_text.zoomer(href="/#{group}/p/#{_id}")
+//                     |!{content}
+//                 // if raw
+//                 //     |!{raw}
+//             a.ui.inline.grey.header(href="/#{group}/p/#{_id}") #{when}
+//             each tags
+//                 +flat_tag_selector
+//             if is_admin 
+//                 +remove_button
+//             +doc_emotion_small    
+//             span(title='views')
+//                 i.grey.eye.icon
+//                 |#{views}
+//             +array_view key='people_tags' icon='user outline' direct=true
+//             +array_view key='time_tags' icon='clock' direct=true
+//             +array_view key='location_tags' icon='marker' direct=true
 
 
-template(name='flat_tag_picker')
-    // a.ui.big.image.rounded.label.zoomer.pointer.select_tag.select_term(href='#' title="#{count} results" class="#{selector_class} #{thinking_class}")
-    a.ui.compact.tiny.basic.image.label.zoomer.select_flat_tag(title="#{count} results" class="#{selector_class} #{thinking_class}")
-        if term
-            if term.metadata.image
-                img.ui.mini.rounded.inline.image.superzoom(src=term.metadata.image )    
-        | #{this}
-        // if in_dev
-        //     small #{count}
+// template(name='flat_tag_picker')
+//     // a.ui.big.image.rounded.label.zoomer.pointer.select_tag.select_term(href='#' title="#{count} results" class="#{selector_class} #{thinking_class}")
+//     a.ui.compact.tiny.basic.image.label.zoomer.select_flat_tag(title="#{count} results" class="#{selector_class} #{thinking_class}")
+//         if term
+//             if term.metadata.image
+//                 img.ui.mini.rounded.inline.image.superzoom(src=term.metadata.image )    
+//         | #{this}
+//         // if in_dev
+//         //     small #{count}

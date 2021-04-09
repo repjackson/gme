@@ -42,7 +42,7 @@ Template.subreddit.onCreated ->
     @autorun => Meteor.subscribe 'subreddit_by_param', Router.current().params.subreddit
     @autorun => Meteor.subscribe 'sub_docs', 
         Router.current().params.subreddit
-        picked_sub_tags.array()
+        picked_tags.array()
         picked_domains.array()
         picked_time_tags.array()
         picked_authors.array()
@@ -51,14 +51,14 @@ Template.subreddit.onCreated ->
   
     @autorun => Meteor.subscribe 'sub_doc_count', 
         Router.current().params.subreddit
-        picked_sub_tags.array()
+        picked_tags.array()
         picked_domains.array()
         picked_time_tags.array()
         picked_authors.array()
 
-    @autorun => Meteor.subscribe 'subreddit_result_tags',
+    @autorun => Meteor.subscribe 'result_tags',
         Router.current().params.subreddit
-        picked_sub_tags.array()
+        picked_tags.array()
         picked_domains.array()
         picked_time_tags.array()
         picked_authors.array()
@@ -70,10 +70,10 @@ Template.subreddit.onCreated ->
     # Meteor.call 'log_subreddit_view', Router.current().params.subreddit, ->
     @autorun => Meteor.subscribe 'agg_sentiment_subreddit',
         Router.current().params.subreddit
-        picked_sub_tags.array()
+        picked_tags.array()
         ()->Session.set('ready',true)
 
-Template.sub_post_card.events
+Template.post_card.events
     'click .view_post': (e,t)-> 
         Session.set('view_section','main')
         # window.speechSynthesis.speak new SpeechSynthesisUtterance @data.title
@@ -83,11 +83,11 @@ Template.subreddit_doc_item.onRendered ->
     # unless @data.watson
     #     Meteor.call 'call_watson',@data._id,'data.url','url',@data.data.url,=>
 
-Template.sub_post_card.onRendered ->
+Template.post_card.onRendered ->
     # unless @data.doc_sentiment_label
     #     Meteor.call 'call_watson',@data._id,'data.url','url',@data.data.url,=>
-    # unless @data.time_tags
-    #     Meteor.call 'tagify_time_rpost',@data._id,=>
+    unless @data.time_tags
+        Meteor.call 'tagify_time_rpost',@data._id,=>
 
 
 Template.sort_direction_button.events
@@ -117,7 +117,7 @@ Template.subreddit.events
         val = $('.search_subreddit').val()
         Session.set('sub_doc_query', val)
         if e.which is 13 
-            picked_sub_tags.push val
+            picked_tags.push val
             # window.speechSynthesis.speak new SpeechSynthesisUtterance val
 
             $('.search_subreddit').val('')
@@ -132,10 +132,11 @@ Template.subreddit.helpers
         if @name in picked_domains.array() then 'blue' else 'basic'
     sort_created_class: -> if Session.equals('sort_key','data.created') then 'active' else 'tertiary'
     sort_ups_class: -> if Session.equals('sort_key','data.ups') then 'active' else 'tertiary'
-    subreddit_result_tags: -> results.find(model:'subreddit_result_tag')
+    result_tags: -> results.find(model:'result_tag')
     subreddit_time_tags: -> results.find(model:'subreddit_time_tag')
+    domain_results: -> results.find(model:'domain')
 
-    picked_sub_tags: -> picked_sub_tags.array()
+    picked_tags: -> picked_tags.array()
     current_sub: -> Router.current().params.subreddit
     
     subreddit_doc: ->
@@ -149,7 +150,7 @@ Template.subreddit.helpers
             "data.subreddit":Router.current().params.subreddit
         },
             sort:"#{Session.get('sort_key')}":parseInt(Session.get('sort_direction'))
-            limit:20)
+            limit:42)
     emotion_avg: -> results.findOne(model:'emotion_avg')
 
     sort_created_class: -> if Session.equals('sort_key','data.created') then 'active' else 'tertiary'
@@ -162,29 +163,29 @@ Template.subreddit.helpers
             
 
 
-Template.sub_tag_picker.onCreated ->
-    @autorun => Meteor.subscribe('doc_by_title', @data.name.toLowerCase())
-Template.sub_tag_picker.helpers
+Template.tag_picker.onCreated ->
+    # @autorun => Meteor.subscribe('doc_by_title', @data.name.toLowerCase())
+Template.tag_picker.helpers
     selector_class: ()->
-        term = 
-            Docs.findOne 
-                title:@name.toLowerCase()
-        if term
-            if term.max_emotion_name
-                switch term.max_emotion_name
-                    when 'joy' then " basic green"
-                    when "anger" then " basic red"
-                    when "sadness" then " basic blue"
-                    when "disgust" then " basic orange"
-                    when "fear" then " basic grey"
-                    else "basic grey"
-    term: ->
-        Docs.findOne 
-            title:@name.toLowerCase()
+        # term = 
+        #     Docs.findOne 
+        #         title:@name.toLowerCase()
+        # if term
+        #     if term.max_emotion_name
+        #         switch term.max_emotion_name
+        #             when 'joy' then " basic green"
+        #             when "anger" then " basic red"
+        #             when "sadness" then " basic blue"
+        #             when "disgust" then " basic orange"
+        #             when "fear" then " basic grey"
+        #             else "basic grey"
+    # term: ->
+    #     Docs.findOne 
+    #         title:@name.toLowerCase()
             
             
-Template.sub_tag_picker.events
-    'click .select_sub_tag': -> 
+Template.tag_picker.events
+    'click .pick_tag': -> 
         # results.update
         # window.speechSynthesis.cancel()
         # window.speechSynthesis.speak new SpeechSynthesisUtterance @name
@@ -192,7 +193,7 @@ Template.sub_tag_picker.events
         #     picked_emotions.push @name
         # else
         # if @model is 'subreddit_tag'
-        picked_sub_tags.push @name
+        picked_tags.push @name
         $('.search_subreddit').val('')
         
         # window.speechSynthesis.speak new SpeechSynthesisUtterance @name
@@ -207,32 +208,32 @@ Template.sub_tag_picker.events
         
         
 
-Template.sub_unpick_tag.onCreated ->
+Template.unpick_tag.onCreated ->
     # @autorun => Meteor.subscribe('doc_by_title', @data.toLowerCase())
     
-Template.sub_unpick_tag.helpers
-    term: ->
-        found = 
-            Docs.findOne 
-                # model:'wikipedia'
-                title:@valueOf().toLowerCase()
-        found
-Template.sub_unpick_tag.events
-    'click .unselect_sub_tag': -> 
+Template.unpick_tag.helpers
+    # term: ->
+    #     found = 
+    #         Docs.findOne 
+    #             # model:'wikipedia'
+    #             title:@valueOf().toLowerCase()
+    #     found
+Template.unpick_tag.events
+    'click .unpick_tag': -> 
         Session.set('skip',0)
-        picked_sub_tags.remove @valueOf()
+        picked_tags.remove @valueOf()
         # window.speechSynthesis.speak new SpeechSynthesisUtterance picked_tags.array().toString()
         Session.set('loading',true)
-        Meteor.call 'search_subreddit', Router.current().params.subreddit, picked_sub_tags.array(), ->
+        Meteor.call 'search_subreddit', Router.current().params.subreddit, picked_tags.array(), ->
             Session.set('loading',false)
         Meteor.setTimeout( ->
             Session.set('toggle',!Session.get('toggle'))
         , 5000)
 
 
-Template.flat_sub_tag_picker.onCreated ->
-    @autorun => Meteor.subscribe('doc_by_title', @data.valueOf().toLowerCase())
-Template.flat_sub_tag_picker.helpers
+Template.flat_tag_picker.onCreated ->
+    # @autorun => Meteor.subscribe('doc_by_title', @data.valueOf().toLowerCase())
+Template.flat_tag_picker.helpers
     selector_class: ()->
         term = 
             Docs.findOne 
@@ -249,12 +250,12 @@ Template.flat_sub_tag_picker.helpers
     term: ->
         Docs.findOne 
             title:@valueOf().toLowerCase()
-Template.flat_sub_tag_picker.events
+Template.flat_tag_picker.events
     'click .select_flat_tag': -> 
         # results.update
         # window.speechSynthesis.cancel()
         # window.speechSynthesis.speak new SpeechSynthesisUtterance @valueOf()
-        picked_sub_tags.push @valueOf()
+        picked_tags.push @valueOf()
         Router.go "/r/#{Router.current().params.subreddit}/"
         $('.search_subreddit').val('')
         Session.set('loading',true)
@@ -263,12 +264,12 @@ Template.flat_sub_tag_picker.events
         Meteor.setTimeout( ->
             Session.set('toggle',!Session.get('toggle'))
         , 700)
-Template.flat_sub_user_tag_selector.events
+Template.flat_user_tag_picker.events
     'click .select_flat_tag': -> 
         # results.update
         # window.speechSynthesis.cancel()
         # window.speechSynthesis.speak new SpeechSynthesisUtterance @valueOf()
-        picked_sub_tags.push @valueOf()
+        picked_tags.push @valueOf()
         parent = Template.parentData()
         Router.go "/r/#{parent.subreddit}/"
         $('.search_subreddit').val('')

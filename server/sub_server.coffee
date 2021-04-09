@@ -6,7 +6,7 @@ Meteor.publish 'subreddit_by_param', (subreddit)->
 
 Meteor.publish 'sub_docs', (
     subreddit
-    picked_sub_tags
+    picked_tags
     picked_domains
     picked_time_tags
     picked_authors
@@ -25,13 +25,13 @@ Meteor.publish 'sub_docs', (
     # if view_unanswered
     #     match.is_answered = false
     # if picked_domains.length > 0 then match.domain = $all:picked_domains
-    if picked_sub_tags.length > 0 then match.tags = $all:picked_sub_tags
+    if picked_tags.length > 0 then match.tags = $all:picked_tags
     # if picked_time_tags.length > 0 then match.time_tags = $all:picked_time_tags
     # if picked_authors.length > 0 then match.authors = $all:picked_authors
     console.log 'match', match
     console.log 'match', Docs.find(match).count()
     Docs.find match,
-        limit:20
+        limit:42
         sort: "#{sort_key}":parseInt(sort_direction)
         fields:
             title:1
@@ -39,7 +39,7 @@ Meteor.publish 'sub_docs', (
             url:1
             model:1
             # data:1    
-            "watson.metadata.image":1
+            "watson":1
             "data.domain":1
             "data.permalink":1
             "permalink":1
@@ -48,13 +48,15 @@ Meteor.publish 'sub_docs', (
             "data.subreddit":1
             "data.url":1
             time_tags:1
+            "data.url":1
+            "data.is_reddit_media_domain":1
             'data.num_comments':1
             'data.author':1
             'data.ups':1
             "data.thumbnail":1
             "data.media.oembed":1
             analyzed_text:1
-            "data.url":1
+            "data":1
             permalink:1
             "data.media":1
             doc_sentiment_score:1
@@ -127,8 +129,9 @@ Meteor.publish 'sub_doc_count', (
     if picked_time_tags.length > 0 then match.time_tags = $all:picked_time_tags
     Counts.publish this, 'sub_doc_counter', Docs.find(match)
     return undefined
-Meteor.publish 'subreddit_result_tags', (
+Meteor.publish 'result_tags', (
     subreddit
+    picked_tags
     picked_domains
     picked_time_tags
     # view_bounties
@@ -145,10 +148,13 @@ Meteor.publish 'subreddit_result_tags', (
     #     match.bounty = true
     # if view_unanswered
     #     match.is_answered = false
+    if picked_tags.length > 0 then match.tags = $all:picked_tags
     if picked_domains.length > 0 then match.domain = $all:picked_domains
     if picked_time_tags.length > 0 then match.time_tags = $all:picked_time_tags
     # if picked_emotion.length > 0 then match.max_emotion_name = picked_emotion
     doc_count = Docs.find(match).count()
+    console.log 'doc_count', doc_count
+    console.log 'match', match
     subreddit_tag_cloud = Docs.aggregate [
         { $match: match }
         { $project: "tags": 1 }
@@ -156,14 +162,14 @@ Meteor.publish 'subreddit_result_tags', (
         { $group: _id: "$tags", count: $sum: 1 }
         { $sort: count: -1, _id: 1 }
         { $match: count: $lt: doc_count }
-        { $limit:11 }
+        { $limit:20 }
         { $project: _id: 0, name: '$_id', count: 1 }
     ]
     subreddit_tag_cloud.forEach (tag, i) ->
         self.added 'results', Random.id(),
             name: tag.name
             count: tag.count
-            model:'subreddit_result_tag'
+            model:'result_tag'
     
     
     domain_cloud = Docs.aggregate [
@@ -383,7 +389,7 @@ Meteor.publish 'subreddit_tags', (
 
 
 Meteor.publish 'subs_tags', (
-    picked_sub_tags
+    picked_tags
     picked_domains
     picked_authors
     # view_bounties
@@ -400,7 +406,7 @@ Meteor.publish 'subs_tags', (
     #     match.bounty = true
     # if view_unanswered
     #     match.is_answered = false
-    if picked_sub_tags.length > 0 then match.tags = $all:picked_sub_tags
+    if picked_tags.length > 0 then match.tags = $all:picked_tags
     if picked_authors.length > 0 then match.author = $all:picked_authors
     # if picked_emotion.length > 0 then match.max_emotion_name = picked_emotion
     doc_count = Docs.find(match).count()
@@ -409,7 +415,7 @@ Meteor.publish 'subs_tags', (
         { $project: "tags": 1 }
         { $unwind: "$tags" }
         { $group: _id: "$tags", count: $sum: 1 }
-        { $match: _id: $nin: picked_sub_tags }
+        { $match: _id: $nin: picked_tags }
         { $sort: count: -1, _id: 1 }
         { $match: count: $lt: doc_count }
         { $limit:42 }

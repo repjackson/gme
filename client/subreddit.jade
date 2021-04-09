@@ -1,33 +1,32 @@
 template(name='subreddit')
     unless subreddit_doc
         .ui.basic.center.aligned.segment
-            i.massive.fire.link.grey.icon.get_info.shadowed2
+            i.massive.line.chart.grey.icon.get_info.shadowed2
             .ui.big.grey.header #{current_sub}
     with subreddit_doc
-        +small_ticker
     
-        .ui.stackable.grid(style="background-image:url(#{data.banner_img}); margin-top:0px;, background-size:cover;, background-repeat: no-repeat; min-width: 100%; ")
-            .twelve.wide.column.seg
+        .ui.stackable.padded.grid(style="background-image:url(#{data.banner_img}); margin-top:0px;, background-size:cover;, background-repeat: no-repeat; min-width: 100%; ")
+            .twelve.wide.column
                 // img(src=data.banner_img)
                 // img(src=banner_background_image)
-                a.ui.basic.compact.icon.button(href="/")
-                    i.chevron.left.grey.icon
-                    i.search.icon
-                    // img.ui.mini.inline.image(src=icon_img)
-                img.get_info.shadowed.ui.inline.image(src=logo_url )
-                .ui.inline.header.get_info #{data.display_name}
-                if picked_sub_tags
+                // a.ui.basic.compact.icon.button(href="/")
+                //     i.chevron.left.grey.icon
+                //     i.search.icon
+                //     // img.ui.mini.inline.image(src=icon_img)
+                // img.get_info.shadowed.ui.inline.image(src=logo_url )
+                // .ui.inline.header.get_info #{data.display_name}
+                if picked_tags
                     // if many_tags
                     //     a#clear_tags.ui.black.invert.icon.compact.button.select_term
                     //         i.remove.icon
-                    each picked_sub_tags
-                        +sub_unpick_tag
+                    each picked_tags
+                        +unpick_tag
                 .ui.icon.input
                     i.search.icon
                     input.search_subreddit(type='text')
-                each subreddit_result_tags
+                each result_tags
                     // .ui.label #{this}
-                    +sub_tag_picker
+                    +tag_picker
                     // .ui.label(title=count) #{name}
                 div
                 .ui.inline.header #{post_count}
@@ -45,11 +44,11 @@ template(name='subreddit')
                 +sort_button l='disgust' i='frown' c='orange' key='rep_disgust'
                 +sort_button l='fear' i='frown' c='grey' key='rep_fear'
                     
-                .scrolling
+                .scrollin
                     if sub_docs
-                        .ui.stackable.three.column.grid 
+                        .ui.stackable.four.column.grid 
                             each sub_docs
-                                +sub_post_card
+                                +post_card
                         // if skv_is 'subreddit_view_layout' 'grid'
                         // else if skv_is 'subreddit_view_layout' 'list'
                         //     each sub_docs
@@ -58,15 +57,16 @@ template(name='subreddit')
                         .ui.basic.center.aligned.segment
                             i.big.loading.yin.yang.icon
             .four.wide.column.scrlling.seg
+                +small_ticker
                 with emotion_avg
-                    if is_positive
-                        span.say.ui.green.text(class="{{calculated_size doc_sentiment_score}}") {{ to_percent doc_sentiment_score }}% positive
-                            |&nbsp;
-                        div.rounded(style="height:5px;width:{{to_percent doc_sentiment_score}}%;background-color:green" title="{{to_percent doc_sentiment_score}}% #{doc_sentiment_label}")
-                    else
-                        span.say.ui.red.text(class="{{calculated_size doc_sentiment_score}}") {{ to_percent doc_sentiment_score }}%  negative
-                            |&nbsp;
-                    //     div.rounded(style="height:5px;width:{{abs_percent doc_sentiment_score}}%;background-color:red" title="{{abs_percent doc_sentiment_score}}% #{doc_sentiment_label}")
+                    // if is_positive
+                    //     span.say.ui.green.text(class="{{calculated_size doc_sentiment_score}}") {{ to_percent doc_sentiment_score }}% positive
+                    //         |&nbsp;
+                    //     div.rounded(style="height:5px;width:{{to_percent doc_sentiment_score}}%;background-color:green" title="{{to_percent doc_sentiment_score}}% #{doc_sentiment_label}")
+                    // else
+                    //     span.say.ui.red.text(class="{{calculated_size doc_sentiment_score}}") {{ to_percent doc_sentiment_score }}%  negative
+                    //         |&nbsp;
+                    // //     div.rounded(style="height:5px;width:{{abs_percent doc_sentiment_score}}%;background-color:red" title="{{abs_percent doc_sentiment_score}}% #{doc_sentiment_label}")
                     span.say.ui.green.text(class="{{calculated_size avg_sent_score}}") {{ to_percent avg_sent_score }}% sentiment 
                         |&nbsp;
                     div.rounded(style="height:5px;width:{{to_percent avg_sent_score}}%;background-color:green" title="{{to_percent avg_sent_score}}% joy")
@@ -94,14 +94,14 @@ template(name='subreddit')
                         |&nbsp;
                     div.rounded(style="height:5px;width:{{to_percent avg_anger_score}}%;background-color:red" title="{{to_percent avg_anger_score}}% anger")
             
-                img.ui.inline.image(src=data.header_img)
-                .ui.inline.header.pull_latest #{data.title}
+                // img.ui.inline.image(src=data.header_img)
+                // .ui.inline.header.pull_latest #{data.title}
                 // +alpha
                 div
                 .ui.inline.small.header
                     i.globe.icon
                     |domains
-                each subreddit_domain_tags
+                each domain_results
                     .ui.basic.label.select_domain(class=domain_selector_class)
                         |#{name} 
                         small #{count}
@@ -109,7 +109,7 @@ template(name='subreddit')
                 .ui.inline.header
                     i.clock.icon    
                     |time tags
-                each subreddit_time_tags
+                each time_tag_results
                     .ui.basic.label.select_time_tag(class=domain_selector_class)
                         |#{name} 
                         small #{count}
@@ -186,7 +186,7 @@ template(name='subreddit_newest')
        
        
    
-template(name='sub_post_card')
+template(name='post_card')
     .ui.column.smallscrol
         // .ui.stackable.equal.width.compact.grid
         //     .row
@@ -194,10 +194,13 @@ template(name='sub_post_card')
             span.rounded.view_post.full
                 |!{embed}
             div
+        if data.is_reddit_media_domain
+            img.ui.centered.rounded.image.pointer.call_visual(src=data.url)
+            
         else if is_image
             // a.view_post(href="/r/#{subreddit}/post/#{_id}" class=post_header_class)
             img.ui.fluid.image.toggle_view.view_post.zoomer.pointer(src=data.url)
-        else if watson.metadata.image.length
+        else if watson.metadata.image
             // a.view_post.zoomer.pointer(href="/r/#{subreddit}/post/#{_id}" class=post_header_class)
             img.ui.fluid.image.toggle_view(src=watson.metadata.image)
         else if data.thumbnail.length
@@ -268,7 +271,7 @@ template(name='subreddit_doc_item')
                 small ({{long_date data.created}})
             .ui.label(title='domain') #{data.domain}
             // each tags
-            //     +flat_sub_tag_picker
+            //     +flat_tag_picker
             if in_dev
                 +print_this
             // if watson
@@ -299,7 +302,7 @@ template(name='subreddit_doc_item')
             //         |!{data.body_html}
             
             each tags
-                +flat_sub_tag_picker
+                +flat_tag_picker
             if watson
                 +doc_emotion_small
             a.ui.inline.header(href="/user/#{data.author}")
@@ -307,9 +310,9 @@ template(name='subreddit_doc_item')
     
 
 
-template(name='sub_tag_picker')
+template(name='tag_picker')
     // a.ui.big.image.basic.rounded.label.zoomer.pointer.select_tag.select_term(href='#' title="#{count} results" class="#{selector_class} #{thinking_class}")
-    a.ui.basic.image.label.select_sub_tag(href='#' title="#{count} results" class="#{selector_class} #{thinking_class}")
+    a.ui.basic.image.label.pick_tag.select_term(href='#' title="#{count} results" class="#{selector_class} #{thinking_class}")
         if term
             if term.watson.metadata.image
                 img.ui.image.superzoom(src=term.watson.metadata.image )    
@@ -317,8 +320,8 @@ template(name='sub_tag_picker')
         // if in_dev
         //     small #{count}
         
-template(name='sub_unpick_tag')
-    a.unselect_sub_tag.ui.black.image.label(href='#')
+template(name='unpick_tag')
+    a.unpick_tag.ui.black.image.label.select_term(href='#')
         if term
             if term.watson.metadata.image
                 img.ui.avatar.compact.image.superzoom(src=term.watson.metadata.image)    
@@ -326,18 +329,18 @@ template(name='sub_unpick_tag')
 
         
         
-template(name='flat_sub_tag_picker')
+template(name='flat_tag_picker')
     // a.ui.big.image.basic.rounded.label.zoomer.pointer.select_tag.select_term(href='#' title="#{count} results" class="#{selector_class} #{thinking_class}")
-    a.ui.basic.image.label.zoomer.select_flat_tag(title="#{count} results" class="#{selector_class} #{thinking_class}")
+    a.ui.basic.image.label.zoomer.select_flat_tag.select_term(title="#{count} results" class="#{selector_class} #{thinking_class}")
         if term
             if term.watson.metadata.image
                 img.ui.image.superzoom(src=term.watson.metadata.image )    
         strong #{this}
         // if in_dev
         //     small #{count}
-template(name='flat_sub_user_tag_selector')
+template(name='flat_user_tag_picker')
     // a.ui.big.image.basic.rounded.label.zoomer.pointer.select_tag.select_term(href='#' title="#{count} results" class="#{selector_class} #{thinking_class}")
-    a.ui.basic.compact.button.zoomer.select_flat_tag(title="#{count} results" class="#{selector_class} #{thinking_class}")
+    a.ui.basic.compact.button.zoomer.select_flat_tag.select_term(href='/' title="#{count} results" class="#{selector_class} #{thinking_class}")
         if term
             if term.watson.metadata.image
                 img.ui.mini.rounded.inline.image.superzoom(src=term.watson.metadata.image )    

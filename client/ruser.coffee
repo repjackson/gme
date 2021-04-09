@@ -11,7 +11,7 @@ Template.ruser_posts.onCreated ->
     @autorun => Meteor.subscribe 'user_result_tags',
         'rpost'
         Router.current().params.username
-        picked_sub_tags.array()
+        picked_tags.array()
         # selected_subreddit_domain.array()
         Session.get('toggle')
         , ->
@@ -20,7 +20,7 @@ Template.ruser_comments.onCreated ->
     @autorun => Meteor.subscribe 'user_result_tags',
         'rcomment'
         Router.current().params.username
-        picked_sub_tags.array()
+        picked_tags.array()
         # selected_subreddit_domain.array()
         Session.get('toggle')
         , ->

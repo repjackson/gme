@@ -1,7 +1,7 @@
-# if Meteor.isClient
-    # Router.route '/', (->
-    #     @redirect('/m/model')
-    # )
+if Meteor.isClient
+    Router.route '/', (->
+        @redirect('/r/Superstonk')
+    )
 
     # Router.route '/', (->
     #     @layout 'layout'
@@ -17,8 +17,12 @@ Router.configure
 
 Router.route '/chart', (->
     @layout 'layout'
-    @render 'chart'
+    @render 'ticker'
     ), name:'chart'
+Router.route '/profile', (->
+    @layout 'layout'
+    @render 'profile'
+    ), name:'profile'
 Router.route '/floor', (->
     @layout 'layout'
     @render 'floor'
