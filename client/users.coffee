@@ -2,7 +2,7 @@
 # @selected_user_roles = new ReactiveArray []
 
 
-Router.route '/apes', (->
+Router.route '/users', (->
     @render 'users'
     ), name:'users'
 

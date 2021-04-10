@@ -23,7 +23,7 @@ Template.call_tone.events
     'click #call_tone': ->
         Meteor.call 'call_tone', Router.current().params.doc_id, ->
 
-Template.tone.events
+Template.tone_view.events
     'click .upvote_sentence': ->
         console.log @
         console.log Template.currentData()

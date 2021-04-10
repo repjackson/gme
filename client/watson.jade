@@ -41,25 +41,25 @@ template(name='doc_emotion')
         
     span.say.ui.green.text(class="{{calculated_size joy_percent}}") {{ to_percent joy_percent }}% joy 
         |&nbsp;
-    +emotion_edit key='joy'
+    // +emotion_edit key='joy'
     div.rounde(style="height:5px;width:{{to_percent joy_percent}}%;background-color:green" title="{{to_percent joy_percent}}% joy")
     //- if above_50 'sadness_percent'
         //- .spacer
     span.say.ui.blue.text(class="{{calculated_size sadness_percent}}") {{ to_percent sadness_percent}}% sad 
         |&nbsp;
-    +emotion_edit key='sadness'
+    // +emotion_edit key='sadness'
     div.rounde(style="height:5px;width:{{to_percent sadness_percent}}%;background-color:blue" title="{{to_percent sadness_percent}}% sad")
     //- if above_50 'fear_percent'
         //- .spacer
     span.say.ui.grey.text(class="{{calculated_size fear_percent}}") {{ to_percent fear_percent }}% fear 
         |&nbsp;
-    +emotion_edit key='fear'
+    // +emotion_edit key='fear'
     div.rounde(style="height:5px;width:{{to_percent fear_percent}}%;background-color:grey" title="{{to_percent fear_percent}}% fear")
     //- if above_50 'disgust_percent'
         //- .spacer
     span.say.ui.orange.text(class="{{calculated_size disgust_percent}}") {{ to_percent disgust_percent }}% disgust 
         |&nbsp;
-    +emotion_edit key='disgust'
+    // +emotion_edit key='disgust'
     div.rounde(style="height:5px;width:{{to_percent disgust_percent}}%;background-color:orange" title="{{to_percent disgust_percent}}% disgust")
     //- if above_50 'anger_percent'
         //- .spacer
@@ -390,7 +390,7 @@ template(name='watson_view')
     
     
     
-template(name='tone')
+template(name='tone_view')
     // h3 tone
     .ui.horizontal.list
         each tone.result.document_tone.tones

@@ -437,12 +437,12 @@ a.title, #title {
 }
 .label:not(.circular) {
     margin: 2px !important;
-    /*border-radius: 10px !important; */
+    border-radius: 10px !important; 
 }
 
 input {
     margin: 5px !important;
-    /*border-radius: 10px !important; */
+    border-radius: 10px !important; 
 }
 
 ::-webkit-scrollbar {
