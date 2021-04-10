@@ -133,7 +133,7 @@ Template.subreddit.helpers
     sort_created_class: -> if Session.equals('sort_key','data.created') then 'active' else 'tertiary'
     sort_ups_class: -> if Session.equals('sort_key','data.ups') then 'active' else 'tertiary'
     result_tags: -> results.find(model:'result_tag')
-    subreddit_time_tags: -> results.find(model:'subreddit_time_tag')
+    time_tag_results: -> results.find(model:'time_tag')
     domain_results: -> results.find(model:'domain')
 
     picked_tags: -> picked_tags.array()
@@ -147,7 +147,7 @@ Template.subreddit.helpers
     sub_docs: ->
         Docs.find({
             model:'rpost'
-            "data.subreddit":Router.current().params.subreddit
+            "subreddit":Router.current().params.subreddit
         },
             sort:"#{Session.get('sort_key')}":parseInt(Session.get('sort_direction'))
             limit:42)

@@ -79,7 +79,7 @@ template(name='rpage')
                     // if skv_is 'view_section' 'tags'
                     // if skv_is 'view_section' 'comments'
                     +rcomments_tab
-            .four.wide.column
+            .four.wide.column.scrolling
                 .ui.header {{ufrom data.created}}
                 a.ui.basic.fluid.button(href=data.url target="_window" title=data.url) 
                     i.external.icon
@@ -117,8 +117,8 @@ template(name='rpage')
                 .ui.small.inline.header #{data.num_crossposts} crossposts
                 |#{tags.length}
                 each tags
-                    .ui.label #{this}
-                    // +flat_tag_picker
+                    // .ui.label #{this}
+                    +flat_tag_picker
                 
                 
 template(name='rcomments_tab')                
