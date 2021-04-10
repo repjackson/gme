@@ -3,16 +3,16 @@
 
 
 Router.route '/apes', (->
-    @render 'rusers'
-    ), name:'rusers'
+    @render 'users'
+    ), name:'users'
 
 # Template.term_image.onCreated ->
-Template.rusers.onCreated ->
+Template.users.onCreated ->
     Session.setDefault('selected_user_location',null)
     Session.setDefault('searching_location',null)
     Session.setDefault('sort_direction',-1)
     
-    @autorun -> Meteor.subscribe 'selected_rusers', 
+    @autorun -> Meteor.subscribe 'selected_users', 
         picked_user_tags.array() 
         Session.get('searching_username')
         Session.get('limit')
@@ -25,7 +25,7 @@ Template.rusers.onCreated ->
         # Session.get('view_mode')
     )
 
-Template.rusers.events
+Template.users.events
     'click .select_user': ->
         # window.speechSynthesis.cancel()
         # window.speechSynthesis.speak new SpeechSynthesisUtterance @display_name
@@ -84,7 +84,7 @@ Template.sort_button.helpers
 
 
 
-Template.rusers.helpers
+Template.users.helpers
     current_username_query: -> Session.get('searching_username')
     users: ->
         match = {model:'user'}
@@ -118,7 +118,7 @@ Template.rusers.helpers
 # Template.user_small.events
 #     'click .add_tag': -> 
 #         picked_user_tags.push @valueOf()
-Template.rusers.events
+Template.users.events
     'click .pick_user_tag': -> 
         # window.speechSynthesis.speak new SpeechSynthesisUtterance @name
         picked_user_tags.push @name

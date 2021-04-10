@@ -162,7 +162,7 @@ Meteor.publish 'result_tags', (
         { $group: _id: "$tags", count: $sum: 1 }
         { $sort: count: -1, _id: 1 }
         { $match: count: $lt: doc_count }
-        { $limit:20 }
+        { $limit:30 }
         { $project: _id: 0, name: '$_id', count: 1 }
     ]
     subreddit_tag_cloud.forEach (tag, i) ->

@@ -1,12 +1,12 @@
-Router.route '/ruser/:username', (->
+Router.route '/user/:username', (->
     @layout 'layout'
-    @render 'ruser'
-    ), name:'ruser'
+    @render 'user'
+    ), name:'user'
 
 
-Template.ruser.onCreated ->
+Template.user.onCreated ->
     @autorun => Meteor.subscribe 'user_doc', Router.current().params.username, ->
-Template.ruser_posts.onCreated ->
+Template.user_posts.onCreated ->
     @autorun => Meteor.subscribe 'user_posts', Router.current().params.username, 42, ->
     @autorun => Meteor.subscribe 'user_result_tags',
         'rpost'
@@ -15,7 +15,7 @@ Template.ruser_posts.onCreated ->
         # selected_subreddit_domain.array()
         Session.get('toggle')
         , ->
-Template.ruser_comments.onCreated ->
+Template.user_comments.onCreated ->
     @autorun => Meteor.subscribe 'user_comments', Router.current().params.username, ->
     @autorun => Meteor.subscribe 'user_result_tags',
         'rcomment'
@@ -24,9 +24,9 @@ Template.ruser_comments.onCreated ->
         # selected_subreddit_domain.array()
         Session.get('toggle')
         , ->
-Template.ruser_comments.onCreated ->
+Template.user_comments.onCreated ->
 
-Template.ruser.events
+Template.user.events
     # Meteor.setTimeout =>
     'click .refresh_info': ->
         $('body').toast(
@@ -43,7 +43,7 @@ Template.ruser.events
                 displayTime: 'auto',
             )
             Session.set('thinking',false)
-Template.ruser_comments.events
+Template.user_comments.events
     'click .refresh_comments': ->
         $('body').toast(
             showIcon: 'chat'
@@ -60,26 +60,26 @@ Template.ruser_comments.events
             )
             Session.set('thinking',false)
 
-Template.ruser_doc_item.onRendered ->
+Template.user_doc_item.onRendered ->
     # console.log @
     # unless @data.watson
     #     Meteor.call 'call_watson',@data._id,'data.url','url',@data.data.url,=>
 
-Template.ruser_comment.events
+Template.user_comment.events
     'click .call_watson_comment': ->
         # console.log 'call', 
         Meteor.call 'call_watson', @_id,'data.body','comment',->
         
-Template.ruser_comment.onRendered ->
+Template.user_comment.onRendered ->
     # unless @data.watson
     #     # console.log 'calling watson on comment'
     #     Meteor.call 'call_watson', @data._id,'data.body','comment',->
-Template.ruser_post.onRendered ->
+Template.user_post.onRendered ->
     # unless @data.watson
     #     # console.log 'calling watson on comment'
     #     Meteor.call 'call_watson', @data._id,'data.body','comment',->
 
-Template.ruser.events
+Template.user.events
     'click .refresh_stats': ->
         Meteor.setTimeout =>
             $('body').toast(
@@ -99,13 +99,13 @@ Template.ruser.events
        
 
 
-Template.ruser.helpers
+Template.user.helpers
     user_doc: ->
         Docs.findOne
             model:'user'
             username:Router.current().params.username
     current_username: -> Router.current().params.username
-Template.ruser_posts.events
+Template.user_posts.events
     'click .refresh_posts': ->
         $('body').toast(
             showIcon: 'edit'
@@ -125,7 +125,7 @@ Template.ruser_posts.events
 
 
         
-Template.ruser_posts.helpers
+Template.user_posts.helpers
     user_post_docs: ->
         Docs.find {
             model:'rpost'
@@ -136,14 +136,14 @@ Template.ruser_posts.helpers
                 _timestamp:-1
         }  
     user_post_tag_results: -> results.find(model:'rpost_result_tag')
-Template.ruser_comments.helpers
+Template.user_comments.helpers
     user_comment_docs: ->
         Docs.find
             model:'rcomment'
             author:Router.current().params.username
         , limit:20
     user_comment_tag_results: -> results.find(model:'rcomment_result_tag')
-Template.ruser.events
+Template.user.events
     'click .search_tag': -> 
         # window.speechSynthesis.speak new SpeechSynthesisUtterance @name
         picked_user_tags.clear()

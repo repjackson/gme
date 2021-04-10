@@ -1,4 +1,4 @@
-template(name='rusers')
+template(name='users')
     .ui.stackable.padded.grid
         .four.wide.column.scrolling
             .ui.inline.header 
@@ -10,24 +10,24 @@ template(name='rusers')
             .ui.small.fluid.icon.input
                 i.search.icon
                 input.search_tags(type='text')
-            if selected_ruser_tags
+            if selected_user_tags
                 // #clear_tags.ui.grey.icon.compact.circular.button
                 //     i.remove.icon
-                each selected_ruser_tags
-                    .unselect_ruser_tag.ui.black.compact.circular.button
+                each selected_user_tags
+                    .unselect_user_tag.ui.black.compact.circular.button
                         strong !{this}
-            each all_ruser_tags
-                .ui.compact.circular.basic.small.button.select_ruser_tag(class=cloud_tag_class title=count) !{this.name}
+            each all_user_tags
+                .ui.compact.circular.basic.small.button.select_user_tag(class=cloud_tag_class title=count) !{this.name}
                     // small #{this.count}
             .ui.small.header sort by
-            +ruser_karma_sort_button l='total' i='yin yang' c=''
-            +ruser_karma_sort_button l='link' i='edit' c=''
-            +ruser_karma_sort_button l='comment' i='chat outline' c=''
-            +ruser_karma_sort_button l='joy' i='smile' c='green'
-            +ruser_karma_sort_button l='anger' i='' c='red'
-            +ruser_karma_sort_button l='sadness' i='' c='blue'
-            +ruser_karma_sort_button l='disgust' i='' c='orange'
-            +ruser_karma_sort_button l='fear' i='' c='grey'
+            +user_karma_sort_button l='total' i='yin yang' c=''
+            +user_karma_sort_button l='link' i='edit' c=''
+            +user_karma_sort_button l='comment' i='chat outline' c=''
+            +user_karma_sort_button l='joy' i='smile' c='green'
+            +user_karma_sort_button l='anger' i='' c='red'
+            +user_karma_sort_button l='sadness' i='' c='blue'
+            +user_karma_sort_button l='disgust' i='' c='orange'
+            +user_karma_sort_button l='fear' i='' c='grey'
             // unless all_tags.count
             //     .ui.basic.center.aligned.segment
             //         .ui.placeholder 
@@ -62,14 +62,14 @@ template(name='rusers')
                                 .line
                                 .line
                 each users
-                    +ruser_small
+                    +user_small
                     
-template(name='ruser_small')
+template(name='user_small')
     .four.wide.column
-        a.select_user(href="/ruser/#{username}")
+        a.select_user(href="/user/#{username}")
             img.ui.circular.small.image.zoomer(src=data.snoovatar_img)
         .content
-            a.ui.zoomer.header.select_user(href="/ruser/#{username}" class=post_header_class)
+            a.ui.zoomer.header.select_user(href="/user/#{username}" class=post_header_class)
                 |!{username}
                 .ui.basic.circular.label(title='total karma')
                     i.grey.yin.yang.icon
@@ -95,7 +95,7 @@ template(name='ruser_small')
                     .ui.small.compact.tertiary.button.add_tag #{this}
                 if user_top_emotion
                     .ui.inline.header #{user_top_emotion}
-                +ruser_top_emotion_small
+                +user_top_emotion_small
             
                 // if user_top_emotions
                 // each user_top_emotions
@@ -104,7 +104,7 @@ template(name='ruser_small')
                 // if is_dev 
                 +print_this
      
-template(name='ruser_karma_sort_button')     
+template(name='user_karma_sort_button')     
     .ui.compact.button.sort(class="#{c} #{button_class}")
         if i 
             i.icon(class=i)
@@ -117,7 +117,7 @@ template(name='sort_button')
         // // |#{l}
             
             
-template(name='ruser_top_emotion_small')
+template(name='user_top_emotion_small')
     .ui.basic.label {{ to_percent avg_sent_score}} sentiment
     .ui.green.small.label
         | {{ to_percent avg_joy_score}}% joy

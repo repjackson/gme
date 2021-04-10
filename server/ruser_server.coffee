@@ -1,6 +1,13 @@
 request = require('request')
 rp = require('request-promise');
 
+
+
+Meteor.publish 'user_doc', (username)->
+    Docs.find
+        model:'user'
+        username:username
+
 Meteor.methods
     get_user_posts: (username)->
         @unblock()
@@ -76,6 +83,7 @@ Meteor.methods
         
     get_user_info: (username)->
         @unblock()
+        console.log 'getting info', username
         # if subreddit 
         #     url = "http://reddit.com/r/#{subreddit}/search.json?q=#{query}&nsfw=1&limit=25&include_facets=false"
         # else
@@ -91,6 +99,7 @@ Meteor.methods
         rp(options)
             .then(Meteor.bindEnvironment((data)->
                 parsed = JSON.parse(data)
+                console.log parsed
                 existing = Docs.findOne 
                     model:'user'
                     username:username

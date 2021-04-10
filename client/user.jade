@@ -1,12 +1,11 @@
-
-template(name='ruser')
+template(name='user')
     unless user_doc
         // .ui.header no user found
         .ui.hidden.divider
         .ui.hidden.divider
         .ui.hidden.divider
         .ui.center.aligned.basic.segment.search
-            i.massive.grey.user.outline.link.icon.get_user_info
+            i.massive.grey.user.outline.link.icon.refresh_info
             .ui.big.header
                 |#{current_username}
         // .ui.massive.fluid.button.f17.zoomer.pointer.search 
@@ -71,7 +70,7 @@ template(name='ruser')
                     
                     
 
-template(name='ruser_posts')
+template(name='user_posts')
     if selected_user_post_tags
         each selected_user_post_tags
             +user_post_unpick_tag
@@ -93,7 +92,7 @@ template(name='ruser_posts')
 
                     
                                 
-template(name='ruser_post')
+template(name='user_post')
     .ui.item
         if embed
             span.rounded.full
@@ -127,7 +126,7 @@ template(name='ruser_post')
             //     +call_watson
     .ui.divider                 
 
-template(name='ruser_comments')                    
+template(name='user_comments')                    
     .ui.inline.dividing.header.get_user_comments
         i.chat.outline.icon
         |#{user_comment_docs.count}
@@ -145,7 +144,7 @@ template(name='ruser_comments')
                     
                     
                     
-template(name='ruser_top_emotions')
+template(name='user_top_emotions')
     .ui.stackable.five.column.grid
         .column
             .ui.green.header
@@ -190,7 +189,7 @@ template(name='ruser_top_emotions')
 
                     
                             
-template(name='ruser_doc_item')
+template(name='user_doc_item')
     .ui.item
         if is_image
             a.view_post(href="/r/#{subreddit}/post/#{_id}" class=post_header_class)
@@ -229,7 +228,7 @@ template(name='ruser_doc_item')
     
     
     
-template(name='ruser_comment')                    
+template(name='user_comment')                    
     .call_watson_comment
         .ui.small.inline.header {{data.score}}
         span.metadata 
