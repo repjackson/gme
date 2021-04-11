@@ -59,17 +59,15 @@ template(name='subreddit')
             .four.wide.column.scrlling.seg
                 +small_ticker
                 with emotion_avg
-                    // if is_positive
-                    //     span.say.ui.green.text(class="{{calculated_size doc_sentiment_score}}") {{ to_percent doc_sentiment_score }}% positive
-                    //         |&nbsp;
-                    //     div.rounded(style="height:5px;width:{{to_percent doc_sentiment_score}}%;background-color:green" title="{{to_percent doc_sentiment_score}}% #{doc_sentiment_label}")
-                    // else
-                    //     span.say.ui.red.text(class="{{calculated_size doc_sentiment_score}}") {{ to_percent doc_sentiment_score }}%  negative
-                    //         |&nbsp;
-                    // //     div.rounded(style="height:5px;width:{{abs_percent doc_sentiment_score}}%;background-color:red" title="{{abs_percent doc_sentiment_score}}% #{doc_sentiment_label}")
-                    span.say.ui.green.text(class="{{calculated_size avg_sent_score}}") {{ to_percent avg_sent_score }}% sentiment 
-                        |&nbsp;
-                    div.rounded(style="height:5px;width:{{to_percent avg_sent_score}}%;background-color:green" title="{{to_percent avg_sent_score}}% joy")
+                    if is_positive
+                        span.say.ui.green.text(class="{{calculated_size avg_sent_score}}") {{ to_percent avg_sent_score }}% positive
+                            |&nbsp;
+                        div.rounded(style="height:5px;width:{{to_percent avg_sent_score}}%;background-color:green" title="{{to_percent avg_sent_score}}%")
+                    else
+                        span.say.ui.red.text(class="{{calculated_size avg_sent_score}}") {{ to_percent avg_sent_score }}%  negative
+                            |&nbsp;
+                        div.rounded(style="height:5px;width:{{abs_percent avg_sent_score}}%;background-color:red" title="{{abs_percent doc_sentiment_score}}% #{doc_sentiment_label}")
+                    // div.rounded(style="height:5px;width:{{to_percent avg_sent_score}}%;background-color:green" title="{{to_percent avg_sent_score}}% joy")
                     span.say.ui.green.text(class="{{calculated_size avg_joy_score}}") {{ to_percent avg_joy_score }}% joy 
                         |&nbsp;
                     div.rounded(style="height:5px;width:{{to_percent avg_joy_score}}%;background-color:green" title="{{to_percent avg_joy_score}}% joy")
@@ -117,8 +115,8 @@ template(name='subreddit')
                 if in_dev
                     +print_this
                     // div
-                +subreddit_best
-                +subreddit_newest
+                // +subreddit_best
+                // +subreddit_newest
                 .smallscroll
                     .ui.list.mobile.hidden
                         .item.seg.say !{data.public_description}

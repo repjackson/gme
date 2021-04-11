@@ -150,7 +150,7 @@ Template.subreddit.helpers
             "subreddit":Router.current().params.subreddit
         },
             sort:"#{Session.get('sort_key')}":parseInt(Session.get('sort_direction'))
-            limit:42)
+            limit:25)
     emotion_avg: -> results.findOne(model:'emotion_avg')
 
     sort_created_class: -> if Session.equals('sort_key','data.created') then 'active' else 'tertiary'
@@ -159,6 +159,9 @@ Template.subreddit.helpers
 
     post_count: -> Counts.get('sub_doc_counter')
 
+    is_positive: -> 
+        console.log @
+        if @avg_sent_score > 0 then true else false    
 
             
 
